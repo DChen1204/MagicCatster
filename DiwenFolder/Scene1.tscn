@@ -8,7 +8,10 @@
 [ext_resource type="Script" uid="uid://b07vpmvwjrrsg" path="res://DiwenFolder/PlayerScript.gd" id="4_ygwo8"]
 [ext_resource type="Script" uid="uid://utrcdm0im0sm" path="res://DiwenFolder/EnemyScript.gd" id="5_0sxtl"]
 [ext_resource type="Script" uid="uid://i8qsk8dfiahs" path="res://DiwenFolder/TurnManager.gd" id="6_g18wv"]
+[ext_resource type="Script" uid="uid://rmqta1r33kom" path="res://DiwenFolder/SPDisplay.gd" id="8_k4tyk"]
 [ext_resource type="Script" uid="uid://b7f8qlcv787cv" path="res://DiwenFolder/TurnNumber.gd" id="8_ygwo8"]
+[ext_resource type="Script" uid="uid://d31rs5tabdp24" path="res://DiwenFolder/HeavyAttackButton.gd" id="11_3yl6h"]
+[ext_resource type="Script" uid="uid://bvnhvb5r30n2" path="res://DiwenFolder/ShieldDisplay.gd" id="12_jrcw8"]
 
 [node name="World" type="Node2D" unique_id=1568438141]
 script = ExtResource("1_u5sc1")
@@ -28,11 +31,12 @@ text = "Turn 0"
 script = ExtResource("8_ygwo8")
 target = NodePath("..")
 
-[node name="Player" type="Sprite2D" parent="TurnManager" unique_id=62225164 node_paths=PackedStringArray("end_turn_button")]
+[node name="Player" type="Sprite2D" parent="TurnManager" unique_id=62225164 node_paths=PackedStringArray("end_turn_button", "health_object")]
 position = Vector2(-309, 7)
 texture = ExtResource("1_wion3")
 script = ExtResource("4_ygwo8")
 end_turn_button = NodePath("../Canvas/End Turn Button")
+health_object = NodePath("PlayerHealth")
 
 [node name="PlayerHealth" type="Node2D" parent="TurnManager/Player" unique_id=2095667902]
 script = ExtResource("3_ai2fy")
@@ -51,10 +55,21 @@ value = 100.0
 script = ExtResource("4_y22jx")
 target = NodePath("../PlayerHealth")
 
-[node name="Enemy" type="Sprite2D" parent="TurnManager" unique_id=824127465]
+[node name="SP Display" type="RichTextLabel" parent="TurnManager/Player" unique_id=1503216475 node_paths=PackedStringArray("target")]
+offset_left = -249.0
+offset_top = -25.0
+offset_right = -99.0
+offset_bottom = 15.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Player SP"
+script = ExtResource("8_k4tyk")
+target = NodePath("..")
+
+[node name="Enemy" type="Sprite2D" parent="TurnManager" unique_id=824127465 node_paths=PackedStringArray("health_object")]
 position = Vector2(286, 17)
 texture = ExtResource("1_wion3")
 script = ExtResource("5_0sxtl")
+health_object = NodePath("EnemyHealth")
 
 [node name="EnemyHealth" type="Node2D" parent="TurnManager/Enemy" unique_id=310854079]
 script = ExtResource("3_ai2fy")
@@ -79,15 +94,16 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Attack Button" type="Button" parent="TurnManager/Canvas" unique_id=1981507433 node_paths=PackedStringArray("target")]
+[node name="Light Attack Button" type="Button" parent="TurnManager/Canvas" unique_id=1981507433 node_paths=PackedStringArray("actor", "target")]
 layout_mode = 0
 offset_left = -548.0
 offset_top = 228.0
 offset_right = -397.0
 offset_bottom = 292.0
-text = "ATTACK"
+text = "LIGHT ATTACK"
 script = ExtResource("4_rx3ek")
-target = NodePath("../../Enemy/EnemyHealth")
+actor = NodePath("../../Player")
+target = NodePath("../../Enemy")
 
 [node name="End Turn Button" type="Button" parent="TurnManager/Canvas" unique_id=1660589545]
 layout_mode = 0
@@ -96,3 +112,34 @@ offset_top = 229.0
 offset_right = -36.0
 offset_bottom = 288.0
 text = "End Turn"
+
+[node name="Heavy Attack Button" type="Button" parent="TurnManager/Canvas" unique_id=1757484005 node_paths=PackedStringArray("actor", "target")]
+layout_mode = 0
+offset_left = -353.0
+offset_top = 230.0
+offset_right = -207.0
+offset_bottom = 292.0
+text = "HEAVY ATTACK"
+script = ExtResource("11_3yl6h")
+actor = NodePath("../../Player")
+target = NodePath("../../Enemy")
+
+[node name="SP Costs" type="RichTextLabel" parent="TurnManager/Canvas" unique_id=1942213893]
+layout_mode = 0
+offset_left = -537.0
+offset_top = 180.0
+offset_right = -128.0
+offset_bottom = 229.0
+text = "SP Cost: 3								SP Cost 4
+												Shield Break!
+"
+
+[node name="Shield Text" type="RichTextLabel" parent="TurnManager/Canvas" unique_id=2141307080 node_paths=PackedStringArray("target")]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 96.0
+offset_right = 445.0
+offset_bottom = 128.0
+text = "ENEMY SHIELD!"
+script = ExtResource("12_jrcw8")
+target = NodePath("../../Enemy")

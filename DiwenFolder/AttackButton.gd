@@ -1,10 +1,11 @@
 extends Button
 
-@export var target: Health
+@export var actor: Character
+@export var target: Character
 
 func _ready() -> void:
 	pressed.connect(_on_pressed)
 	
 func _on_pressed() -> void:
-	if is_instance_valid(target):
-		target.take_damage(10.0)
+	if is_instance_valid(target) and is_instance_valid(actor):
+		actor.light_attack(target)

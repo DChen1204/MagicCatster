@@ -4,6 +4,7 @@ extends Node
 
 # @onready var player: Sprite2D = %Player
 var turn_manager: Node
+
 var player: Node
 var enemy: Node
 

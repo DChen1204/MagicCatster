@@ -6,6 +6,9 @@ signal health_changed(new_value: float)
 @export var health_point: float = 100.0
 var is_dead: bool = false
 
+# func _ready():
+	
+
 # Call the following methods when taking damage and healing
 func take_damage(amount: float) -> void:
 	health_point -= amount;

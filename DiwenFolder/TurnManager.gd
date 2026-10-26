@@ -7,7 +7,7 @@ extends Node
 # Variables
 var active_character_index: int = 0
 var turn_queue: Array
-var turn_number: int = 50
+var turn_number: int = 1
 
 # Notify other scripts
 signal turn_number_changed(new_value: int)
@@ -38,8 +38,8 @@ func advance_queue():
 	
 	# Increase turn number if everyone went once
 	if (active_character_index == 0):
+		print("\n")
 		turn_number += 1
-		print("turn_number=", turn_number)
 		turn_number_changed.emit(turn_number)
 		
 	# Recursion

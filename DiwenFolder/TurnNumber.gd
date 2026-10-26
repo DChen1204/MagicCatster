@@ -7,5 +7,4 @@ func _ready() -> void:
 	target.turn_number_changed.connect(_on_turn_number_changed)
 	
 func _on_turn_number_changed(new_value: int) -> void:
-	print("Should get trigger!")
 	text = "Turn %d" % new_value
