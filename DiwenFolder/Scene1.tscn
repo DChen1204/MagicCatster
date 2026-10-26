@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://bm2m57mv3gop5"]
+
+[ext_resource type="Script" uid="uid://banyasb8i2768" path="res://DiwenFolder/GameManager.gd" id="1_u5sc1"]
+[ext_resource type="Texture2D" uid="uid://1icv1845hs3q" path="res://icon.svg" id="1_wion3"]
+[ext_resource type="Script" uid="uid://cb7vhpkjrdigx" path="res://DiwenFolder/Health.gd" id="3_ai2fy"]
+[ext_resource type="Script" uid="uid://b4vvw7qhuq3lx" path="res://DiwenFolder/AttackButton.gd" id="4_rx3ek"]
+[ext_resource type="Script" uid="uid://cfrnv2u688ioq" path="res://DiwenFolder/HealthBar.gd" id="4_y22jx"]
+[ext_resource type="Script" uid="uid://b07vpmvwjrrsg" path="res://DiwenFolder/PlayerScript.gd" id="4_ygwo8"]
+[ext_resource type="Script" uid="uid://utrcdm0im0sm" path="res://DiwenFolder/EnemyScript.gd" id="5_0sxtl"]
+[ext_resource type="Script" uid="uid://i8qsk8dfiahs" path="res://DiwenFolder/TurnManager.gd" id="6_g18wv"]
+[ext_resource type="Script" uid="uid://b7f8qlcv787cv" path="res://DiwenFolder/TurnNumber.gd" id="8_ygwo8"]
+
+[node name="World" type="Node2D" unique_id=1568438141]
+script = ExtResource("1_u5sc1")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1886399847]
+
+[node name="TurnManager" type="Node" parent="." unique_id=811916368]
+script = ExtResource("6_g18wv")
+
+[node name="Turn Number" type="RichTextLabel" parent="TurnManager" unique_id=974599388 node_paths=PackedStringArray("target")]
+offset_left = -539.0
+offset_top = -291.0
+offset_right = -330.0
+offset_bottom = -241.0
+theme_override_font_sizes/normal_font_size = 30
+text = "Turn 0"
+script = ExtResource("8_ygwo8")
+target = NodePath("..")
+
+[node name="Player" type="Sprite2D" parent="TurnManager" unique_id=62225164 node_paths=PackedStringArray("end_turn_button")]
+position = Vector2(-309, 7)
+texture = ExtResource("1_wion3")
+script = ExtResource("4_ygwo8")
+end_turn_button = NodePath("../Canvas/End Turn Button")
+
+[node name="PlayerHealth" type="Node2D" parent="TurnManager/Player" unique_id=2095667902]
+script = ExtResource("3_ai2fy")
+
+[node name="HealthBar" type="ProgressBar" parent="TurnManager/Player" unique_id=1579076212 node_paths=PackedStringArray("target")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_top = -128.0
+offset_right = 36.0
+offset_bottom = -101.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+value = 100.0
+script = ExtResource("4_y22jx")
+target = NodePath("../PlayerHealth")
+
+[node name="Enemy" type="Sprite2D" parent="TurnManager" unique_id=824127465]
+position = Vector2(286, 17)
+texture = ExtResource("1_wion3")
+script = ExtResource("5_0sxtl")
+
+[node name="EnemyHealth" type="Node2D" parent="TurnManager/Enemy" unique_id=310854079]
+script = ExtResource("3_ai2fy")
+
+[node name="HealthBar" type="ProgressBar" parent="TurnManager/Enemy" unique_id=508483871 node_paths=PackedStringArray("target")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -164.0
+offset_top = -122.0
+offset_right = 32.0
+offset_bottom = -95.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+value = 100.0
+script = ExtResource("4_y22jx")
+target = NodePath("../EnemyHealth")
+
+[node name="Canvas" type="Control" parent="TurnManager" unique_id=1660389181]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Attack Button" type="Button" parent="TurnManager/Canvas" unique_id=1981507433 node_paths=PackedStringArray("target")]
+layout_mode = 0
+offset_left = -548.0
+offset_top = 228.0
+offset_right = -397.0
+offset_bottom = 292.0
+text = "ATTACK"
+script = ExtResource("4_rx3ek")
+target = NodePath("../../Enemy/EnemyHealth")
+
+[node name="End Turn Button" type="Button" parent="TurnManager/Canvas" unique_id=1660589545]
+layout_mode = 0
+offset_left = -162.0
+offset_top = 229.0
+offset_right = -36.0
+offset_bottom = 288.0
+text = "End Turn"
