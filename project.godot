@@ -11,8 +11,14 @@ config_version=5
 [application]
 
 config/name="Magic Catster"
+run/main_scene="uid://bm2m57mv3gop5"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*uid://banyasb8i2768"
+Health="*uid://cb7vhpkjrdigx"
 
 [display]
 
