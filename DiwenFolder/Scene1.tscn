@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://banyasb8i2768" path="res://DiwenFolder/GameManager.gd" id="1_u5sc1"]
 [ext_resource type="Texture2D" uid="uid://1icv1845hs3q" path="res://icon.svg" id="1_wion3"]
+[ext_resource type="Script" uid="uid://bb8khp5mjwqbe" path="res://DiwenFolder/GameOverScreen.gd" id="2_ipq4u"]
 [ext_resource type="Script" uid="uid://cb7vhpkjrdigx" path="res://DiwenFolder/Health.gd" id="3_ai2fy"]
 [ext_resource type="Script" uid="uid://b4vvw7qhuq3lx" path="res://DiwenFolder/AttackButton.gd" id="4_rx3ek"]
 [ext_resource type="Script" uid="uid://cfrnv2u688ioq" path="res://DiwenFolder/HealthBar.gd" id="4_y22jx"]
@@ -18,63 +19,63 @@ script = ExtResource("1_u5sc1")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1886399847]
 
-[node name="TurnManager" type="Node" parent="." unique_id=811916368]
-script = ExtResource("6_g18wv")
+[node name="Game Over Screen" type="Control" parent="." unique_id=1660389181]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = -226.0
+offset_top = -101.0
+offset_right = 224.0
+offset_bottom = 99.0
+script = ExtResource("2_ipq4u")
 
-[node name="Turn Number" type="RichTextLabel" parent="TurnManager" unique_id=974599388 node_paths=PackedStringArray("target")]
-offset_left = -539.0
-offset_top = -291.0
-offset_right = -330.0
-offset_bottom = -241.0
-theme_override_font_sizes/normal_font_size = 30
-text = "Turn 0"
-script = ExtResource("8_ygwo8")
-target = NodePath("..")
-
-[node name="Player" type="Sprite2D" parent="TurnManager" unique_id=62225164 node_paths=PackedStringArray("end_turn_button", "health_object")]
-position = Vector2(-309, 7)
-texture = ExtResource("1_wion3")
-script = ExtResource("4_ygwo8")
-end_turn_button = NodePath("../Canvas/End Turn Button")
-health_object = NodePath("PlayerHealth")
-
-[node name="PlayerHealth" type="Node2D" parent="TurnManager/Player" unique_id=2095667902]
-script = ExtResource("3_ai2fy")
-
-[node name="HealthBar" type="ProgressBar" parent="TurnManager/Player" unique_id=1579076212 node_paths=PackedStringArray("target")]
+[node name="VictoryText" type="RichTextLabel" parent="Game Over Screen" unique_id=1395298691]
+z_index = 1
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -160.0
-offset_top = -128.0
-offset_right = 36.0
-offset_bottom = -101.0
+offset_left = -104.0
+offset_right = 104.0
+offset_bottom = 57.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 16
-value = 100.0
-script = ExtResource("4_y22jx")
-target = NodePath("../PlayerHealth")
+theme_override_colors/default_color = Color(0.40977117, 0.81065845, 0.957442, 1)
+theme_override_font_sizes/normal_font_size = 40
+text = "VICTORY!"
+scroll_active = false
+horizontal_alignment = 1
 
-[node name="SP Display" type="RichTextLabel" parent="TurnManager/Player" unique_id=1503216475 node_paths=PackedStringArray("target")]
-offset_left = -249.0
-offset_top = -25.0
-offset_right = -99.0
-offset_bottom = 15.0
-theme_override_font_sizes/normal_font_size = 20
-text = "Player SP"
-script = ExtResource("8_k4tyk")
-target = NodePath("..")
+[node name="ColorRect" type="ColorRect" parent="Game Over Screen" unique_id=1264882418]
+layout_mode = 0
+offset_right = 450.0
+offset_bottom = 200.0
+color = Color(0.9056048, 0.8871768, 0.9319379, 1)
 
-[node name="Enemy" type="Sprite2D" parent="TurnManager" unique_id=824127465 node_paths=PackedStringArray("health_object")]
+[node name="RestartButton" type="Button" parent="Game Over Screen" unique_id=1907616608]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -49.0
+offset_top = -54.0
+offset_right = 47.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Restart "
+
+[node name="Enemy" type="Sprite2D" parent="." unique_id=824127465 node_paths=PackedStringArray("health_object")]
 position = Vector2(286, 17)
 texture = ExtResource("1_wion3")
 script = ExtResource("5_0sxtl")
 health_object = NodePath("EnemyHealth")
 
-[node name="EnemyHealth" type="Node2D" parent="TurnManager/Enemy" unique_id=310854079]
+[node name="EnemyHealth" type="Node2D" parent="Enemy" unique_id=310854079]
 script = ExtResource("3_ai2fy")
 
-[node name="HealthBar" type="ProgressBar" parent="TurnManager/Enemy" unique_id=508483871 node_paths=PackedStringArray("target")]
+[node name="HealthBar" type="ProgressBar" parent="Enemy" unique_id=508483871 node_paths=PackedStringArray("target")]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -88,58 +89,94 @@ value = 100.0
 script = ExtResource("4_y22jx")
 target = NodePath("../EnemyHealth")
 
-[node name="Canvas" type="Control" parent="TurnManager" unique_id=1660389181]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Shield Text" type="RichTextLabel" parent="Enemy" unique_id=2141307080 node_paths=PackedStringArray("target")]
+offset_left = -61.0
+offset_top = 79.0
+offset_right = 159.0
+offset_bottom = 111.0
+text = "ENEMY SHIELD"
+script = ExtResource("12_jrcw8")
+target = NodePath("..")
 
-[node name="Light Attack Button" type="Button" parent="TurnManager/Canvas" unique_id=1981507433 node_paths=PackedStringArray("actor", "target")]
-layout_mode = 0
-offset_left = -548.0
-offset_top = 228.0
-offset_right = -397.0
-offset_bottom = 292.0
+[node name="Player" type="Sprite2D" parent="." unique_id=62225164 node_paths=PackedStringArray("end_turn_button", "health_object")]
+position = Vector2(-309, 7)
+texture = ExtResource("1_wion3")
+script = ExtResource("4_ygwo8")
+end_turn_button = NodePath("../TurnManager/End Turn Button")
+health_object = NodePath("PlayerHealth")
+
+[node name="PlayerHealth" type="Node2D" parent="Player" unique_id=2095667902]
+script = ExtResource("3_ai2fy")
+
+[node name="HealthBar" type="ProgressBar" parent="Player" unique_id=1579076212 node_paths=PackedStringArray("target")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_top = -128.0
+offset_right = 36.0
+offset_bottom = -101.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+value = 100.0
+script = ExtResource("4_y22jx")
+target = NodePath("../PlayerHealth")
+
+[node name="SP Display" type="RichTextLabel" parent="Player" unique_id=1503216475 node_paths=PackedStringArray("target")]
+offset_left = -249.0
+offset_top = -25.0
+offset_right = -99.0
+offset_bottom = 15.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Player SP"
+script = ExtResource("8_k4tyk")
+target = NodePath("..")
+
+[node name="Light Attack Button" type="Button" parent="Player" unique_id=1981507433 node_paths=PackedStringArray("actor", "target")]
+offset_left = -239.0
+offset_top = 221.0
+offset_right = -88.0
+offset_bottom = 285.0
 text = "LIGHT ATTACK"
 script = ExtResource("4_rx3ek")
-actor = NodePath("../../Player")
+actor = NodePath("..")
 target = NodePath("../../Enemy")
 
-[node name="End Turn Button" type="Button" parent="TurnManager/Canvas" unique_id=1660589545]
-layout_mode = 0
+[node name="Heavy Attack Button" type="Button" parent="Player" unique_id=1757484005 node_paths=PackedStringArray("actor", "target")]
+offset_left = -44.0
+offset_top = 223.0
+offset_right = 102.0
+offset_bottom = 285.0
+text = "HEAVY ATTACK"
+script = ExtResource("11_3yl6h")
+actor = NodePath("..")
+target = NodePath("../../Enemy")
+
+[node name="SP Costs" type="RichTextLabel" parent="Player" unique_id=1942213893]
+offset_left = -228.0
+offset_top = 173.0
+offset_right = 181.0
+offset_bottom = 222.0
+text = "SP Cost: 3								SP Cost 4
+												Shield Break!
+"
+
+[node name="TurnManager" type="Node" parent="." unique_id=811916368]
+script = ExtResource("6_g18wv")
+
+[node name="Turn Number" type="RichTextLabel" parent="TurnManager" unique_id=974599388 node_paths=PackedStringArray("target")]
+offset_left = -539.0
+offset_top = -291.0
+offset_right = -330.0
+offset_bottom = -241.0
+theme_override_font_sizes/normal_font_size = 30
+text = "Turn 0"
+script = ExtResource("8_ygwo8")
+target = NodePath("..")
+
+[node name="End Turn Button" type="Button" parent="TurnManager" unique_id=1660589545]
 offset_left = -162.0
 offset_top = 229.0
 offset_right = -36.0
 offset_bottom = 288.0
 text = "End Turn"
-
-[node name="Heavy Attack Button" type="Button" parent="TurnManager/Canvas" unique_id=1757484005 node_paths=PackedStringArray("actor", "target")]
-layout_mode = 0
-offset_left = -353.0
-offset_top = 230.0
-offset_right = -207.0
-offset_bottom = 292.0
-text = "HEAVY ATTACK"
-script = ExtResource("11_3yl6h")
-actor = NodePath("../../Player")
-target = NodePath("../../Enemy")
-
-[node name="SP Costs" type="RichTextLabel" parent="TurnManager/Canvas" unique_id=1942213893]
-layout_mode = 0
-offset_left = -537.0
-offset_top = 180.0
-offset_right = -128.0
-offset_bottom = 229.0
-text = "SP Cost: 3								SP Cost 4
-												Shield Break!
-"
-
-[node name="Shield Text" type="RichTextLabel" parent="TurnManager/Canvas" unique_id=2141307080 node_paths=PackedStringArray("target")]
-layout_mode = 0
-offset_left = 225.0
-offset_top = 96.0
-offset_right = 445.0
-offset_bottom = 128.0
-text = "ENEMY SHIELD!"
-script = ExtResource("12_jrcw8")
-target = NodePath("../../Enemy")

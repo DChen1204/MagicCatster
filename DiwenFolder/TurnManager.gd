@@ -27,6 +27,11 @@ func initialize():
 		print("Player and/or Enemy are null!")
 		print("Turn Manager NOT Initialized.")
 
+func reset():
+	active_character_index = 0
+	turn_number = 1
+	turn_number_changed.emit(turn_number)
+
 # Manage the turns 
 func advance_queue():
 	

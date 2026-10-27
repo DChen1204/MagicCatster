@@ -7,10 +7,19 @@ func _ready():
 	super.assign_stats(10, 10, 100, true, 10)
 	health_object.max_health_point = health
 	health_object.health_point = health
+	health_object.become_dead.connect(_on_dead)
 	sp_changed.emit(sp)
 	GameManager.register_player(self)
 	print("Player registered!")
 
+func reset():
+	super.assign_stats(10, 10, 100, true, 10)
+	health_object.max_health_point = health
+	health_object.health_point = health
+	health_object.is_dead = false
+	health_object.take_damage(0)
+	sp_changed.emit(sp)
+	
 func play_turn():
 	sp = 10
 	sp_changed.emit(sp)
@@ -35,3 +44,6 @@ func got_light_attacked(actor: Character):
 		var damage = actor.attack - self.defense
 		self.health = self.health - damage
 		health_object.take_damage(damage)
+		
+func _on_dead(new_value: bool):
+	GameManager.register_dead(self)
