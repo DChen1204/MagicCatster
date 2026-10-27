@@ -10,8 +10,19 @@ func _ready():
 	health_object.health_point = health
 	total_defense = defense
 	shield_changed.emit(false)
+	health_object.become_dead.connect(_on_dead)
 	GameManager.register_enemy(self)
 	print("Enemy registered!")
+
+func reset():
+	super.assign_stats(20, 5, 100, false)
+	health_object.max_health_point = health
+	health_object.health_point = health
+	health_object.is_dead = false
+	health_object.take_damage(0)
+	total_defense = defense
+	shield_changed.emit(false)
+	
 
 func play_turn():
 	shielded = false
@@ -55,4 +66,6 @@ func got_heavy_attacked(actor: Character):
 		var damage = actor.attack - self.total_defense
 		self.health = self.health - damage
 		health_object.take_damage(damage)
-	
+
+func _on_dead(new_value: bool):
+	GameManager.register_dead(self)
