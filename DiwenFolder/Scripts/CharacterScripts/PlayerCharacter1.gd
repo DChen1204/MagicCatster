@@ -8,6 +8,10 @@ extends Character
 # The health object of this character. 
 @export var health_object: Node
 
+#SFX for attacks
+@onready var sfx_lightAttack1 = $sfx_lightAttack1
+@onready var sfx_heavyAttack1 = $sfx_heavyAttack1
+
 # Set up
 func _ready():
 	# Assign stats to itself
@@ -45,6 +49,7 @@ func light_attack(target: Character):
 		sp_changed.emit(sp)
 		print("Player light-attack enemy.")
 		target.got_light_attacked(self)
+		sfx_lightAttack1.play()
 		
 # The character's heavy attack
 # Need SP to do
@@ -54,6 +59,7 @@ func heavy_attack(target: Character):
 		sp_changed.emit(sp)
 		print("Player heavy-attack enemy.")
 		target.got_heavy_attacked(self)
+		sfx_heavyAttack1.play()
 	
 # Called by other characters to resolve the attack
 func got_light_attacked(actor: Character):

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://1icv1845hs3q" path="res://icon.svg" id="1_wion3"]
 [ext_resource type="Script" uid="uid://bb8khp5mjwqbe" path="res://DiwenFolder/Scripts/UIScripts/GameOverScreen.gd" id="2_ipq4u"]
 [ext_resource type="Script" uid="uid://cb7vhpkjrdigx" path="res://DiwenFolder/Scripts/ObjectScripts/Health.gd" id="3_ai2fy"]
+[ext_resource type="AudioStream" uid="uid://bofmufwx3d1e1" path="res://BSmallAudio/TestVictoryMusci.wav" id="3_t7vr1"]
 [ext_resource type="Script" uid="uid://b4vvw7qhuq3lx" path="res://DiwenFolder/Scripts/UIScripts/LightAttackButton.gd" id="4_rx3ek"]
 [ext_resource type="Script" uid="uid://cfrnv2u688ioq" path="res://DiwenFolder/Scripts/UIScripts/HealthBar.gd" id="4_y22jx"]
 [ext_resource type="Script" uid="uid://b07vpmvwjrrsg" path="res://DiwenFolder/Scripts/CharacterScripts/PlayerCharacter1.gd" id="4_ygwo8"]
@@ -13,6 +14,11 @@
 [ext_resource type="Script" uid="uid://b7f8qlcv787cv" path="res://DiwenFolder/Scripts/UIScripts/TurnNumber.gd" id="8_ygwo8"]
 [ext_resource type="Script" uid="uid://d31rs5tabdp24" path="res://DiwenFolder/Scripts/UIScripts/HeavyAttackButton.gd" id="11_3yl6h"]
 [ext_resource type="Script" uid="uid://bvnhvb5r30n2" path="res://DiwenFolder/Scripts/UIScripts/ShieldDisplay.gd" id="12_jrcw8"]
+[ext_resource type="AudioStream" uid="uid://dv2a1tefu34d6" path="res://BSmallAudio/lightAttack1.wav" id="12_ypvc8"]
+[ext_resource type="AudioStream" uid="uid://dtbrxoxvox4p1" path="res://BSmallAudio/heavyAttack1.mp3" id="13_y2hg3"]
+[ext_resource type="AudioStream" uid="uid://lola6yesy8bi" path="res://BSmallAudio/TestBattleMusic.wav" id="14_5g4ls"]
+[ext_resource type="AudioStream" uid="uid://chlr6hoe6ntno" path="res://BSmallAudio/uiButton1.wav" id="14_r5kap"]
+[ext_resource type="Script" uid="uid://dkfp8w12fw65d" path="res://DiwenFolder/end_turn_button.gd" id="16_asecs"]
 
 [node name="World" type="Node2D" unique_id=1568438141]
 script = ExtResource("1_u5sc1")
@@ -65,6 +71,10 @@ offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Restart "
+
+[node name="VictoryMusic" type="AudioStreamPlayer" parent="Game Over Screen" unique_id=668445122]
+stream = ExtResource("3_t7vr1")
+volume_db = -10.0
 
 [node name="Enemy" type="Sprite2D" parent="." unique_id=824127465 node_paths=PackedStringArray("health_object")]
 position = Vector2(286, 17)
@@ -161,6 +171,13 @@ text = "SP Cost: 3								SP Cost 4
 												Shield Break!
 "
 
+[node name="sfx_lightAttack1" type="AudioStreamPlayer" parent="Player" unique_id=2120017065]
+stream = ExtResource("12_ypvc8")
+volume_db = -6.0
+
+[node name="sfx_heavyAttack1" type="AudioStreamPlayer" parent="Player" unique_id=988328742]
+stream = ExtResource("13_y2hg3")
+
 [node name="TurnManager" type="Node" parent="." unique_id=811916368]
 script = ExtResource("6_g18wv")
 
@@ -180,3 +197,15 @@ offset_top = 229.0
 offset_right = -36.0
 offset_bottom = 288.0
 text = "End Turn"
+script = ExtResource("16_asecs")
+
+[node name="ui_Button1" type="AudioStreamPlayer" parent="TurnManager" unique_id=1838632567]
+stream = ExtResource("14_r5kap")
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="." unique_id=2060811514]
+stream = ExtResource("14_5g4ls")
+volume_db = -13.619
+autoplay = true
+
+[node name="ui_Button1" type="AudioStreamPlayer" parent="." unique_id=78912384]
+stream = ExtResource("14_r5kap")

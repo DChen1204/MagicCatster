@@ -2,6 +2,7 @@ extends Node
 
 # Turn Manager: The object that controls the turn system. 
 
+
 # The array of characters in the scene
 # Currently it has one player and one enemy character
 var turn_queue: Array

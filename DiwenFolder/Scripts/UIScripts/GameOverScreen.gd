@@ -3,6 +3,9 @@ extends Control
 # This script to control the game over screen.
 # Right now the game over screen has a popup and a restart button. 
 
+# Victory Music
+@onready var victory_music: AudioStreamPlayer = $VictoryMusic
+
 func _ready():
 	# Make itself invisible at the start of the game
 	self.hide()
@@ -19,6 +22,7 @@ func _ready():
 
 # Appear when game over
 func _on_game_over(victor: String):
+	victory_music.play()
 	# Set the text for the popup
 	if victor == "Player":
 		get_node("VictoryText").text = "VICTORY!"
