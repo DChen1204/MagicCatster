@@ -64,7 +64,7 @@ func register_dead(d: Node):
 # Reset the game
 func reset_game():
 	dead_characters.clear()
-	turn_manager.reset()
 	for p in players:
 		p.reset()
 	enemy.reset()
+	turn_manager.reset()

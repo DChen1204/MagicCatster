@@ -133,12 +133,12 @@ script = ExtResource("4_y22jx")
 health = NodePath("../PlayerHealth")
 
 [node name="SP Display" type="RichTextLabel" parent="Player" unique_id=1503216475 node_paths=PackedStringArray("target")]
-offset_left = -252.0
+offset_left = -266.0
 offset_top = -23.0
 offset_right = -102.0
 offset_bottom = 17.0
 theme_override_font_sizes/normal_font_size = 20
-text = "Player 1 SP"
+text = "Character SP"
 script = ExtResource("8_k4tyk")
 target = NodePath("..")
 
@@ -203,12 +203,12 @@ script = ExtResource("4_y22jx")
 health = NodePath("../PlayerHealth")
 
 [node name="SP Display" type="RichTextLabel" parent="Player2" unique_id=786104522 node_paths=PackedStringArray("target")]
-offset_left = -256.0
+offset_left = -279.0
 offset_top = -17.0
 offset_right = -106.0
 offset_bottom = 23.0
 theme_override_font_sizes/normal_font_size = 20
-text = "Player 2 SP"
+text = "Character SP"
 script = ExtResource("8_k4tyk")
 target = NodePath("..")
 

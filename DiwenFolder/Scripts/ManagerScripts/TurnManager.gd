@@ -38,6 +38,7 @@ func reset():
 	active_character_index = 0
 	turn_number = 1
 	turn_changed.emit(turn_number)
+	# advance_queue()
 	
 # Move to the next character in th queue and count turns
 func _step_index():

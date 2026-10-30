@@ -34,7 +34,7 @@ func play_turn():
 	decide_action()
 	
 # Enemy AI deciding what to do in its turn
-# Right, it is random 50/50 attacking and shielding
+# Right, it is random 70/30 attacking and shielding
 func decide_action():
 	if randf() < 0.5:
 		var target = pick_target()
