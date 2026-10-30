@@ -37,10 +37,21 @@ func play_turn():
 # Right, it is random 50/50 attacking and shielding
 func decide_action():
 	if randf() < 0.5:
-		light_attack(GameManager.player)
+		var target = pick_target()
+		# If no player is alive, there is nothing to attack
+		if target != null:
+			light_attack(target)
 	else:
 		shield()
-	
+	# Pick a randome player that is still alive
+func pick_target() -> Character:
+		var living_players: Array = []
+		for p in GameManager.players:
+			if not GameManager.is_dead(p):
+				living_players.append(p)
+		if living_players.is_empty():
+			return null
+		return living_players.pick_random()
 # Light attack
 func light_attack(target: Character):
 	print("Enemy light-attack player.")
