@@ -1,6 +1,7 @@
 
 class_name Character
 extends Node2D
+# My turn
 
 # Base class of all characters
 
@@ -22,10 +23,13 @@ var sp: int = 0
 # whether the character is shielding
 var shielded: bool
 
+# SP change event notifier
 signal sp_changed(new_sp: int)
+
+# Shield change event notifier
 signal shield_changed(new_shield: bool)
 
-# Assign stats
+# Assign stats to the character
 func assign_stats(att: float, def: float, hp: float, is_play: bool, new_sp: int = 0):
 	attack = att
 	defense = def

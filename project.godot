@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*uid://banyasb8i2768"
-Health="*uid://cb7vhpkjrdigx"
 
 [display]
 
