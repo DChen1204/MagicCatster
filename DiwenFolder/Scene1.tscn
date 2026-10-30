@@ -109,7 +109,7 @@ script = ExtResource("12_jrcw8")
 target = NodePath("..")
 
 [node name="Player" type="Sprite2D" parent="." unique_id=62225164 node_paths=PackedStringArray("end_turn_button", "health_object")]
-position = Vector2(-309, 7)
+position = Vector2(-287, -168)
 texture = ExtResource("1_wion3")
 script = ExtResource("4_ygwo8")
 end_turn_button = NodePath("../TurnManager/End Turn Button")
@@ -133,40 +133,40 @@ script = ExtResource("4_y22jx")
 health = NodePath("../PlayerHealth")
 
 [node name="SP Display" type="RichTextLabel" parent="Player" unique_id=1503216475 node_paths=PackedStringArray("target")]
-offset_left = -249.0
-offset_top = -25.0
-offset_right = -99.0
-offset_bottom = 15.0
+offset_left = -252.0
+offset_top = -23.0
+offset_right = -102.0
+offset_bottom = 17.0
 theme_override_font_sizes/normal_font_size = 20
-text = "Player SP"
+text = "Player 1 SP"
 script = ExtResource("8_k4tyk")
 target = NodePath("..")
 
 [node name="Light Attack Button" type="Button" parent="Player" unique_id=1981507433 node_paths=PackedStringArray("attacker", "target")]
-offset_left = -239.0
-offset_top = 221.0
-offset_right = -88.0
-offset_bottom = 285.0
+offset_left = -230.0
+offset_top = 418.0
+offset_right = -79.0
+offset_bottom = 482.0
 text = "LIGHT ATTACK"
 script = ExtResource("4_rx3ek")
 attacker = NodePath("..")
 target = NodePath("../../Enemy")
 
 [node name="Heavy Attack Button" type="Button" parent="Player" unique_id=1757484005 node_paths=PackedStringArray("attacker", "target")]
-offset_left = -44.0
-offset_top = 223.0
-offset_right = 102.0
-offset_bottom = 285.0
+offset_left = -40.0
+offset_top = 420.0
+offset_right = 106.0
+offset_bottom = 482.0
 text = "HEAVY ATTACK"
 script = ExtResource("11_3yl6h")
 attacker = NodePath("..")
 target = NodePath("../../Enemy")
 
 [node name="SP Costs" type="RichTextLabel" parent="Player" unique_id=1942213893]
-offset_left = -228.0
-offset_top = 173.0
-offset_right = 181.0
-offset_bottom = 222.0
+offset_left = -223.0
+offset_top = 368.0
+offset_right = 186.0
+offset_bottom = 417.0
 text = "SP Cost: 3								SP Cost 4
 												Shield Break!
 "
@@ -176,6 +176,76 @@ stream = ExtResource("12_ypvc8")
 volume_db = -6.0
 
 [node name="sfx_heavyAttack1" type="AudioStreamPlayer" parent="Player" unique_id=988328742]
+stream = ExtResource("13_y2hg3")
+
+[node name="Player2" type="Sprite2D" parent="." unique_id=21549763 node_paths=PackedStringArray("end_turn_button", "health_object")]
+position = Vector2(-282, 28)
+texture = ExtResource("1_wion3")
+script = ExtResource("4_ygwo8")
+end_turn_button = NodePath("../TurnManager/End Turn Button")
+health_object = NodePath("PlayerHealth")
+
+[node name="PlayerHealth" type="Node2D" parent="Player2" unique_id=932656185]
+script = ExtResource("3_ai2fy")
+
+[node name="HealthBar" type="ProgressBar" parent="Player2" unique_id=965869586 node_paths=PackedStringArray("health")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -162.0
+offset_top = -113.0
+offset_right = 34.0
+offset_bottom = -86.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+value = 100.0
+script = ExtResource("4_y22jx")
+health = NodePath("../PlayerHealth")
+
+[node name="SP Display" type="RichTextLabel" parent="Player2" unique_id=786104522 node_paths=PackedStringArray("target")]
+offset_left = -256.0
+offset_top = -17.0
+offset_right = -106.0
+offset_bottom = 23.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Player 2 SP"
+script = ExtResource("8_k4tyk")
+target = NodePath("..")
+
+[node name="Light Attack Button" type="Button" parent="Player2" unique_id=1122796738 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -235.0
+offset_top = 221.0
+offset_right = -84.0
+offset_bottom = 285.0
+text = "LIGHT ATTACK"
+script = ExtResource("4_rx3ek")
+attacker = NodePath("..")
+target = NodePath("../../Enemy")
+
+[node name="Heavy Attack Button" type="Button" parent="Player2" unique_id=743070321 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -44.0
+offset_top = 223.0
+offset_right = 102.0
+offset_bottom = 285.0
+text = "HEAVY ATTACK"
+script = ExtResource("11_3yl6h")
+attacker = NodePath("..")
+target = NodePath("../../Enemy")
+
+[node name="SP Costs" type="RichTextLabel" parent="Player2" unique_id=345295596]
+offset_left = -228.0
+offset_top = 173.0
+offset_right = 181.0
+offset_bottom = 222.0
+text = "SP Cost: 3								SP Cost 4
+												Shield Break!
+"
+
+[node name="sfx_lightAttack1" type="AudioStreamPlayer" parent="Player2" unique_id=346011636]
+stream = ExtResource("12_ypvc8")
+volume_db = -6.0
+
+[node name="sfx_heavyAttack1" type="AudioStreamPlayer" parent="Player2" unique_id=1452934084]
 stream = ExtResource("13_y2hg3")
 
 [node name="TurnManager" type="Node" parent="." unique_id=811916368]
@@ -192,10 +262,10 @@ script = ExtResource("8_ygwo8")
 turn_manager = NodePath("..")
 
 [node name="End Turn Button" type="Button" parent="TurnManager" unique_id=1660589545]
-offset_left = -162.0
-offset_top = 229.0
-offset_right = -36.0
-offset_bottom = 288.0
+offset_left = -160.0
+offset_top = 252.0
+offset_right = -34.0
+offset_bottom = 311.0
 text = "End Turn"
 script = ExtResource("16_asecs")
 

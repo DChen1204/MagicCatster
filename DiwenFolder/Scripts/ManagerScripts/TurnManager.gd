@@ -21,15 +21,16 @@ func _ready() -> void:
 	print("Turn Manager registered!")
 
 func initialize():
-	if (GameManager.player != null and GameManager.enemy != null):
-		# Add the characters from GameManager
-		turn_queue.append(GameManager.player)
+	if (GameManager.players != null and GameManager.enemy != null):
+		# Add the characters from GameManager (players first, then the enemy)
+		for p in GameManager.players:
+			turn_queue.append(p)
 		turn_queue.append(GameManager.enemy)
 		# Start the turn system
 		advance_queue()
 		print("Turn Manager Initialized.")
 	else:
-		print("Player and/or Enemy are null!")
+		print("Player(s) and/or Enemy are null!")
 		print("Turn Manager NOT Initialized.")
 
 # Reset itself when game over
@@ -37,22 +38,33 @@ func reset():
 	active_character_index = 0
 	turn_number = 1
 	turn_changed.emit(turn_number)
+	
+# Move to the next character in th queue and count turns
+func _step_index():
+	active_character_index = (active_character_index + 1) % turn_queue.size()
+	
+	# Increase turn number if everyone went
+	if (active_character_index == 0):
+		turn_number +=1
+		turn_changed.emit(turn_number)
 
 # Manage the turn system
 func advance_queue():
+	
+	# Skip dead characters so they don't stall the queue
+	var skipped = 0
+	while GameManager.is_dead(turn_queue[active_character_index]):
+		_step_index()
+		skipped += 1
+		if skipped >= turn_queue.size():
+			return # Eveyone died, stop
 	
 	# Wait unitl the current character's turn is finished
 	await turn_queue[active_character_index].play_turn()
 	
 	# Ready the next character in the queue
-	active_character_index = (active_character_index + 1) % turn_queue.size()
+	_step_index()
 	
-	# Increase turn number if everyone went once
-	if (active_character_index == 0):
-		print("\n")
-		turn_number += 1
-		turn_changed.emit(turn_number)
-		
 	# Recursion
 	advance_queue()
 	
