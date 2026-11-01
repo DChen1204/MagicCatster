@@ -1,6 +1,8 @@
 extends Node
 
 # The health object of the characters. 
+# DEPERCATED! ALL FUNCTIONALITY MOVED TO CHARACTER CLASS!
+# DO NOT USE!
 
 # Health change event notifier
 signal health_changed(new_value: float)
@@ -8,9 +10,9 @@ signal health_changed(new_value: float)
 # Character is dead event notifier
 signal become_dead(new_value: bool)
 
-@export var max_health_point: float = 100.0
-@export var health_point: float = 100.0
-var is_dead: bool = false
+var max_health_point: float
+var health_point: float
+var is_dead: bool
 
 # Called when a character takes damager
 func take_damage(amount: float) -> void:

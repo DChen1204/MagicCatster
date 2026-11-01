@@ -1,14 +1,11 @@
 extends Button
 
-# This script plays a sound when the End Turn button is pressed
-
-@onready var ui_button1: AudioStreamPlayer = $"../ui_Button1"  # adjust path
-
+# This script switches scene to goldfish level
+# THIS DOES NOW WORK RIGHT NOW
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pressed.connect(_on_pressed)
 
-
 func _on_pressed() -> void:
-	ui_button1.play()
+	get_tree().change_scene_to_file("res://DiwenFolder/Scene2.tscn")

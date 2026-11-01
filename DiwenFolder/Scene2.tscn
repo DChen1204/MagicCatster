@@ -2,19 +2,42 @@
 
 [ext_resource type="Script" uid="uid://banyasb8i2768" path="res://DiwenFolder/Scripts/ManagerScripts/GameManager.gd" id="1_0c2l6"]
 [ext_resource type="Texture2D" uid="uid://coo1c8owycbbm" path="res://TempImages/CatImage1.jpeg" id="1_vv7at"]
-[ext_resource type="Script" uid="uid://cb7vhpkjrdigx" path="res://DiwenFolder/Scripts/ObjectScripts/Health.gd" id="2_cc1m5"]
-[ext_resource type="Script" uid="uid://cfrnv2u688ioq" path="res://DiwenFolder/Scripts/UIScripts/HealthBar.gd" id="3_dfg8u"]
+[ext_resource type="Script" uid="uid://dp4dyqlg1bfek" path="res://DiwenFolder/Scripts/CharacterScripts/Cat.gd" id="2_pjtp4"]
+[ext_resource type="Script" uid="uid://cfrnv2u688ioq" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/HealthBar.gd" id="3_dfg8u"]
 [ext_resource type="Texture2D" uid="uid://spamqhfd3f5" path="res://TempImages/alchemy_lab_blue_glow.png" id="4_dfg8u"]
 [ext_resource type="Script" uid="uid://i8qsk8dfiahs" path="res://DiwenFolder/Scripts/ManagerScripts/TurnManager.gd" id="5_la6bv"]
-[ext_resource type="Script" uid="uid://b7f8qlcv787cv" path="res://DiwenFolder/Scripts/UIScripts/TurnNumber.gd" id="6_0c2l6"]
-[ext_resource type="Script" uid="uid://dkfp8w12fw65d" path="res://DiwenFolder/end_turn_button.gd" id="7_wu7b8"]
+[ext_resource type="Script" uid="uid://b7f8qlcv787cv" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/TurnNumber.gd" id="6_0c2l6"]
+[ext_resource type="Script" uid="uid://cqw0gi1hv8xd" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/PawAttackButton.gd" id="6_stwdt"]
+[ext_resource type="Script" uid="uid://rmqta1r33kom" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/SPDisplay.gd" id="7_bdr68"]
+[ext_resource type="Script" uid="uid://c5qyujajafno8" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/SPBar.gd" id="8_1ex0y"]
 [ext_resource type="AudioStream" uid="uid://chlr6hoe6ntno" path="res://BSmallAudio/uiButton1.wav" id="8_pjtp4"]
+[ext_resource type="Script" uid="uid://cedxbpqw165nr" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/HealthDisplay.gd" id="8_u1lym"]
+[ext_resource type="Texture2D" uid="uid://c7ph3y61637vb" path="res://TempImages/GoldfishImage1.jpeg" id="10_wu7b8"]
+[ext_resource type="Script" uid="uid://dsm2wif4321pt" path="res://DiwenFolder/Scripts/CharacterScripts/Goldfish.gd" id="12_bdr68"]
+[ext_resource type="Script" uid="uid://bb8khp5mjwqbe" path="res://DiwenFolder/Scripts/UIScripts/GameOverScreen.gd" id="12_n8fqv"]
+[ext_resource type="AudioStream" uid="uid://bofmufwx3d1e1" path="res://BSmallAudio/TestVictoryMusci.wav" id="13_stwdt"]
+[ext_resource type="Script" uid="uid://s6w3d1txb1wp" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/TurtleLevelButton.gd" id="17_u1lym"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrivr"]
 bg_color = Color(0.9647059, 0.07058824, 0.043137256, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13qdw"]
-bg_color = Color(0.31635836, 0.6992446, 0.29905766, 1)
+bg_color = Color(0.3196685, 0.69887894, 0.29762772, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjtp4"]
+bg_color = Color(0.8168608, 0.528142, 0.12982893, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mwn8k"]
+bg_color = Color(0.10829217, 0.059270762, 0.08788093, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ypm2"]
+bg_color = Color(0.23028189, 0.62517625, 0.9409401, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1lba0"]
+bg_color = Color(0.83996326, 0.2754299, 0.20617571, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_twaol"]
+bg_color = Color(0.2123048, 0.21230489, 0.21230471, 1)
 
 [node name="World" type="Node2D" unique_id=42255485]
 script = ExtResource("1_0c2l6")
@@ -23,37 +46,98 @@ script = ExtResource("1_0c2l6")
 
 [node name="Cat" type="Node2D" parent="." unique_id=1256070123]
 z_index = 2
+script = ExtResource("2_pjtp4")
 
 [node name="CatSprite" type="Sprite2D" parent="Cat" unique_id=1428940964]
 position = Vector2(-385, 9)
 scale = Vector2(0.58093524, 0.5911764)
 texture = ExtResource("1_vv7at")
 
-[node name="CatHealth" type="Node2D" parent="Cat" unique_id=475819299]
-script = ExtResource("2_cc1m5")
-
-[node name="CatHealthBar" type="ProgressBar" parent="Cat" unique_id=1218942256 node_paths=PackedStringArray("health")]
-offset_left = -493.0
-offset_top = -155.0
-offset_right = -276.0
-offset_bottom = -116.0
+[node name="CatHealthBar" type="ProgressBar" parent="Cat" unique_id=1218942256 node_paths=PackedStringArray("character")]
+offset_left = -284.0
+offset_top = 262.0
+offset_right = -67.0
+offset_bottom = 301.0
 theme_override_styles/background = SubResource("StyleBoxFlat_xrivr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_13qdw")
 value = 100.0
+show_percentage = false
 script = ExtResource("3_dfg8u")
-health = NodePath("../CatHealth")
+character = NodePath("..")
+
+[node name="Paw Attack Button" type="Button" parent="Cat" unique_id=2131501139 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -228.0
+offset_top = -110.0
+offset_right = -79.0
+offset_bottom = -29.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_pjtp4")
+text = "Paw Scratch
+Deals 500% DMG
+- 5 SP "
+script = ExtResource("6_stwdt")
+attacker = NodePath("..")
+target = NodePath("../../Goldfish")
+
+[node name="CatNameLabel" type="RichTextLabel" parent="Cat" unique_id=329795008]
+offset_left = -468.0
+offset_top = -145.0
+offset_right = -306.0
+offset_bottom = -98.0
+theme_override_font_sizes/normal_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_mwn8k")
+text = "Catster"
+horizontal_alignment = 1
+
+[node name="CatSPDisplay" type="RichTextLabel" parent="Cat" unique_id=1323602701 node_paths=PackedStringArray("target")]
+offset_left = -528.0
+offset_top = 219.0
+offset_right = -287.0
+offset_bottom = 259.0
+theme_override_font_sizes/normal_font_size = 21
+text = "Character SP"
+script = ExtResource("7_bdr68")
+target = NodePath("..")
+
+[node name="CatSPBar" type="ProgressBar" parent="Cat" unique_id=1784342234 node_paths=PackedStringArray("character")]
+offset_left = -530.0
+offset_top = 262.0
+offset_right = -313.0
+offset_bottom = 301.0
+theme_override_styles/background = SubResource("StyleBoxFlat_xrivr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1ypm2")
+value = 100.0
+show_percentage = false
+script = ExtResource("8_1ex0y")
+character = NodePath("..")
+
+[node name="CatHealthDisplay" type="RichTextLabel" parent="Cat" unique_id=1680723035 node_paths=PackedStringArray("target")]
+offset_left = -282.0
+offset_top = 219.0
+offset_right = -41.0
+offset_bottom = 259.0
+theme_override_font_sizes/normal_font_size = 21
+text = "Character SP"
+script = ExtResource("8_u1lym")
+target = NodePath("..")
+
+[node name="TurtleBlockToggle" type="CheckButton" parent="Cat" unique_id=331100757]
+offset_left = -512.0
+offset_top = 136.0
+offset_right = -205.0
+offset_bottom = 206.0
+theme_override_font_sizes/font_size = 20
+text = "Turtle Block
+25% Chance Nulls Damage"
 
 [node name="Background" type="Node2D" parent="." unique_id=1780150100]
+metadata/_edit_lock_ = true
 
 [node name="BackgroundImage" type="Sprite2D" parent="Background" unique_id=1605119711]
+position = Vector2(-2, -2)
+scale = Vector2(0.89453125, 1)
 texture = ExtResource("4_dfg8u")
-
-[node name="Button Panel" type="Control" parent="." unique_id=255819868]
-z_index = 1
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+metadata/_edit_lock_ = true
 
 [node name="TurnManager" type="Node" parent="." unique_id=2006292496]
 script = ExtResource("5_la6bv")
@@ -61,24 +145,134 @@ script = ExtResource("5_la6bv")
 [node name="Turn Number" type="RichTextLabel" parent="TurnManager" unique_id=1108877278 node_paths=PackedStringArray("turn_manager")]
 offset_left = -539.0
 offset_top = -291.0
-offset_right = -330.0
+offset_right = -416.0
 offset_bottom = -241.0
 theme_override_font_sizes/normal_font_size = 30
 text = "Turn 0"
 script = ExtResource("6_0c2l6")
 turn_manager = NodePath("..")
 
-[node name="End Turn Button" type="Button" parent="TurnManager" unique_id=2142780874]
-offset_left = -160.0
-offset_top = 252.0
-offset_right = -34.0
-offset_bottom = 311.0
+[node name="EndTurnButton" type="Button" parent="TurnManager" unique_id=2142780874]
+offset_left = 424.0
+offset_top = 238.0
+offset_right = 550.0
+offset_bottom = 297.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_1lba0")
 text = "End Turn"
-script = ExtResource("7_wu7b8")
 
 [node name="ui_Button1" type="AudioStreamPlayer" parent="TurnManager" unique_id=623448863]
 stream = ExtResource("8_pjtp4")
 
 [node name="Goldfish" type="Node2D" parent="." unique_id=675740565]
+script = ExtResource("12_bdr68")
 
-[node name="GoldFishSprite" type="Sprite2D" parent="Goldfish" unique_id=982258047]
+[node name="GoldfishSprite" type="Sprite2D" parent="Goldfish" unique_id=982258047]
+position = Vector2(297.99997, 29)
+scale = Vector2(0.5859031, 0.49411765)
+texture = ExtResource("10_wu7b8")
+
+[node name="GoldfishHealthBar" type="ProgressBar" parent="Goldfish" unique_id=322728773 node_paths=PackedStringArray("character")]
+offset_left = -383.0
+offset_top = -250.0
+offset_right = 474.0
+offset_bottom = -211.0
+theme_override_styles/background = SubResource("StyleBoxFlat_xrivr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_13qdw")
+max_value = 50.0
+value = 50.0
+show_percentage = false
+script = ExtResource("3_dfg8u")
+character = NodePath("..")
+
+[node name="GoldfishNameLabel" type="RichTextLabel" parent="Goldfish" unique_id=1145737620]
+offset_left = -80.0
+offset_top = -307.0
+offset_right = 82.0
+offset_bottom = -260.0
+theme_override_font_sizes/normal_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_mwn8k")
+text = "Poseidon"
+horizontal_alignment = 1
+
+[node name="GoldfishDialogueBox" type="RichTextLabel" parent="Goldfish" unique_id=529990718]
+offset_left = 81.0
+offset_top = -169.0
+offset_right = 522.0
+offset_bottom = -68.0
+theme_override_font_sizes/normal_font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_twaol")
+text = "How dare you fight me!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GoldfishHealthDisplay" type="RichTextLabel" parent="Goldfish" unique_id=1640335290 node_paths=PackedStringArray("target")]
+offset_left = -118.0
+offset_top = -247.0
+offset_right = 172.0
+offset_bottom = -207.0
+theme_override_font_sizes/normal_font_size = 21
+text = "Character SP: 100/100"
+script = ExtResource("8_u1lym")
+target = NodePath("..")
+
+[node name="Game Over Screen" type="Control" parent="." unique_id=1124794058]
+visible = false
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_left = -226.0
+offset_top = -101.0
+offset_right = 224.0
+offset_bottom = 99.0
+script = ExtResource("12_n8fqv")
+
+[node name="VictoryText" type="RichTextLabel" parent="Game Over Screen" unique_id=726297558]
+z_index = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -104.0
+offset_right = 104.0
+offset_bottom = 57.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.40977117, 0.81065845, 0.957442, 1)
+theme_override_font_sizes/normal_font_size = 40
+text = "VICTORY!"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="Game Over Screen" unique_id=760741431]
+layout_mode = 0
+offset_right = 450.0
+offset_bottom = 200.0
+color = Color(0.9056048, 0.8871768, 0.9319379, 1)
+
+[node name="RestartButton" type="Button" parent="Game Over Screen" unique_id=1584660948]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -49.0
+offset_top = -54.0
+offset_right = 47.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Restart "
+
+[node name="VictoryMusic" type="AudioStreamPlayer" parent="Game Over Screen" unique_id=1020196398]
+stream = ExtResource("13_stwdt")
+volume_db = -10.0
+
+[node name="TurtleLevelButton" type="Button" parent="." unique_id=236857949]
+visible = false
+offset_left = 289.0
+offset_top = 238.0
+offset_right = 405.0
+offset_bottom = 295.0
+text = "Turtle Level
+DOES NOT WORK"
+script = ExtResource("17_u1lym")
