@@ -2,7 +2,6 @@ extends Node
 
 # Turn Manager: The object that controls the turn system. 
 
-
 # The array of characters in the scene
 # Currently it has one player and one enemy character
 var turn_queue: Array
@@ -34,10 +33,12 @@ func initialize():
 		print("Turn Manager NOT Initialized.")
 
 # Reset itself when game over
+# Need to fix the issue where the button disappear on reset
 func reset():
 	active_character_index = 0
 	turn_number = 1
 	turn_changed.emit(turn_number)
+	# advance_queue()
 	
 # Move to the next character in th queue and count turns
 func _step_index():

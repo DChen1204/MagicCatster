@@ -13,7 +13,6 @@ extends Character
 @onready var heavy_btn: Button = $"Heavy Attack Button"
 @onready var sp_costs = $"SP Costs"
 
-
 #SFX for attacks
 @onready var sfx_lightAttack1 = $sfx_lightAttack1
 @onready var sfx_heavyAttack1 = $sfx_heavyAttack1
@@ -30,7 +29,7 @@ func _ready():
 	super.assign_stats(10, 10, 100, true, 10)
 	
 	# Connect to health object
-	connect_to_health_object()
+	super.connect_to_health_object(health_object)
 	
 	# Notify SP change
 	sp_changed.emit(sp)
@@ -45,7 +44,7 @@ func reset():
 	heavy_btn.hide()
 	sp_costs.hide()
 	super.assign_stats(10, 10, 100, true, 10)
-	connect_to_health_object()
+	super.connect_to_health_object(health_object)
 	sp_changed.emit(sp)
 	set_active(false)
 	
@@ -98,16 +97,4 @@ func got_light_attacked(actor: Character):
 		self.health = self.health - damage
 		health_object.take_damage(damage)
 		
-# Notify the GameManager when dead
-func _on_dead(new_status: bool):
-	GameManager.register_dead(self)
-
-# Connect to the health object 
-func connect_to_health_object():
-	health_object.max_health_point = health
-	health_object.health_point = health
-	health_object.is_dead = false
-	health_object.take_damage(0)
-	# Sign up for the dead event (when hp drops to zero) 
-	health_object.become_dead.connect(_on_dead)
 	

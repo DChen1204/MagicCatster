@@ -11,6 +11,7 @@ var turn_manager: Node
 # The characters
 var players: Array[Node] = []
 var enemy: Node
+var player: Character
 
 # Characters that have died (cleared or reset)
 var dead_characters: Array[Node]
@@ -25,6 +26,7 @@ signal game_over(victor: String)
 # Crucial to ensure everything load before the game starts. 
 func register_player(p: Node):
 	players.append(p)
+	player = p
 	_try_start()
 func register_enemy(e: Node):
 	enemy = e
@@ -64,7 +66,10 @@ func register_dead(d: Node):
 # Reset the game
 func reset_game():
 	dead_characters.clear()
-	turn_manager.reset()
 	for p in players:
 		p.reset()
 	enemy.reset()
+	turn_manager.reset()
+	
+func get_turn_number() -> int:
+	return turn_manager.turn_number
