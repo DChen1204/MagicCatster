@@ -9,16 +9,19 @@
 [ext_resource type="Script" uid="uid://cedxbpqw165nr" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/HealthDisplay.gd" id="7_3ghlo"]
 [ext_resource type="Script" uid="uid://d125l4jpbb1a8" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/AcidSprayButton.gd" id="8_3ghlo"]
 [ext_resource type="Texture2D" uid="uid://spamqhfd3f5" path="res://TempImages/alchemy_lab_blue_glow.png" id="8_dm7pf"]
+[ext_resource type="AudioStream" uid="uid://dv2a1tefu34d6" path="res://BSmallAudio/lightAttack1.wav" id="9_5tq84"]
 [ext_resource type="Script" uid="uid://i8qsk8dfiahs" path="res://DiwenFolder/Scripts/ManagerScripts/TurnManager.gd" id="9_ubpc5"]
 [ext_resource type="Script" uid="uid://b7f8qlcv787cv" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/TurnNumber.gd" id="10_5tq84"]
-[ext_resource type="AudioStream" uid="uid://chlr6hoe6ntno" path="res://BSmallAudio/uiButton1.wav" id="11_jvtii"]
 [ext_resource type="Script" uid="uid://bb8khp5mjwqbe" path="res://DiwenFolder/Scripts/UIScripts/GameOverScreen.gd" id="12_ll2o1"]
-[ext_resource type="AudioStream" uid="uid://bofmufwx3d1e1" path="res://BSmallAudio/TestVictoryMusci.wav" id="13_pp3n8"]
+[ext_resource type="Script" uid="uid://c1m5h1hkrfvr4" path="res://DiwenFolder/end_turn_button.gd" id="13_5tq84"]
+[ext_resource type="AudioStream" uid="uid://bofmufwx3d1e1" path="res://BSmallAudio/TestVictoryMusic.wav" id="13_pp3n8"]
 [ext_resource type="Texture2D" uid="uid://cletpfokhcf6j" path="res://TempImages/pixel-art-8bit-cartoon-turtle-260nw-1819767353.webp" id="14_acss3"]
 [ext_resource type="Script" uid="uid://de74y6l47bs3l" path="res://DiwenFolder/Scripts/CharacterScripts/Turtle.gd" id="14_g4geq"]
 [ext_resource type="Script" uid="uid://5gsw3bm6stl8" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/GoldfishLevelButton.gd" id="14_jy08m"]
 [ext_resource type="Script" uid="uid://bvnhvb5r30n2" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/ShieldDisplay.gd" id="15_jy08m"]
+[ext_resource type="AudioStream" uid="uid://byqwc6df2j51n" path="res://BSmallAudio/TestDefeatMusic.wav" id="16_5tq84"]
 [ext_resource type="Script" uid="uid://c42f4g7ui5vxg" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/ShieldBar.gd" id="17_3ghlo"]
+[ext_resource type="AudioStream" uid="uid://lola6yesy8bi" path="res://BSmallAudio/TestBattleMusic.wav" id="20_dm7pf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q2kye"]
 bg_color = Color(0.9647059, 0.07058824, 0.043137256, 1)
@@ -165,6 +168,9 @@ text = "Goldfish Heal
 Heal 10% Every 3 turn"
 icon_alignment = 1
 
+[node name="sfx_basicAttack1" type="AudioStreamPlayer" parent="Cat" unique_id=1557120559]
+stream = ExtResource("9_5tq84")
+
 [node name="Background" type="Node2D" parent="." unique_id=1396674784]
 metadata/_edit_lock_ = true
 
@@ -194,11 +200,9 @@ offset_right = 550.0
 offset_bottom = 297.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_4hdsd")
 text = "End Turn"
+script = ExtResource("13_5tq84")
 
-[node name="ui_Button1" type="AudioStreamPlayer" parent="TurnManager" unique_id=172904080]
-stream = ExtResource("11_jvtii")
-
-[node name="Game Over Screen" type="Control" parent="." unique_id=1520928869]
+[node name="Game Over Screen" type="Control" parent="." unique_id=1520928869 node_paths=PackedStringArray("battle_music")]
 visible = false
 z_index = 10
 layout_mode = 3
@@ -208,6 +212,7 @@ offset_top = -101.0
 offset_right = 224.0
 offset_bottom = 99.0
 script = ExtResource("12_ll2o1")
+battle_music = NodePath("../Test_BattleMusic")
 
 [node name="VictoryText" type="RichTextLabel" parent="Game Over Screen" unique_id=1056190219]
 z_index = 1
@@ -249,6 +254,9 @@ text = "Restart "
 [node name="VictoryMusic" type="AudioStreamPlayer" parent="Game Over Screen" unique_id=547441527]
 stream = ExtResource("13_pp3n8")
 volume_db = -10.0
+
+[node name="DefeatMusic" type="AudioStreamPlayer" parent="Game Over Screen" unique_id=780168754]
+stream = ExtResource("16_5tq84")
 
 [node name="GoldfishLevelButton" type="Button" parent="." unique_id=1753128446]
 visible = false
@@ -335,3 +343,8 @@ theme_override_font_sizes/normal_font_size = 21
 text = "Character Health: 100/100"
 script = ExtResource("7_3ghlo")
 target = NodePath("..")
+
+[node name="Test_BattleMusic" type="AudioStreamPlayer" parent="." unique_id=1105500636]
+stream = ExtResource("20_dm7pf")
+volume_db = -16.0
+autoplay = true

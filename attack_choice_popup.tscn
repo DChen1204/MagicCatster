@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://tham7ji8np0c"]
+
+[ext_resource type="Script" uid="uid://ctn081ybxfdy" path="res://attack_choice_popup.gd" id="1_mtrws"]
+
+[node name="AttackChoicePopup" type="CanvasLayer" unique_id=5521783]
+layer = 10
+script = ExtResource("1_mtrws")
+
+[node name="Dim" type="ColorRect" parent="." unique_id=1108075265]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.019607844, 0.03529412, 0.007843138, 0.5882353)
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1648912679]
+custom_minimum_size = Vector2(400, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -23.5
+offset_right = 20.0
+offset_bottom = 23.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Panel" unique_id=1618371562]
+layout_mode = 2
+
+[node name="Message" type="Label" parent="Panel/VBox" unique_id=1039725720]
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="OptionA" type="Button" parent="Panel/VBox" unique_id=396782605]
+layout_mode = 2
+
+[node name="OptionB" type="Button" parent="Panel/VBox" unique_id=1351744115]
+layout_mode = 2
