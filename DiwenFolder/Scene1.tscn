@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://1icv1845hs3q" path="res://icon.svg" id="1_wion3"]
 [ext_resource type="Script" uid="uid://bb8khp5mjwqbe" path="res://DiwenFolder/Scripts/UIScripts/GameOverScreen.gd" id="2_ipq4u"]
 [ext_resource type="Script" uid="uid://cb7vhpkjrdigx" path="res://DiwenFolder/Scripts/ObjectScripts/Health.gd" id="3_ai2fy"]
-[ext_resource type="AudioStream" uid="uid://bofmufwx3d1e1" path="res://BSmallAudio/TestVictoryMusci.wav" id="3_t7vr1"]
+[ext_resource type="AudioStream" uid="uid://bofmufwx3d1e1" path="res://BSmallAudio/TestVictoryMusic.wav" id="3_t7vr1"]
 [ext_resource type="Script" uid="uid://b4vvw7qhuq3lx" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/LightAttackButton.gd" id="4_rx3ek"]
 [ext_resource type="Script" uid="uid://cfrnv2u688ioq" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/HealthBar.gd" id="4_y22jx"]
 [ext_resource type="Script" uid="uid://b07vpmvwjrrsg" path="res://DiwenFolder/Scripts/CharacterScripts/PlayerCharacter1.gd" id="4_ygwo8"]

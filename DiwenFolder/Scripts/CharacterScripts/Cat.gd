@@ -5,6 +5,10 @@ extends Character
 # End turn button
 @onready var end_turn_button: Button = $"../TurnManager/EndTurnButton"
 
+#SFX for attacks
+@onready var sfx_basicAttack1 = $sfx_basicAttack1
+
+
 """
 Initial stats of the Cat
 Base Attack = 300
@@ -69,6 +73,7 @@ func cat_paw_scratch(target: Character):
 		sp_changed.emit()
 		print("Cat paw scratch enemy.")
 		target.got_cat_paw_scratch(self, 5)
+		sfx_basicAttack1.play()
 
 # Second skill: acid spray, corrodes shield, 300% Damage
 func cat_acid_spray(target: Character):
