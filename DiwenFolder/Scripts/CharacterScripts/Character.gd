@@ -1,7 +1,6 @@
 
 class_name Character
 extends Node2D
-# My turn
 
 # Base class of all characters
 
@@ -14,7 +13,7 @@ var defense: float
 # Max hp
 var max_health: float
 
-# Base health
+# health
 var health: float
 
 # True if controlled by the player
@@ -64,6 +63,8 @@ func set_character_name(new_name: String):
 	
 # Handle death of the character
 func on_dead():
+	is_dead = true
+	print("%s is dead!" % character_name)
 	# Tell the GameManager
 	GameManager.register_dead(self)
 	
@@ -72,8 +73,6 @@ func take_damage(amount: float) -> void:
 	health -= amount;
 	health = clampf(health, 0, max_health)
 	if (health <= 1):
-		is_dead = true
-		print("%s is dead!" % character_name)
 		on_dead()
 	# Tell the healthbar the new health
 	health_changed.emit()

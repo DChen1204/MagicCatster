@@ -1,20 +1,20 @@
 extends Node
 
 # Game Manager: The object that controls the game. 
-# It is currently the only global variable.
+# It is a global variable.
 
-# The game over screen 
-var game_over_screen: Control
+# The game over music controller 
+var game_over_music: Control
 # The turn manager 
 var turn_manager: Node
 
 # The characters
-var players: Array[Node] = []
-var enemy: Node
+# var players: Array[Node] = []
+var enemy: Character
 var player: Character
 
 # Characters that have died (cleared or reset)
-var dead_characters: Array[Node]
+# var dead_characters: Array[Node]
 
 # Prevents the game from starting more than once
 var _start_queued: bool = false
@@ -25,7 +25,7 @@ signal game_over(victor: String)
 # Make important objects register themselves with the GameManager.
 # Crucial to ensure everything load before the game starts. 
 func register_player(p: Node):
-	players.append(p)
+	# players.append(p)
 	player = p
 	_try_start()
 func register_enemy(e: Node):
@@ -35,7 +35,7 @@ func register_turn_manager(t: Node):
 	turn_manager = t
 	_try_start()
 func register_game_over_screen(s: Node):
-	game_over_screen = s
+	game_over_music = s
 	_try_start()
 	
 # Start game once every object is registered
@@ -43,31 +43,27 @@ func register_game_over_screen(s: Node):
 func _try_start():
 	if _start_queued:
 		return
-	if turn_manager and game_over_screen and players.size() > 0 and enemy:
+	if turn_manager and game_over_music and player and enemy:
 		_start_queued = true
 		call_deferred("_start_game")
 		
 func _start_game():
 	turn_manager.initialize()
 	
-	#Check whether a character has died
-func is_dead(c: Node) -> bool:
-	return c in dead_characters
+#Check whether a character has died
+func is_dead(c: Character) -> bool:
+	return c.is_dead
 
 # Broadcast game_over event when the player or enemy is dead 
 func register_dead(d: Node):
-	if not (d in dead_characters):
-		dead_characters.append(d)
 	if d == enemy:
 		game_over.emit("Player")
-	elif players.all(func(p): return p in dead_characters):
+	elif d == player:
 		game_over.emit("Enemy")
 		
 # Reset the game
 func reset_game():
-	dead_characters.clear()
-	for p in players:
-		p.reset()
+	player.reset()
 	enemy.reset()
 	turn_manager.reset()
 	
@@ -76,11 +72,10 @@ var chosen_attack: String = ""
 
 # Clear everything tied to the current battle scene
 func clear_battle_state():
-	players.clear()
-	dead_characters.clear()
+	player = null
 	enemy = null
 	turn_manager = null
-	game_over_screen = null
+	game_over_music = null
 	_start_queued = false
 
 # Use this instead of calling change_scene_to_file directly

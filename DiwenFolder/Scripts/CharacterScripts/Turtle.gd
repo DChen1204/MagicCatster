@@ -16,9 +16,7 @@ Character Name = Rock
 # The dialogue box of this character.
 @onready var dialogue_box: RichTextLabel = $"TurtleDialogueBox"
 
-# The shield bar of turtle
-# @onready var shield_bar: ProgressBar = $"TurtleShieldBar"
-
+# Shield stats 
 var shield: float
 var max_shield: float
 
@@ -30,9 +28,12 @@ func _ready():
 
 	health_changed.emit()
 	
+	# The shield is based on max health
 	max_shield = max_health
 	shield = max_shield
 	shield_changed.emit()
+	
+	dialogue_box.text = "Baby don't hurt me!"
 	
 	# Register itself with GameManager
 	GameManager.register_enemy(self)
@@ -43,10 +44,14 @@ func reset():
 	super.assign_stats(attack, defense, max_health, is_play_character)
 	health_changed.emit()
 	shield_changed.emit()
+	dialogue_box.text = "Baby don't hurt me!"
 	
 
 # Play its turn
 func play_turn():
+	# Pause for some time to pretend thinking
+	dialogue_box.text = "Rock is digging up earth..."
+	await get_tree().create_timer(1.5).timeout
 	decide_action()
 	
 # Enemy AI deciding what to do in its turn
@@ -59,17 +64,16 @@ func decide_action():
 		
 
 # List of Skills
-# maybe animate it like the turtle used the shell like a she
 func turtle_shell_attack():
-	print("Turtle shell attack Cat.")
+	print("Rock Crystal Pillars.")
 	GameManager.player.got_turtle_shell_attack(self, 1)
-	dialogue_box.text = "Rock threw its shell at you!"
+	dialogue_box.text = "Rock struck Catster with Crystal Pillars!"
 	
 func turtle_shield():
 	print("Turtle shield.")
 	shield = max_shield
 	shield_changed.emit()
-	dialogue_box.text = "Rock repaired its shell!"
+	dialogue_box.text = "Rock reinforced its shell!"
 
 # List of affected skills
 func got_cat_paw_scratch(attacker: Character, dmg_percentage: float):

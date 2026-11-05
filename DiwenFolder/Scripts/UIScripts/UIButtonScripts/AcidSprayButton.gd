@@ -15,5 +15,7 @@ func _ready() -> void:
 # Notify the attacker to attack the target
 func _on_pressed() -> void:
 	# ui_button1.play()
+	# Enable action when both targets are valid and it is the attacker's turn
 	if is_instance_valid(target) and is_instance_valid(attacker):
-		attacker.cat_acid_spray(target)
+		if GameManager.turn_manager.get_active_character(attacker):
+			attacker.cat_acid_spray(target)
