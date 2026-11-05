@@ -15,17 +15,19 @@ var turn_number: int = 1
 # Turn change event notifier
 signal turn_changed(new_turn_number: int)
 
+# var stop_queue: bool = true
+
 func _ready() -> void:
 	GameManager.register_turn_manager(self)
 	print("Turn Manager registered!")
 
 func initialize():
-	if (GameManager.players != null and GameManager.enemy != null):
+	if (GameManager.player != null and GameManager.enemy != null):
 		# Add the characters from GameManager (players first, then the enemy)
-		for p in GameManager.players:
-			turn_queue.append(p)
+		turn_queue.append(GameManager.player)
 		turn_queue.append(GameManager.enemy)
 		# Start the turn system
+		# stop_queue = false
 		advance_queue()
 		print("Turn Manager Initialized.")
 	else:
@@ -33,12 +35,15 @@ func initialize():
 		print("Turn Manager NOT Initialized.")
 
 # Reset itself when game over
-# Need to fix the issue where the button disappear on reset
 func reset():
 	active_character_index = 0
 	turn_number = 1
 	turn_changed.emit(turn_number)
-	# advance_queue()
+	advance_queue()
+	
+# Get the active player right now
+func get_active_character(c: Character) -> bool:
+	return turn_queue[active_character_index] == c
 	
 # Move to the next character in th queue and count turns
 func _step_index():
@@ -53,15 +58,20 @@ func _step_index():
 func advance_queue():
 	
 	# Skip dead characters so they don't stall the queue
+	"""
 	var skipped = 0
 	while GameManager.is_dead(turn_queue[active_character_index]):
 		_step_index()
 		skipped += 1
 		if skipped >= turn_queue.size():
 			return # Eveyone died, stop
-	
-	# Wait unitl the current character's turn is finished
+	"""
+	# Wait until the current character's turn is finished
 	await turn_queue[active_character_index].play_turn()
+	
+	# Stop recursion if anyone is dead
+	if (GameManager.player.is_dead or GameManager.enemy.is_dead):
+		return
 	
 	# Ready the next character in the queue
 	_step_index()

@@ -1,27 +1,26 @@
 [gd_scene format=3 uid="uid://c3xcyqqr6cci6"]
 
-[ext_resource type="Script" uid="uid://dp4dyqlg1bfek" path="res://DiwenFolder/Scripts/CharacterScripts/Cat.gd" id="1_l1sa6"]
-[ext_resource type="Texture2D" uid="uid://coo1c8owycbbm" path="res://TempImages/CatImage1.jpeg" id="2_acss3"]
-[ext_resource type="Script" uid="uid://cfrnv2u688ioq" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/HealthBar.gd" id="3_0ynu0"]
-[ext_resource type="Script" uid="uid://cqw0gi1hv8xd" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/PawAttackButton.gd" id="4_0cm01"]
-[ext_resource type="Script" uid="uid://rmqta1r33kom" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/SPDisplay.gd" id="5_g4geq"]
-[ext_resource type="Script" uid="uid://c5qyujajafno8" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/SPBar.gd" id="6_jy08m"]
-[ext_resource type="Script" uid="uid://cedxbpqw165nr" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/HealthDisplay.gd" id="7_3ghlo"]
-[ext_resource type="Script" uid="uid://d125l4jpbb1a8" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/AcidSprayButton.gd" id="8_3ghlo"]
-[ext_resource type="Texture2D" uid="uid://spamqhfd3f5" path="res://TempImages/alchemy_lab_blue_glow.png" id="8_dm7pf"]
-[ext_resource type="AudioStream" uid="uid://dv2a1tefu34d6" path="res://BSmallAudio/lightAttack1.wav" id="9_5tq84"]
-[ext_resource type="Script" uid="uid://i8qsk8dfiahs" path="res://DiwenFolder/Scripts/ManagerScripts/TurnManager.gd" id="9_ubpc5"]
-[ext_resource type="Script" uid="uid://b7f8qlcv787cv" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/TurnNumber.gd" id="10_5tq84"]
-[ext_resource type="Script" uid="uid://bb8khp5mjwqbe" path="res://DiwenFolder/Scripts/UIScripts/GameOverScreen.gd" id="12_ll2o1"]
-[ext_resource type="Script" uid="uid://c1m5h1hkrfvr4" path="res://DiwenFolder/end_turn_button.gd" id="13_5tq84"]
-[ext_resource type="AudioStream" uid="uid://bofmufwx3d1e1" path="res://BSmallAudio/TestVictoryMusic.wav" id="13_pp3n8"]
-[ext_resource type="Texture2D" uid="uid://cletpfokhcf6j" path="res://TempImages/pixel-art-8bit-cartoon-turtle-260nw-1819767353.webp" id="14_acss3"]
-[ext_resource type="Script" uid="uid://de74y6l47bs3l" path="res://DiwenFolder/Scripts/CharacterScripts/Turtle.gd" id="14_g4geq"]
-[ext_resource type="Script" uid="uid://5gsw3bm6stl8" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/GoldfishLevelButton.gd" id="14_jy08m"]
-[ext_resource type="Script" uid="uid://bvnhvb5r30n2" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/ShieldDisplay.gd" id="15_jy08m"]
-[ext_resource type="AudioStream" uid="uid://byqwc6df2j51n" path="res://BSmallAudio/TestDefeatMusic.wav" id="16_5tq84"]
-[ext_resource type="Script" uid="uid://c42f4g7ui5vxg" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/ShieldBar.gd" id="17_3ghlo"]
-[ext_resource type="AudioStream" uid="uid://lola6yesy8bi" path="res://BSmallAudio/TestBattleMusic.wav" id="20_dm7pf"]
+[ext_resource type="Script" uid="uid://dp4dyqlg1bfek" path="res://DiwenFolder/Scripts/CharacterScripts/Cat.gd" id="1_y1nwd"]
+[ext_resource type="Texture2D" uid="uid://coo1c8owycbbm" path="res://TempImages/CatImage1.jpeg" id="2_wdwy1"]
+[ext_resource type="Script" uid="uid://cfrnv2u688ioq" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/HealthBar.gd" id="3_e70ou"]
+[ext_resource type="Script" uid="uid://cqw0gi1hv8xd" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/PawAttackButton.gd" id="4_k1lyr"]
+[ext_resource type="Script" uid="uid://rmqta1r33kom" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/SPDisplay.gd" id="5_2tyy8"]
+[ext_resource type="Script" uid="uid://c5qyujajafno8" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/SPBar.gd" id="6_fcldl"]
+[ext_resource type="Script" uid="uid://cedxbpqw165nr" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/HealthDisplay.gd" id="7_wfap5"]
+[ext_resource type="Script" uid="uid://d125l4jpbb1a8" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/AcidSprayButton.gd" id="8_o45ij"]
+[ext_resource type="AudioStream" uid="uid://dv2a1tefu34d6" path="res://BSmallAudio/lightAttack1.wav" id="9_m6a0m"]
+[ext_resource type="Texture2D" uid="uid://spamqhfd3f5" path="res://TempImages/alchemy_lab_blue_glow.png" id="10_p5epa"]
+[ext_resource type="Script" uid="uid://i8qsk8dfiahs" path="res://DiwenFolder/Scripts/ManagerScripts/TurnManager.gd" id="11_80x7d"]
+[ext_resource type="Script" uid="uid://b7f8qlcv787cv" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/TurnNumber.gd" id="12_52703"]
+[ext_resource type="Script" uid="uid://c1m5h1hkrfvr4" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/end_turn_button.gd" id="13_y1nwd"]
+[ext_resource type="AudioStream" uid="uid://bofmufwx3d1e1" path="res://BSmallAudio/TestVictoryMusic.wav" id="15_uubjq"]
+[ext_resource type="AudioStream" uid="uid://byqwc6df2j51n" path="res://BSmallAudio/TestDefeatMusic.wav" id="16_7dxga"]
+[ext_resource type="Script" uid="uid://de74y6l47bs3l" path="res://DiwenFolder/Scripts/CharacterScripts/Turtle.gd" id="18_pph7p"]
+[ext_resource type="Script" uid="uid://bvnhvb5r30n2" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/ShieldDisplay.gd" id="19_437qj"]
+[ext_resource type="Texture2D" uid="uid://cletpfokhcf6j" path="res://TempImages/pixel-art-8bit-cartoon-turtle-260nw-1819767353.webp" id="20_xqvke"]
+[ext_resource type="Script" uid="uid://bb8khp5mjwqbe" path="res://DiwenFolder/Scripts/UIScripts/GameOverDefeat.gd" id="20_y1nwd"]
+[ext_resource type="Script" uid="uid://c42f4g7ui5vxg" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/ShieldBar.gd" id="21_8rndc"]
+[ext_resource type="AudioStream" uid="uid://lola6yesy8bi" path="res://BSmallAudio/TestBattleMusic.wav" id="22_mcm55"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q2kye"]
 bg_color = Color(0.9647059, 0.07058824, 0.043137256, 1)
@@ -40,6 +39,8 @@ bg_color = Color(0.23028189, 0.62517625, 0.9409401, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jy08m"]
 bg_color = Color(0.43880767, 0.68210435, 0.094066925, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3nbg1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hdsd"]
 bg_color = Color(0.83996326, 0.2754299, 0.20617571, 1)
@@ -68,12 +69,12 @@ bg_color = Color(0.2123048, 0.21230489, 0.21230471, 1)
 
 [node name="Cat" type="Node2D" parent="." unique_id=2021096576]
 z_index = 2
-script = ExtResource("1_l1sa6")
+script = ExtResource("1_y1nwd")
 
 [node name="CatSprite" type="Sprite2D" parent="Cat" unique_id=2134995916]
 position = Vector2(-385, 9)
 scale = Vector2(0.58093524, 0.5911764)
-texture = ExtResource("2_acss3")
+texture = ExtResource("2_wdwy1")
 
 [node name="CatHealthBar" type="ProgressBar" parent="Cat" unique_id=296650448 node_paths=PackedStringArray("character")]
 offset_left = -284.0
@@ -84,7 +85,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_q2kye")
 theme_override_styles/fill = SubResource("StyleBoxFlat_xsruf")
 value = 100.0
 show_percentage = false
-script = ExtResource("3_0ynu0")
+script = ExtResource("3_e70ou")
 character = NodePath("..")
 
 [node name="PawAttackButton" type="Button" parent="Cat" unique_id=1914667546 node_paths=PackedStringArray("attacker", "target")]
@@ -94,10 +95,10 @@ offset_right = -79.0
 offset_bottom = -29.0
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_ac6d3")
-text = "Paw Scratch
+text = "Spike Ball
 Deals 500% DMG
 - 5 SP "
-script = ExtResource("4_0cm01")
+script = ExtResource("4_k1lyr")
 attacker = NodePath("..")
 target = NodePath("../../Turtle")
 
@@ -118,7 +119,7 @@ offset_right = -287.0
 offset_bottom = 259.0
 theme_override_font_sizes/normal_font_size = 21
 text = "Character SP"
-script = ExtResource("5_g4geq")
+script = ExtResource("5_2tyy8")
 target = NodePath("..")
 
 [node name="CatSPBar" type="ProgressBar" parent="Cat" unique_id=1096410314 node_paths=PackedStringArray("character")]
@@ -130,7 +131,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_q2kye")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ap38i")
 value = 100.0
 show_percentage = false
-script = ExtResource("6_jy08m")
+script = ExtResource("6_fcldl")
 character = NodePath("..")
 
 [node name="CatHealthDisplay" type="RichTextLabel" parent="Cat" unique_id=1201772986 node_paths=PackedStringArray("target")]
@@ -140,7 +141,7 @@ offset_right = -41.0
 offset_bottom = 259.0
 theme_override_font_sizes/normal_font_size = 21
 text = "Character SP"
-script = ExtResource("7_3ghlo")
+script = ExtResource("7_wfap5")
 target = NodePath("..")
 
 [node name="AcidSprayButton" type="Button" parent="Cat" unique_id=901853010 node_paths=PackedStringArray("attacker", "target")]
@@ -154,11 +155,12 @@ text = "Acid Spray
 Deals 300% DMG
 Corrodes Shield
 - 5 SP "
-script = ExtResource("8_3ghlo")
+script = ExtResource("8_o45ij")
 attacker = NodePath("..")
 target = NodePath("../../Turtle")
 
 [node name="GoldfishHealToggle" type="CheckButton" parent="Cat" unique_id=2099154603]
+visible = false
 offset_left = -523.0
 offset_top = 139.0
 offset_right = -274.0
@@ -169,7 +171,28 @@ Heal 10% Every 3 turn"
 icon_alignment = 1
 
 [node name="sfx_basicAttack1" type="AudioStreamPlayer" parent="Cat" unique_id=1557120559]
-stream = ExtResource("9_5tq84")
+stream = ExtResource("9_m6a0m")
+
+[node name="WaterCleanseLabel" type="RichTextLabel" parent="Cat" unique_id=933078199]
+visible = false
+offset_left = -536.0
+offset_top = 137.0
+offset_right = -275.0
+offset_bottom = 212.0
+theme_override_font_sizes/normal_font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_3nbg1")
+text = "Water Cleanse:
+Heal 10% HP every 3 turns"
+
+[node name="WaterPurifyLabel" type="RichTextLabel" parent="Cat" unique_id=2109698856]
+offset_left = -536.0
+offset_top = 138.0
+offset_right = -275.0
+offset_bottom = 213.0
+theme_override_font_sizes/normal_font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_3nbg1")
+text = "Water Purify:
+Negate Debuff"
 
 [node name="Background" type="Node2D" parent="." unique_id=1396674784]
 metadata/_edit_lock_ = true
@@ -177,11 +200,11 @@ metadata/_edit_lock_ = true
 [node name="BackgroundImage" type="Sprite2D" parent="Background" unique_id=497961169]
 position = Vector2(-2, -2)
 scale = Vector2(0.89453125, 1)
-texture = ExtResource("8_dm7pf")
+texture = ExtResource("10_p5epa")
 metadata/_edit_lock_ = true
 
 [node name="TurnManager" type="Node" parent="." unique_id=1220535795]
-script = ExtResource("9_ubpc5")
+script = ExtResource("11_80x7d")
 
 [node name="Turn Number" type="RichTextLabel" parent="TurnManager" unique_id=1048462498 node_paths=PackedStringArray("turn_manager")]
 offset_left = -539.0
@@ -190,7 +213,7 @@ offset_right = -416.0
 offset_bottom = -241.0
 theme_override_font_sizes/normal_font_size = 30
 text = "Turn 0"
-script = ExtResource("10_5tq84")
+script = ExtResource("12_52703")
 turn_manager = NodePath("..")
 
 [node name="EndTurnButton" type="Button" parent="TurnManager" unique_id=806202689]
@@ -200,76 +223,10 @@ offset_right = 550.0
 offset_bottom = 297.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_4hdsd")
 text = "End Turn"
-script = ExtResource("13_5tq84")
-
-[node name="Game Over Screen" type="Control" parent="." unique_id=1520928869 node_paths=PackedStringArray("battle_music")]
-visible = false
-z_index = 10
-layout_mode = 3
-anchors_preset = 0
-offset_left = -226.0
-offset_top = -101.0
-offset_right = 224.0
-offset_bottom = 99.0
-script = ExtResource("12_ll2o1")
-battle_music = NodePath("../Test_BattleMusic")
-
-[node name="VictoryText" type="RichTextLabel" parent="Game Over Screen" unique_id=1056190219]
-z_index = 1
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -104.0
-offset_right = 104.0
-offset_bottom = 57.0
-grow_horizontal = 2
-theme_override_colors/default_color = Color(0.40977117, 0.81065845, 0.957442, 1)
-theme_override_font_sizes/normal_font_size = 40
-text = "VICTORY!"
-scroll_active = false
-horizontal_alignment = 1
-
-[node name="ColorRect" type="ColorRect" parent="Game Over Screen" unique_id=1811582572]
-layout_mode = 0
-offset_right = 450.0
-offset_bottom = 200.0
-color = Color(0.9056048, 0.8871768, 0.9319379, 1)
-
-[node name="RestartButton" type="Button" parent="Game Over Screen" unique_id=793719772]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -49.0
-offset_top = -54.0
-offset_right = 47.0
-offset_bottom = -16.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Restart "
-
-[node name="VictoryMusic" type="AudioStreamPlayer" parent="Game Over Screen" unique_id=547441527]
-stream = ExtResource("13_pp3n8")
-volume_db = -10.0
-
-[node name="DefeatMusic" type="AudioStreamPlayer" parent="Game Over Screen" unique_id=780168754]
-stream = ExtResource("16_5tq84")
-
-[node name="GoldfishLevelButton" type="Button" parent="." unique_id=1753128446]
-visible = false
-offset_left = 260.0
-offset_top = 236.0
-offset_right = 395.0
-offset_bottom = 298.0
-text = "Goldfish Level
-DOES NOT WORK"
-script = ExtResource("14_jy08m")
+script = ExtResource("13_y1nwd")
 
 [node name="Turtle" type="Node2D" parent="." unique_id=997118019]
-script = ExtResource("14_g4geq")
+script = ExtResource("18_pph7p")
 
 [node name="TurtleShieldDisplay" type="RichTextLabel" parent="Turtle" unique_id=669968016 node_paths=PackedStringArray("target")]
 z_index = 2
@@ -280,12 +237,12 @@ offset_bottom = -213.0
 theme_override_font_sizes/normal_font_size = 20
 text = "Character Shield: 100/100"
 horizontal_alignment = 1
-script = ExtResource("15_jy08m")
+script = ExtResource("19_437qj")
 target = NodePath("..")
 
 [node name="TurtleSprite" type="Sprite2D" parent="Turtle" unique_id=825765740]
 position = Vector2(278, 4)
-texture = ExtResource("14_acss3")
+texture = ExtResource("20_xqvke")
 
 [node name="TurtleShieldBar" type="ProgressBar" parent="Turtle" unique_id=1826437061 node_paths=PackedStringArray("character")]
 z_index = 1
@@ -297,7 +254,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_acss3")
 theme_override_styles/fill = SubResource("StyleBoxFlat_0ynu0")
 value = 100.0
 show_percentage = false
-script = ExtResource("17_3ghlo")
+script = ExtResource("21_8rndc")
 character = NodePath("..")
 
 [node name="TurtleHealthBar" type="ProgressBar" parent="Turtle" unique_id=1329554305 node_paths=PackedStringArray("character")]
@@ -310,7 +267,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_ubpc5")
 max_value = 50.0
 value = 50.0
 show_percentage = false
-script = ExtResource("3_0ynu0")
+script = ExtResource("3_e70ou")
 character = NodePath("..")
 
 [node name="TurtleNameLabel" type="RichTextLabel" parent="Turtle" unique_id=1519212105]
@@ -341,10 +298,68 @@ offset_right = 172.0
 offset_bottom = -207.0
 theme_override_font_sizes/normal_font_size = 21
 text = "Character Health: 100/100"
-script = ExtResource("7_3ghlo")
+script = ExtResource("7_wfap5")
 target = NodePath("..")
 
 [node name="Test_BattleMusic" type="AudioStreamPlayer" parent="." unique_id=1105500636]
-stream = ExtResource("20_dm7pf")
+stream = ExtResource("22_mcm55")
 volume_db = -16.0
 autoplay = true
+
+[node name="GameOverDefeat" type="Control" parent="." unique_id=1886236834 node_paths=PackedStringArray("battle_music")]
+visible = false
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_left = -226.0
+offset_top = -101.0
+offset_right = 224.0
+offset_bottom = 99.0
+script = ExtResource("20_y1nwd")
+battle_music = NodePath("../Test_BattleMusic")
+
+[node name="VictoryMusic" type="AudioStreamPlayer" parent="GameOverDefeat" unique_id=1668379408]
+stream = ExtResource("15_uubjq")
+volume_db = -10.0
+
+[node name="DefeatMusic" type="AudioStreamPlayer" parent="GameOverDefeat" unique_id=227899786]
+stream = ExtResource("16_7dxga")
+volume_db = -18.086
+
+[node name="VictoryText" type="RichTextLabel" parent="GameOverDefeat" unique_id=1183126620]
+z_index = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -193.0
+offset_top = 15.0
+offset_right = 195.0
+offset_bottom = 145.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.40977117, 0.81065845, 0.957442, 1)
+theme_override_font_sizes/normal_font_size = 40
+text = "Catster's journey has ended! "
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="GameOverDefeat" unique_id=2056749646]
+layout_mode = 0
+offset_right = 450.0
+offset_bottom = 200.0
+color = Color(0.9056048, 0.8871768, 0.9319379, 1)
+
+[node name="RestartButton" type="Button" parent="GameOverDefeat" unique_id=1463593643]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -49.0
+offset_top = -54.0
+offset_right = 56.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Retry Level"

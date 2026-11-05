@@ -12,8 +12,8 @@ func _ready() -> void:
 	message.text = "Victory! Choose a new attack to carry into the next fight."
 	option_a.text = "Water Cleanse"
 	option_b.text = "Water Purify"
-	option_a.pressed.connect(_choose.bind("fireball"))
-	option_b.pressed.connect(_choose.bind("ice_shard"))
+	option_a.pressed.connect(_choose.bind("water_cleanse"))
+	option_b.pressed.connect(_choose.bind("water_purify"))
 	GameManager.game_over.connect(_on_game_over)
 
 # Only appear when the player side wins
