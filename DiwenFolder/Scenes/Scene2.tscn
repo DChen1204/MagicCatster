@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://spamqhfd3f5" path="res://TempImages/alchemy_lab_blue_glow.png" id="11_8lyrt"]
 [ext_resource type="Script" uid="uid://i8qsk8dfiahs" path="res://DiwenFolder/Scripts/ManagerScripts/TurnManager.gd" id="12_q3cm8"]
 [ext_resource type="Script" uid="uid://b7f8qlcv787cv" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/TurnNumber.gd" id="13_77foi"]
-[ext_resource type="Script" uid="uid://c1m5h1hkrfvr4" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/end_turn_button.gd" id="14_amivq"]
+[ext_resource type="Script" uid="uid://dkfp8w12fw65d" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/end_turn_button.gd" id="14_amivq"]
 [ext_resource type="Script" uid="uid://dsm2wif4321pt" path="res://DiwenFolder/Scripts/CharacterScripts/Goldfish.gd" id="15_go3hv"]
 [ext_resource type="Texture2D" uid="uid://c7ph3y61637vb" path="res://TempImages/GoldfishImage1.jpeg" id="16_5ijur"]
 [ext_resource type="Script" uid="uid://bb8khp5mjwqbe" path="res://DiwenFolder/Scripts/UIScripts/GameOverDefeat.gd" id="17_hojyp"]
@@ -60,10 +60,10 @@ scale = Vector2(0.58093524, 0.5911764)
 texture = ExtResource("4_e4jyd")
 
 [node name="CatHealthBar" type="ProgressBar" parent="Cat" unique_id=1218942256 node_paths=PackedStringArray("character")]
-offset_left = -284.0
-offset_top = 262.0
-offset_right = -67.0
-offset_bottom = 301.0
+offset_left = -502.0
+offset_top = -132.0
+offset_right = -285.0
+offset_bottom = -93.0
 theme_override_styles/background = SubResource("StyleBoxFlat_xrivr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_13qdw")
 value = 100.0
@@ -72,10 +72,10 @@ script = ExtResource("5_g03e7")
 character = NodePath("..")
 
 [node name="PawAttackButton" type="Button" parent="Cat" unique_id=2131501139 node_paths=PackedStringArray("attacker", "target")]
-offset_left = -228.0
-offset_top = -110.0
-offset_right = -79.0
-offset_bottom = -29.0
+offset_left = -542.0
+offset_top = 162.0
+offset_right = -361.0
+offset_bottom = 275.0
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_pjtp4")
 text = "Spike Ball
@@ -86,30 +86,30 @@ attacker = NodePath("..")
 target = NodePath("../../Goldfish")
 
 [node name="CatNameLabel" type="RichTextLabel" parent="Cat" unique_id=329795008]
-offset_left = -468.0
-offset_top = -145.0
-offset_right = -306.0
-offset_bottom = -98.0
+offset_left = -473.0
+offset_top = -180.0
+offset_right = -311.0
+offset_bottom = -133.0
 theme_override_font_sizes/normal_font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_mwn8k")
 text = "Catster"
 horizontal_alignment = 1
 
 [node name="CatSPDisplay" type="RichTextLabel" parent="Cat" unique_id=1323602701 node_paths=PackedStringArray("target")]
-offset_left = -528.0
-offset_top = 219.0
-offset_right = -287.0
-offset_bottom = 259.0
+offset_left = -278.0
+offset_top = -105.0
+offset_right = -37.0
+offset_bottom = -65.0
 theme_override_font_sizes/normal_font_size = 21
 text = "Character SP"
 script = ExtResource("7_kiahr")
 target = NodePath("..")
 
 [node name="CatSPBar" type="ProgressBar" parent="Cat" unique_id=1784342234 node_paths=PackedStringArray("character")]
-offset_left = -530.0
-offset_top = 262.0
-offset_right = -313.0
-offset_bottom = 301.0
+offset_left = -287.0
+offset_top = -75.0
+offset_right = -70.0
+offset_bottom = -36.0
 theme_override_styles/background = SubResource("StyleBoxFlat_xrivr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_1ypm2")
 value = 100.0
@@ -118,10 +118,10 @@ script = ExtResource("8_mvohu")
 character = NodePath("..")
 
 [node name="CatHealthDisplay" type="RichTextLabel" parent="Cat" unique_id=1680723035 node_paths=PackedStringArray("target")]
-offset_left = -282.0
-offset_top = 219.0
-offset_right = -41.0
-offset_bottom = 259.0
+offset_left = -495.0
+offset_top = -127.0
+offset_right = -254.0
+offset_bottom = -87.0
 theme_override_font_sizes/normal_font_size = 21
 text = "Character SP"
 script = ExtResource("9_vewk3")
@@ -224,6 +224,10 @@ text = "Character SP: 100/100"
 script = ExtResource("9_vewk3")
 target = NodePath("..")
 
+[node name="sfx_basicAttack1" type="AudioStreamPlayer" parent="Goldfish" unique_id=1274723350]
+stream = ExtResource("10_urdjd")
+volume_db = -9.0
+
 [node name="GameOverDefeat" type="Control" parent="." unique_id=1124794058 node_paths=PackedStringArray("battle_music")]
 visible = false
 z_index = 10
@@ -284,5 +288,5 @@ text = "Retry Level"
 
 [node name="Test_BattleMusic" type="AudioStreamPlayer" parent="." unique_id=215303707]
 stream = ExtResource("21_vola3")
-volume_db = -13.0
+volume_db = -6.0
 autoplay = true
