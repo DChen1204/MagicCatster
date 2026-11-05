@@ -71,5 +71,22 @@ func reset_game():
 	enemy.reset()
 	turn_manager.reset()
 	
+	# Choices that carry over between fights
+var chosen_attack: String = ""
+
+# Clear everything tied to the current battle scene
+func clear_battle_state():
+	players.clear()
+	dead_characters.clear()
+	enemy = null
+	turn_manager = null
+	game_over_screen = null
+	_start_queued = false
+
+# Use this instead of calling change_scene_to_file directly
+func go_to_scene(path: String):
+	clear_battle_state()
+	get_tree().change_scene_to_file(path)
+	
 func get_turn_number() -> int:
 	return turn_manager.turn_number
