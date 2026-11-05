@@ -2,7 +2,7 @@ extends ProgressBar
 
 # This script is to control health bars. 
 
-# The health component of the character that has this health bar. 
+# The character that has this health bar. 
 @export var character: Character
 
 func _ready() -> void:

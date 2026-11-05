@@ -29,6 +29,7 @@ func _ready():
 	# used_heal = false
 	
 	health_changed.emit()
+	dialogue_box.text = "How dare you fight me!"
 	
 	# Register itself with GameManager
 	GameManager.register_enemy(self)
@@ -38,9 +39,14 @@ func _ready():
 func reset():
 	super.assign_stats(attack, defense, max_health, is_play_character)
 	health_changed.emit()
+	dialogue_box.text = "How dare you fight me!"
 
 # Play its turn
 func play_turn():
+	# Pause for some time to pretend thinking
+	dialogue_box.text = "Poseidon is summoning water..."
+	await get_tree().create_timer(1.5).timeout
+	# Do action
 	decide_action()
 	
 # Enemy AI deciding what to do in its turn
@@ -58,9 +64,9 @@ func decide_action():
 		
 # List of Skills
 func goldfish_bubble_attack():
-	print("Goldfish bubble attack Cat.")
+	print("Goldfish bubble attack.")
 	GameManager.player.got_goldfish_bubble_attack(self, 2)
-	dialogue_box.text = "Poseidon spewed bubbles to your face!"
+	dialogue_box.text = "Poseidon spewed bubbles on Catster's face!"
 	
 func goldfish_water_heal():
 	print("Goldfish heals itself.")
