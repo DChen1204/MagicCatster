@@ -13,6 +13,9 @@ SP = 0
 Character Name = Poseidon
 """
 
+#SFX for attacks
+@onready var sfx_basicAttack1 = $sfx_basicAttack1
+
 # The dialogue box of this character.
 @onready var dialogue_box: RichTextLabel = $"GoldfishDialogueBox"
 
@@ -66,6 +69,7 @@ func decide_action():
 func goldfish_bubble_attack():
 	print("Goldfish bubble attack.")
 	GameManager.player.got_goldfish_bubble_attack(self, 2)
+	sfx_basicAttack1.play()
 	dialogue_box.text = "Poseidon spewed bubbles on Catster's face!"
 	
 func goldfish_water_heal():

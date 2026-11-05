@@ -7,6 +7,7 @@ extends Character
 
 #SFX for attacks
 @onready var sfx_basicAttack1 = $sfx_basicAttack1
+@onready var sfx_basicAttack2 = $sfx_basicAttack2
 
 
 """
@@ -88,16 +89,19 @@ func cat_paw_scratch(target: Character):
 		sp -= 5
 		sp_changed.emit()
 		print("Cat paw scratch enemy.")
+		await get_tree().create_timer(1).timeout
 		target.got_cat_paw_scratch(self, 5)
 		sfx_basicAttack1.play()
 
-# Second skill: acid spray, corrodes shield, 300% Damage
-func cat_acid_spray(target: Character):
-	if (sp >= 5):
-		sp -= 5
+# Second skill: Pounce, breaks down shields, 300% Damage
+func cat_pounce(target: Character):
+	if (sp >= 3):
+		sp -= 3
 		sp_changed.emit()
-		print("Cat acid spray enemy.")
-		target.got_cat_acid_spray(self, 3)
+		print("Cat pounced onto enemy.")
+		await get_tree().create_timer(1).timeout
+		target.got_cat_pounce(self, 3)
+		sfx_basicAttack2.play()
 
 # Got affected by skills list
 func got_goldfish_bubble_attack(attacker: Character, dmg_percentage: float):
