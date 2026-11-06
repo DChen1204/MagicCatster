@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://spamqhfd3f5" path="res://TempImages/alchemy_lab_blue_glow.png" id="11_8lyrt"]
 [ext_resource type="Script" uid="uid://i8qsk8dfiahs" path="res://DiwenFolder/Scripts/ManagerScripts/TurnManager.gd" id="12_q3cm8"]
 [ext_resource type="Script" uid="uid://b7f8qlcv787cv" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/TurnNumber.gd" id="13_77foi"]
-[ext_resource type="Script" uid="uid://dkfp8w12fw65d" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/end_turn_button.gd" id="14_amivq"]
+[ext_resource type="Script" uid="uid://c1m5h1hkrfvr4" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/end_turn_button.gd" id="14_amivq"]
 [ext_resource type="Script" uid="uid://dsm2wif4321pt" path="res://DiwenFolder/Scripts/CharacterScripts/Goldfish.gd" id="15_go3hv"]
 [ext_resource type="Texture2D" uid="uid://c7ph3y61637vb" path="res://TempImages/GoldfishImage1.jpeg" id="16_5ijur"]
 [ext_resource type="Script" uid="uid://bb8khp5mjwqbe" path="res://DiwenFolder/Scripts/UIScripts/GameOverDefeat.gd" id="17_hojyp"]

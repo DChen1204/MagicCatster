@@ -72,7 +72,7 @@ func play_turn():
 	
 	# Apply Goldfish Water Cleanse
 	if water_cleanse:
-		if GameManager.get_turn_number() % 3 == 0:
+		if GameManager.get_turn_number() % 4 == 0:
 			super.heal(max_health * 0.1)
 			
 	# Water Purify is to negate debuff
@@ -95,8 +95,8 @@ func cat_paw_scratch(target: Character):
 
 # Second skill: Pounce, breaks down shields, 300% Damage
 func cat_pounce(target: Character):
-	if (sp >= 3):
-		sp -= 3
+	if (sp >= 4):
+		sp -= 4
 		sp_changed.emit()
 		print("Cat pounced onto enemy.")
 		await get_tree().create_timer(1).timeout

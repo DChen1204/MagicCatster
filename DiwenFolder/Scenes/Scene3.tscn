@@ -13,7 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://dtbrxoxvox4p1" path="res://BSmallAudio/heavyAttack1.mp3" id="10_y1nwd"]
 [ext_resource type="Script" uid="uid://i8qsk8dfiahs" path="res://DiwenFolder/Scripts/ManagerScripts/TurnManager.gd" id="11_80x7d"]
 [ext_resource type="Script" uid="uid://b7f8qlcv787cv" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/TurnNumber.gd" id="12_52703"]
-[ext_resource type="Script" uid="uid://dkfp8w12fw65d" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/end_turn_button.gd" id="13_y1nwd"]
+[ext_resource type="Script" uid="uid://c1m5h1hkrfvr4" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/end_turn_button.gd" id="13_y1nwd"]
 [ext_resource type="AudioStream" uid="uid://bofmufwx3d1e1" path="res://BSmallAudio/TestVictoryMusic.wav" id="15_uubjq"]
 [ext_resource type="AudioStream" uid="uid://byqwc6df2j51n" path="res://BSmallAudio/TestDefeatMusic.wav" id="16_7dxga"]
 [ext_resource type="Script" uid="uid://de74y6l47bs3l" path="res://DiwenFolder/Scripts/CharacterScripts/Turtle.gd" id="18_pph7p"]
@@ -155,7 +155,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_jy08m")
 text = "Pounce
 Deals 300% DMG
 Breaks Down Shields
-- 3 SP "
+- 4 SP "
 script = ExtResource("8_o45ij")
 attacker = NodePath("..")
 target = NodePath("../../Turtle")
@@ -175,6 +175,7 @@ icon_alignment = 1
 stream = ExtResource("9_m6a0m")
 
 [node name="WaterCleanseLabel" type="RichTextLabel" parent="Cat" unique_id=933078199]
+visible = false
 offset_left = -278.0
 offset_top = -24.0
 offset_right = -126.0
@@ -182,9 +183,10 @@ offset_bottom = 62.0
 theme_override_font_sizes/normal_font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_3nbg1")
 text = "Water Cleanse:
-Heal 10% HP every 3 turns"
+Heal 10% HP every 4 turns"
 
 [node name="WaterPurifyLabel" type="RichTextLabel" parent="Cat" unique_id=2109698856]
+visible = false
 offset_left = -279.0
 offset_top = -24.0
 offset_right = -133.0
