@@ -95,7 +95,7 @@ func play_turn():
 	
 	# Apply Goldfish Water Cleanse
 	if water_cleanse:
-		if GameManager.get_turn_number() % 3 == 0:
+		if GameManager.get_turn_number() % 4 == 0:
 			super.heal(max_health * 0.1)
 			
 	# Water Purify is to negate debuff

@@ -14,7 +14,7 @@ func _ready() -> void:
 	option_b.text = "Water Purify"
 	
 	# Hover text describing what each attack does
-	option_a.tooltip_text = "Water Cleanse: Heals the player by 10% every 3 turns"
+	option_a.tooltip_text = "Water Cleanse: Heals the player by 10% every 4 turns"
 	option_b.tooltip_text = "Water Purify: Negates all Debuffs on the player"
 	
 	option_a.pressed.connect(_choose.bind("water_cleanse"))

@@ -181,6 +181,7 @@ icon_alignment = 1
 stream = ExtResource("9_m6a0m")
 
 [node name="WaterCleanseLabel" type="RichTextLabel" parent="Cat" unique_id=933078199]
+visible = false
 offset_left = -278.0
 offset_top = -24.0
 offset_right = -126.0
@@ -188,9 +189,10 @@ offset_bottom = 62.0
 theme_override_font_sizes/normal_font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_3nbg1")
 text = "Water Cleanse:
-Heal 10% HP every 3 turns"
+Heal 10% HP every 4 turns"
 
 [node name="WaterPurifyLabel" type="RichTextLabel" parent="Cat" unique_id=2109698856]
+visible = false
 offset_left = -279.0
 offset_top = -24.0
 offset_right = -133.0
