@@ -13,6 +13,9 @@ SP = 0
 Character Name = Rock
 """
 
+#SFX for attacks
+@onready var sfx_basicAttack2 = $sfx_basicAttack2
+
 # The dialogue box of this character.
 @onready var dialogue_box: RichTextLabel = $"TurtleDialogueBox"
 
@@ -67,6 +70,7 @@ func decide_action():
 func turtle_shell_attack():
 	print("Rock Crystal Pillars.")
 	GameManager.player.got_turtle_shell_attack(self, 1)
+	sfx_basicAttack2.play()
 	dialogue_box.text = "Rock struck Catster with Crystal Pillars!"
 	
 func turtle_shield():
@@ -93,7 +97,7 @@ func got_cat_paw_scratch(attacker: Character, dmg_percentage: float):
 		super.take_damage(total_damage)
 		
 # Corrodes shield
-func got_cat_acid_spray(attacker: Character, dmg_percentage: float):
+func got_cat_pounce(attacker: Character, dmg_percentage: float):
 	var total_damage = (attacker.attack / self.defense) * dmg_percentage
 	var shield_damage = (2 * attacker.attack / self.defense) * dmg_percentage
 	if shield > 0:
@@ -109,6 +113,24 @@ func got_cat_acid_spray(attacker: Character, dmg_percentage: float):
 	# Restore normal damage to health
 	# total_damage /= 2.5
 
+	# Calculate health loss
+	if total_damage > 0:
+		super.take_damage(total_damage)
+		
+
+func got_cat_ult_scratch(attacker: Character, dmg_percentage: float):
+	var total_damage = (attacker.attack / self.defense) * dmg_percentage
+	var shield_damage = (2 * attacker.attack / self.defense) * dmg_percentage
+	if shield > 0:
+		if shield >= shield_damage:
+			shield = shield - shield_damage
+			total_damage = 0
+		else:
+			shield_damage = shield_damage - shield
+			total_damage = shield_damage / 2
+			shield = 0
+		shield_changed.emit()
+		
 	# Calculate health loss
 	if total_damage > 0:
 		super.take_damage(total_damage)

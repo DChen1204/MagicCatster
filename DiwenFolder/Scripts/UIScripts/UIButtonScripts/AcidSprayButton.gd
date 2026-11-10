@@ -18,4 +18,4 @@ func _on_pressed() -> void:
 	# Enable action when both targets are valid and it is the attacker's turn
 	if is_instance_valid(target) and is_instance_valid(attacker):
 		if GameManager.turn_manager.get_active_character(attacker):
-			attacker.cat_acid_spray(target)
+			attacker.cat_pounce(target)

@@ -7,11 +7,14 @@ extends Character
 Stats of the Goldfish
 Base Attack = 200
 Base Defense = 10
-Base Health = 400
+Base Health = 1000
 Play Character = false
 SP = 0
 Character Name = Poseidon
 """
+
+#SFX for attacks
+@onready var sfx_basicAttack1 = $sfx_basicAttack1
 
 # The dialogue box of this character.
 @onready var dialogue_box: RichTextLabel = $"GoldfishDialogueBox"
@@ -24,7 +27,7 @@ Character Name = Poseidon
 # Set up
 func _ready():
 	# Assign stats and name to itself
-	super.assign_stats(200, 10, 400, false)
+	super.assign_stats(200, 10, 1000, false)
 	super.set_character_name("Poseidon")
 	# used_heal = false
 	
@@ -64,18 +67,24 @@ func decide_action():
 		
 # List of Skills
 func goldfish_bubble_attack():
-	print("Goldfish bubble attack.")
+	print("Goldfish used Bubble Wave.")
 	GameManager.player.got_goldfish_bubble_attack(self, 2)
+	sfx_basicAttack1.play()
 	dialogue_box.text = "Poseidon spewed bubbles on Catster's face!"
 	
 func goldfish_water_heal():
-	print("Goldfish heals itself.")
+	print("Goldfish used Gift of the Seas (HEALS).")
 	super.heal(max_health * 0.5)
 	dialogue_box.text = "Poseidon used Water Heal on itself!"
 		
 		
 # List of affected skills
-func got_cat_paw_scratch(attacker: Character, dmg_percentage: float):
+func got_cat_pounce(attacker: Character, dmg_percentage: float):
+	var damage = (attacker.attack / self.defense) * dmg_percentage
+	if damage:
+		super.take_damage(damage)
+
+func got_cat_ult_scratch(attacker: Character, dmg_percentage: float):
 	var damage = (attacker.attack / self.defense) * dmg_percentage
 	if damage:
 		super.take_damage(damage)

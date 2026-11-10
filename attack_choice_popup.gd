@@ -12,6 +12,11 @@ func _ready() -> void:
 	message.text = "Victory! Choose a new attack to carry into the next fight."
 	option_a.text = "Water Cleanse"
 	option_b.text = "Water Purify"
+	
+	# Hover text describing what each attack does
+	option_a.tooltip_text = "Water Cleanse: Heals the player by 10% every 4 turns"
+	option_b.tooltip_text = "Water Purify: Negates all Debuffs on the player"
+	
 	option_a.pressed.connect(_choose.bind("water_cleanse"))
 	option_b.pressed.connect(_choose.bind("water_purify"))
 	GameManager.game_over.connect(_on_game_over)
