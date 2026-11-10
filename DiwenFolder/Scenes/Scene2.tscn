@@ -5,15 +5,15 @@
 [ext_resource type="Script" uid="uid://dp4dyqlg1bfek" path="res://DiwenFolder/Scripts/CharacterScripts/Cat.gd" id="3_rcx44"]
 [ext_resource type="Texture2D" uid="uid://coo1c8owycbbm" path="res://TempImages/CatImage1.jpeg" id="4_e4jyd"]
 [ext_resource type="Script" uid="uid://cfrnv2u688ioq" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/HealthBar.gd" id="5_g03e7"]
-[ext_resource type="Script" uid="uid://cqw0gi1hv8xd" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/PawAttackButton.gd" id="6_pxbdf"]
+[ext_resource type="Script" uid="uid://cqw0gi1hv8xd" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/CatSkillsButton.gd" id="6_pxbdf"]
 [ext_resource type="Script" uid="uid://rmqta1r33kom" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/SPDisplay.gd" id="7_kiahr"]
 [ext_resource type="Script" uid="uid://c5qyujajafno8" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/SPBar.gd" id="8_mvohu"]
 [ext_resource type="Script" uid="uid://cedxbpqw165nr" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/HealthDisplay.gd" id="9_vewk3"]
 [ext_resource type="AudioStream" uid="uid://dv2a1tefu34d6" path="res://BSmallAudio/lightAttack1.wav" id="10_urdjd"]
 [ext_resource type="Texture2D" uid="uid://spamqhfd3f5" path="res://TempImages/alchemy_lab_blue_glow.png" id="11_8lyrt"]
+[ext_resource type="AudioStream" uid="uid://dtbrxoxvox4p1" path="res://BSmallAudio/heavyAttack1.mp3" id="11_sgdef"]
 [ext_resource type="Script" uid="uid://i8qsk8dfiahs" path="res://DiwenFolder/Scripts/ManagerScripts/TurnManager.gd" id="12_q3cm8"]
 [ext_resource type="Script" uid="uid://b7f8qlcv787cv" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/TurnNumber.gd" id="13_77foi"]
-[ext_resource type="Script" uid="uid://c1m5h1hkrfvr4" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/end_turn_button.gd" id="14_amivq"]
 [ext_resource type="Script" uid="uid://dsm2wif4321pt" path="res://DiwenFolder/Scripts/CharacterScripts/Goldfish.gd" id="15_go3hv"]
 [ext_resource type="Texture2D" uid="uid://c7ph3y61637vb" path="res://TempImages/GoldfishImage1.jpeg" id="16_5ijur"]
 [ext_resource type="Script" uid="uid://bb8khp5mjwqbe" path="res://DiwenFolder/Scripts/UIScripts/GameOverDefeat.gd" id="17_hojyp"]
@@ -35,9 +35,6 @@ bg_color = Color(0.10829217, 0.059270762, 0.08788093, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ypm2"]
 bg_color = Color(0.23028189, 0.62517625, 0.9409401, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1lba0"]
-bg_color = Color(0.83996326, 0.2754299, 0.20617571, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_twaol"]
 bg_color = Color(0.2123048, 0.21230489, 0.21230471, 1)
@@ -71,17 +68,41 @@ show_percentage = false
 script = ExtResource("5_g03e7")
 character = NodePath("..")
 
-[node name="PawAttackButton" type="Button" parent="Cat" unique_id=2131501139 node_paths=PackedStringArray("attacker", "target")]
+[node name="BlockButton" type="Button" parent="Cat" unique_id=2131501139 node_paths=PackedStringArray("attacker", "target")]
 offset_left = -542.0
-offset_top = 162.0
-offset_right = -361.0
+offset_top = 234.0
+offset_right = -420.0
 offset_bottom = 275.0
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_pjtp4")
-text = "Spike Ball
-Deals 500% DMG
-- 5 SP "
+text = "BLOCK"
 script = ExtResource("6_pxbdf")
+skill = 0
+attacker = NodePath("..")
+target = NodePath("..")
+
+[node name="PounceButton" type="Button" parent="Cat" unique_id=1397001259 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -397.0
+offset_top = 233.0
+offset_right = -268.0
+offset_bottom = 275.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_pjtp4")
+text = "POUNCE"
+script = ExtResource("6_pxbdf")
+attacker = NodePath("..")
+target = NodePath("../../Goldfish")
+
+[node name="UltButton" type="Button" parent="Cat" unique_id=778740610 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -248.0
+offset_top = 235.0
+offset_right = -85.0
+offset_bottom = 275.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_pjtp4")
+text = "ULTIMATE SCRATCH"
+script = ExtResource("6_pxbdf")
+skill = 2
 attacker = NodePath("..")
 target = NodePath("../../Goldfish")
 
@@ -137,9 +158,11 @@ theme_override_font_sizes/font_size = 20
 text = "Turtle Block
 25% Chance Nulls Damage"
 
-[node name="sfx_basicAttack1" type="AudioStreamPlayer" parent="Cat" unique_id=1130572947]
+[node name="sfx_pounce" type="AudioStreamPlayer" parent="Cat" unique_id=1723762458]
 stream = ExtResource("10_urdjd")
-volume_db = -9.0
+
+[node name="sfx_ult_scratch" type="AudioStreamPlayer" parent="Cat" unique_id=2100172725]
+stream = ExtResource("11_sgdef")
 
 [node name="Background" type="Node2D" parent="." unique_id=1780150100]
 metadata/_edit_lock_ = true
@@ -162,15 +185,6 @@ theme_override_font_sizes/normal_font_size = 30
 text = "Turn 0"
 script = ExtResource("13_77foi")
 turn_manager = NodePath("..")
-
-[node name="EndTurnButton" type="Button" parent="TurnManager" unique_id=2142780874]
-offset_left = 424.0
-offset_top = 238.0
-offset_right = 550.0
-offset_bottom = 297.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_1lba0")
-text = "End Turn"
-script = ExtResource("14_amivq")
 
 [node name="Goldfish" type="Node2D" parent="." unique_id=675740565]
 script = ExtResource("15_go3hv")
