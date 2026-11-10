@@ -117,4 +117,22 @@ func got_cat_pounce(attacker: Character, dmg_percentage: float):
 	if total_damage > 0:
 		super.take_damage(total_damage)
 		
+
+func got_cat_ult_scratch(attacker: Character, dmg_percentage: float):
+	var total_damage = (attacker.attack / self.defense) * dmg_percentage
+	var shield_damage = (2 * attacker.attack / self.defense) * dmg_percentage
+	if shield > 0:
+		if shield >= shield_damage:
+			shield = shield - shield_damage
+			total_damage = 0
+		else:
+			shield_damage = shield_damage - shield
+			total_damage = shield_damage / 2
+			shield = 0
+		shield_changed.emit()
+		
+	# Calculate health loss
+	if total_damage > 0:
+		super.take_damage(total_damage)
+		
 	
