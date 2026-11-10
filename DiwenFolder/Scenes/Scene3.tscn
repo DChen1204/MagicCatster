@@ -121,6 +121,7 @@ theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_wdwy1")
 text = "ULTIMATE SCRATCH"
 script = ExtResource("4_k1lyr")
+skill = 2
 attacker = NodePath("..")
 target = NodePath("../../Turtle")
 

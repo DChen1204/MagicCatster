@@ -10,7 +10,7 @@ extends Character
 """
 Initial stats of the Cat
 Base Attack = 200
-Base Defense = 20
+Base Defense = 200
 Max Health = 500
 Play Character = true
 Max SP = 100
@@ -19,16 +19,18 @@ Character Name = Catster
 
 # Skill tuning. Base Power is multiplied by POWER_SCALE to get
 # the damage multiplier (50 -> 5.0)
-const POWER_SCALE: float = 0.1
+# const POWER_SCALE: float = 0.1
 
 const BLOCK_COST: int = 10
 const BLOCK_DAMAGE_MULT: float = 0.5
 
-const POUNCE_COST: int = 10
-const POUNCE_POWER: float = 50.0
+const POUNCE_COST: int = 30
+const POUNCE_POWER: float = 100.0
 
-const ULT_SCRATCH_COST: int = 50
-const ULT_SCRATCH_POWER: float = 150.0
+const ULT_SCRATCH_COST: int = 80
+const ULT_SCRATCH_POWER: float = 500.0
+
+const SP_RECOVER_RATE: int = 30
 
 # True while Block is active (until the start of the Cat's next turn)
 var is_blocking: bool = false
@@ -39,13 +41,9 @@ signal action_finished
 # True once the Cat has committed to an action this turn
 var has_acted: bool = false
 
-# The toggle for goldfish heal ability
-var goldfish_heal_toggle: CheckButton
+# The text for goldfish heal ability
 var water_cleanse_text: RichTextLabel
 var water_purify_text: RichTextLabel
-
-# The toggle for turtle block ability
-var turtle_block_toggle: CheckButton
 
 # Whether we have the following abilities unlocked
 var water_cleanse: bool = false
@@ -54,7 +52,7 @@ var water_purify: bool = false
 # Set up
 func _ready():
 	# Assign stats and name to itself
-	super.assign_stats(200, 20, 500, true, 100)
+	super.assign_stats(200, 200, 500, true, 100)
 	super.set_character_name("Catster") 
 	
 	# Notify SP change
@@ -62,10 +60,6 @@ func _ready():
 	
 	# Notify health change
 	health_changed.emit()
-	
-	# Get abilities if avaliable
-	goldfish_heal_toggle = get_node_or_null("GoldfishHealToggle")
-	turtle_block_toggle = get_node_or_null("TurtleBlockToggle")
 	
 	# Add potential chosen attack
 	add_chosen_attack()
@@ -91,7 +85,7 @@ func play_turn():
 	# Block from the last turn wears off
 	_set_blocking(false)
 	# Refills SP every turn 
-	restore_sp(20)
+	restore_sp(SP_RECOVER_RATE)
 	
 	# Apply Goldfish Water Cleanse
 	if water_cleanse:
@@ -122,7 +116,7 @@ func cat_pounce(target: Character):
 		return
 	print("Catster pounced onto enemy.")
 	await get_tree().create_timer(1).timeout
-	target.got_cat_pounce(self, POUNCE_POWER * POWER_SCALE)
+	target.got_cat_pounce(self, POUNCE_POWER)
 	_play_sfx(sfx_pounce)
 	_end_action()
 		
@@ -132,7 +126,7 @@ func cat_ult_scratch(target: Character):
 		return
 	print("Catster unleashed ultimate scratch!")
 	await get_tree().create_timer(1).timeout
-	target.got_cat_ult_scratch(self, ULT_SCRATCH_POWER * POWER_SCALE)
+	target.got_cat_ult_scratch(self, ULT_SCRATCH_POWER)
 	_play_sfx(sfx_ult_scratch)
 	_end_action()
 	
@@ -163,24 +157,30 @@ func _end_action():
 	action_finished.emit()
 
 # Got affected by skills list
+# Goldfish list
 func got_goldfish_bubble_attack(attacker: Character, dmg_percentage: float):
 	_receive_hit(attacker, dmg_percentage)
 
-		
-func got_turtle_shell_attack(attacker: Character, dmg_percentage: float):
+# Turtle list
+func got_turtle_bite_dust(attacker: Character, dmg_percentage: float):
+	_receive_hit(attacker, dmg_percentage)
+func got_turtle_tick_damage(attacker: Character, dmg_percentage: float):
+	_receive_hit(attacker, dmg_percentage)
+func got_turtle_emerald_splash(attacker: Character, dmg_percentage: float):
 	_receive_hit(attacker, dmg_percentage)
 
 # Shared damage handling for every enemy attack
 func _receive_hit(attacker: Character, dmg_percentage: float):
 	var damage = (attacker.attack / self.defense) * dmg_percentage
 	# Blocked by turtle ability
-	if turtle_block_toggle != null && turtle_block_toggle.button_pressed:
-		if randf() < 0.25:
-			return
+	#if turtle_block_toggle != null && turtle_block_toggle.button_pressed:
+	#	if randf() < 0.25:
+	#		return
 	# Catster's block halves the damage
 	if is_blocking:
 		damage *= BLOCK_DAMAGE_MULT
 	if damage:
+		print("Cat takes %f damages." % damage)
 		take_damage(damage)
 
 # Turn Block on or off, and tint the sprite so the player can see it

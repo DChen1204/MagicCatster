@@ -17,7 +17,3 @@ func _ready() -> void:
 func _on_shield_changed() -> void:
 	max_value = character.max_shield
 	value = character.shield
-	if value < 1:
-		hide()
-	else:
-		show()

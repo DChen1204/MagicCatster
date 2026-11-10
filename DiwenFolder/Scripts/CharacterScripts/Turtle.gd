@@ -15,11 +15,14 @@ Character Name = Rock
 
 # Constants 
 const BITE_DUST_DAMAGE: float = 20.0		# Initial damage of Bite Dust
-const BITE_DUST_TICK_DAMAGE: float = 50.0 	# Tick damage of Bite Dust per turn
+const BITE_DUST_TICK_DAMAGE: float = 20.0 	# Tick damage of Bite Dust per turn
 const BITE_DUST_DURATION: int = 5			# Number of turns Bite Dust ticks
 
-const CRAZY_DIAMOND_SHEILD_REPAIR: float = 0.25
-const CRAZY_DIAMOND_SHIELD_TURN: int = 3
+const CRAZY_DIAMOND_SHEILD_REPAIR: float = 0.25		# The percentage of every shield repair
+const CRAZY_DIAMOND_SHIELD_TURN: int = 3			# Number of turns before shield repair
+
+const EMERALD_SPLASH_EMERALD_DAMAGE: float = 25
+const EMERALD_SPLASH_EMERALD_COUNT: int = 4
 
 #SFX for attacks
 @onready var sfx_basicAttack2 = $sfx_basicAttack2
@@ -43,7 +46,7 @@ var crazy_diamond_current_turn: int = 0
 # Set up
 func _ready():
 	# Assign stats and name to itself
-	super.assign_stats(150, 25, 400, false)
+	super.assign_stats(150, 500, 500, false)
 	super.set_character_name("Rock")
 
 	health_changed.emit()
@@ -64,6 +67,7 @@ func _ready():
 func reset():
 	super.assign_stats(attack, defense, max_health, is_play_character)
 	health_changed.emit()
+	shield = 0
 	shield_changed.emit()
 	dialogue_box.text = "Baby don't hurt me!"
 	
@@ -71,7 +75,7 @@ func reset():
 # Play its turn
 func play_turn():
 	# Pause for some time to pretend thinking
-	dialogue_box.text = "Rock is digging up earth..."
+	dialogue_box.text = "Rock is preparing to attack..."
 	await get_tree().create_timer(1.5).timeout
 	decide_action()
 	
@@ -84,22 +88,29 @@ func decide_action():
 		turtle_crazy_diamond()
 		return
 	
-	# Recover shield when shield is up
+	# Shielded actions
 	if shield > 0:
 		if crazy_diamond_current_turn == CRAZY_DIAMOND_SHIELD_TURN:
+			dialogue_box.text = "Rock repairs its shield!"
 			shield += max_shield * CRAZY_DIAMOND_SHEILD_REPAIR
 			crazy_diamond_current_turn = 0
 		else:
 			crazy_diamond_current_turn += 1
+			turtle_emerald_splash()
+		return
 		
+	# If play is dusted, resolve tick damage and do emerald spash
+	if player_dusted:
+		# Resolve tick damage 
+		print("Turtle uses tick.")
+		GameManager.player.got_turtle_tick_damage(self, BITE_DUST_TICK_DAMAGE)
+		player_dusted_duration += 1
+		if player_dusted_duration >= BITE_DUST_DURATION:
+			player_dusted = false
+		# Do Emerald Splash
+		turtle_emerald_splash()
 	else:
-		if player_dusted:
-			GameManager.player.got_turtle_tick_damage(BITE_DUST_TICK_DAMAGE)
-			player_dusted_duration += 1
-			if player_dusted_duration >= BITE_DUST_DURATION:
-				player_dusted = false
-		else:
-			turtle_bite_dust()
+		turtle_bite_dust()
 
 # List of Skills
 
@@ -108,10 +119,10 @@ func decide_action():
 # Dusted: Take BITE_DUST_TICK_DAMAGE damage per turn for BITE_DUST_DURATION turns
 func turtle_bite_dust():
 	print("Turtle uses Bite Dust.")
-	GameManager.player.got_turtle_bite_dust(BITE_DUST_DAMAGE)
+	dialogue_box.text = "Rock uses Bite Dust! Some dust got into Catster's eyes."
+	GameManager.player.got_turtle_bite_dust(self, BITE_DUST_DAMAGE)
 	player_dusted = true
 	player_dusted_duration = 0
-	dialogue_box.text = "Rock: BITO DUSTO!"
 	sfx_basicAttack2.play()
 	
 # Skill "Crazy Diamond'
@@ -122,33 +133,31 @@ func turtle_bite_dust():
 # Defense mode is removed once the shield is completely broken. 
 # And the turtle is stunt (can not take action) for the next z turns.
 func turtle_crazy_diamond():
-	print("Turtle shield.")
+	print("Turtle uses Crazy Diamond.")
+	dialogue_box.text = "Rock uses Crazy Diamond! Now it is shielded."
 	shield = max_shield
 	shield_changed.emit()
 	player_dusted = false
-	dialogue_box.text = "Rock: CRAZY DIAMOND!"
-
-# List of affected skills
-func got_cat_paw_scratch(attacker: Character, dmg_percentage: float):
-	var total_damage = (attacker.attack / self.defense) * dmg_percentage
-	# Subtract the shield first
-	if shield > 0:
-		if shield >= total_damage:
-			shield = shield - total_damage
-			total_damage = 0
-		else:
-			total_damage = total_damage - shield
-			shield = 0
-		shield_changed.emit()
+	crazy_diamond_used = true
 	
-	# Calculate health loss
-	if total_damage > 0:
-		super.take_damage(total_damage)
+
+# Skill 'Emerald Splash'
+# Deals a total of 100% damage across multiple emeralds 
+func turtle_emerald_splash():
+	print("Turtle uses Emerald Splash.")
+	dialogue_box.text = "Rock uses Emerald Splash! It shoots Catster with emeralds."
+	for i in range(EMERALD_SPLASH_EMERALD_COUNT):
+		await get_tree().create_timer(0.3).timeout
+		GameManager.player.got_turtle_emerald_splash(self, EMERALD_SPLASH_EMERALD_DAMAGE)
+	sfx_basicAttack2.play()	
+	
+	
+# List of affected skills
 		
 # Corrodes shield
 func got_cat_pounce(attacker: Character, dmg_percentage: float):
 	var total_damage = (attacker.attack / self.defense) * dmg_percentage
-	var shield_damage = (2 * attacker.attack / self.defense) * dmg_percentage
+	var shield_damage = (attacker.attack / self.defense) * dmg_percentage
 	if shield > 0:
 		if shield >= shield_damage:
 			shield = shield - shield_damage
@@ -164,12 +173,13 @@ func got_cat_pounce(attacker: Character, dmg_percentage: float):
 
 	# Calculate health loss
 	if total_damage > 0:
+		print("Turtle takes %f damage." % total_damage)
 		super.take_damage(total_damage)
 		
 
 func got_cat_ult_scratch(attacker: Character, dmg_percentage: float):
 	var total_damage = (attacker.attack / self.defense) * dmg_percentage
-	var shield_damage = (2 * attacker.attack / self.defense) * dmg_percentage
+	var shield_damage = (attacker.attack / self.defense) * dmg_percentage
 	if shield > 0:
 		if shield >= shield_damage:
 			shield = shield - shield_damage
@@ -182,6 +192,7 @@ func got_cat_ult_scratch(attacker: Character, dmg_percentage: float):
 		
 	# Calculate health loss
 	if total_damage > 0:
+		print("Turtle takes %f damage." % total_damage)
 		super.take_damage(total_damage)
 		
 	
