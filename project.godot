@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Magic Catster"
-run/main_scene="uid://c3xcyqqr6cci6"
+run/main_scene="uid://nv0asuka4fli"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 

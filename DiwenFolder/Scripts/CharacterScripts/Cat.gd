@@ -5,7 +5,7 @@ extends Character
 #SFX for attacks
 @onready var sfx_ult_scratch = get_node_or_null("sfx_ult_scratch")
 @onready var sfx_pounce = get_node_or_null("sfx_pounce")
-
+@onready var sfx_block = get_node_or_null("sfx_block")
 
 """
 Initial stats of the Cat
@@ -27,8 +27,8 @@ const BLOCK_DAMAGE_MULT: float = 0.5
 const POUNCE_COST: int = 30
 const POUNCE_POWER: float = 100.0
 
-const ULT_SCRATCH_COST: int = 70
-const ULT_SCRATCH_POWER: float = 500.0
+const ULT_SCRATCH_COST: int = 90
+const ULT_SCRATCH_POWER: float = 400.0
 
 const HYDRO_CLEANSE_COST: int = 30
 const HYDRO_CLEANSE_AMOUNT: float = 50
@@ -103,6 +103,11 @@ func play_turn():
 	# Undim when it is its turn
 	sprite.modulate = Color(1, 1, 1,) 
 	
+	# Default text while the player picks an action
+	await get_tree().create_timer(1.0).timeout
+	GameManager.turn_log.animate("Catster prepares her next move", 0.5)
+
+	
 	has_acted = false
 	# Block from the last turn wears off
 	_set_blocking(false)
@@ -134,32 +139,32 @@ func cat_block():
 	_set_blocking(true)
 	print("Catster blocks.")
 	GameManager.turn_log.animate("Catster is blocking...", 0.5)
-	#_play_sfx(block)
+	_play_sfx(sfx_block)
 	await get_tree().create_timer(1.0).timeout
 	_end_action()
 
-# Pounce: Costs 10 SP, Base Power 50
+# Pounce: Costs 30 SP, Base Power 100
 func cat_pounce(target: Character):
 	if not _begin_action(POUNCE_COST):
 		return
-	await get_tree().create_timer(0.5).timeout
-	target.got_cat_pounce(self, POUNCE_POWER)
-	_play_sfx(sfx_pounce)
-	print("Catster pounced onto enemy.")
 	GameManager.turn_log.animate("Catster pounced onto the enemy.", 1.0)
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(1.2).timeout
+	target.got_cat_pounce(self, POUNCE_POWER)
+	print("Catster pounced onto enemy!")
+	_play_sfx(sfx_pounce)
+	await get_tree().create_timer(1.0).timeout
 	_end_action()
 		
-# Ultimate Scratch: Costs 50 SP, Base Power 100, pierces through shields
+# Ultimate Scratch: Costs 90 SP, Base Power 400
 func cat_ult_scratch(target: Character):
 	if not _begin_action(ULT_SCRATCH_COST):
 		return
-	await get_tree().create_timer(0.5).timeout
+	GameManager.turn_log.animate("Catster unleashed her Ultimate Scratch!", 1.0)
+	await get_tree().create_timer(1.2).timeout
 	target.got_cat_ult_scratch(self, ULT_SCRATCH_POWER)
-	_play_sfx(sfx_ult_scratch)
 	print("Catster unleashed Ultimate Scratch!")
-	GameManager.turn_log.animate("Catster unleashed Ultimate Scratch!", 1.0)
-	await get_tree().create_timer(2.0).timeout
+	_play_sfx(sfx_ult_scratch)
+	await get_tree().create_timer(1.0).timeout
 	_end_action()
 	
 # Hydro Cleanse: Heal hp over time
@@ -194,7 +199,7 @@ func get_skill_tooltip(skill_name: String) -> String:
 		"pounce":
 			return "Cost: %d SP\nPower: %d\nA quick strike that does damage." % [POUNCE_COST, POUNCE_POWER]
 		"ult":
-			return "Cost: %d SP\nPower: %d\nA devastating scratch with big damage." % [ULT_SCRATCH_COST, ULT_SCRATCH_POWER]
+			return "Cost: %d SP\nPower: %d\nA devastating scratch with big damage.\nCan also cancel multi-turn healing" % [ULT_SCRATCH_COST, ULT_SCRATCH_POWER]
 		"cleanse":
 			return "Cost: %d SP\nHeal %d HP over %d turns." % [HYDRO_CLEANSE_COST, HYDRO_CLEANSE_AMOUNT, HYDRO_CLEANSE_TURN]
 		"purify":
