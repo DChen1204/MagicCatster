@@ -2,7 +2,7 @@ extends Button
 
 # This script is to control Cat Skills. Pick which skill in the Inspector.
 
-enum Skill { BLOCK, POUNCE, ULT }
+enum Skill { BLOCK, POUNCE, ULT, CLEANSE, PURIFY }
 
 @export var skill: Skill = Skill.POUNCE
 @export var attacker: Character
@@ -28,3 +28,7 @@ func _on_pressed() -> void:
 			attacker.cat_pounce(target)
 		Skill.ULT:
 			attacker.cat_ult_scratch(target)
+		Skill.CLEANSE:
+			attacker.cat_hydro_cleanse()
+		Skill.PURIFY:
+			attacker.cat_hydro_purify()

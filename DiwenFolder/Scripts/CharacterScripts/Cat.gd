@@ -27,8 +27,17 @@ const BLOCK_DAMAGE_MULT: float = 0.5
 const POUNCE_COST: int = 30
 const POUNCE_POWER: float = 100.0
 
-const ULT_SCRATCH_COST: int = 80
+const ULT_SCRATCH_COST: int = 70
 const ULT_SCRATCH_POWER: float = 500.0
+
+const HYDRO_CLEANSE_COST: int = 30
+const HYDRO_CLEANSE_AMOUNT: float = 50
+const HYDRO_CLEANSE_TURN: int = 5
+var hydro_cleanse_on: bool = false
+var hydro_cleanse_current_turn: int = 1
+
+const HYDRO_PURIFY_COST: int = 30
+const HYDRO_PURIFY_AMOUNT: float = 175
 
 const SP_RECOVER_RATE: int = 30
 
@@ -49,6 +58,10 @@ var water_purify_text: RichTextLabel
 var water_cleanse: bool = false
 var water_purify: bool = false
 
+@onready var sprite: Sprite2D = $CatSprite
+var original_modulate: Color
+var flashed_once: bool = false
+
 # Set up
 func _ready():
 	# Assign stats and name to itself
@@ -64,11 +77,16 @@ func _ready():
 	# Add potential chosen attack
 	add_chosen_attack()
 	
+	# Dim itself
+	sprite.modulate = Color(0.5, 0.5, 0.5) 
+	
 	# Register with GameManager
 	GameManager.register_player(self)
 	print("Catster registered!")
 	
 	detect_attack_texts()
+	
+	original_modulate = sprite.modulate
 	
 	
 # Reset the character when resetting the game
@@ -81,6 +99,10 @@ func reset():
 
 # Called when it's its turn
 func play_turn():
+	
+	# Undim when it is its turn
+	sprite.modulate = Color(1, 1, 1,) 
+	
 	has_acted = false
 	# Block from the last turn wears off
 	_set_blocking(false)
@@ -88,9 +110,10 @@ func play_turn():
 	restore_sp(SP_RECOVER_RATE)
 	
 	# Apply Goldfish Water Cleanse
-	if water_cleanse:
-		if GameManager.get_turn_number() % 4 == 0:
-			super.heal(max_health * 0.1)
+	#if water_cleanse and hydro_cleanse_on:
+	#	cat_resolve_hydro_cleanse()
+	if hydro_cleanse_on:
+		cat_resolve_hydro_cleanse()
 			
 	# Water Purify is to negate debuff
 	# It is a temp effect, and not implemented yet.
@@ -98,38 +121,71 @@ func play_turn():
 	# The turn ends as soon as the one action finishes
 	await action_finished
 	
+	# Dim itself after its turn
+	await get_tree().create_timer(1.0).timeout
+	sprite.modulate = Color(0.5, 0.5, 0.5)
+	
 	
 # Skill Lists
 # Block: Costs 10 SP, halves damage taken until the next playable turn
 func cat_block():
 	if not _begin_action(BLOCK_COST):
 		return
-	print("Catster blocks.")
 	_set_blocking(true)
+	print("Catster blocks.")
+	GameManager.turn_log.animate("Catster is blocking...", 0.5)
 	#_play_sfx(block)
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(1.0).timeout
 	_end_action()
 
 # Pounce: Costs 10 SP, Base Power 50
 func cat_pounce(target: Character):
 	if not _begin_action(POUNCE_COST):
 		return
-	print("Catster pounced onto enemy.")
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.5).timeout
 	target.got_cat_pounce(self, POUNCE_POWER)
 	_play_sfx(sfx_pounce)
+	print("Catster pounced onto enemy.")
+	GameManager.turn_log.animate("Catster pounced onto the enemy.", 1.0)
+	await get_tree().create_timer(2.0).timeout
 	_end_action()
 		
 # Ultimate Scratch: Costs 50 SP, Base Power 100, pierces through shields
 func cat_ult_scratch(target: Character):
 	if not _begin_action(ULT_SCRATCH_COST):
 		return
-	print("Catster unleashed ultimate scratch!")
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.5).timeout
 	target.got_cat_ult_scratch(self, ULT_SCRATCH_POWER)
 	_play_sfx(sfx_ult_scratch)
+	print("Catster unleashed Ultimate Scratch!")
+	GameManager.turn_log.animate("Catster unleashed Ultimate Scratch!", 1.0)
+	await get_tree().create_timer(2.0).timeout
 	_end_action()
 	
+# Hydro Cleanse: Heal hp over time
+func cat_hydro_cleanse():
+	if not _begin_action(HYDRO_CLEANSE_COST):
+		return
+	await get_tree().create_timer(0.5).timeout
+	hydro_cleanse_on = true
+	super.heal(HYDRO_CLEANSE_AMOUNT)
+	hydro_cleanse_current_turn = 1
+	print("Cat used hydro cleanse.")
+	GameManager.turn_log.animate("Catster called Poseidon for Hydro Cleanse.", 1.0)
+	await get_tree().create_timer(2.0).timeout
+	_end_action()
+	
+func cat_hydro_purify():
+	if not _begin_action(HYDRO_PURIFY_COST):
+		return
+	await get_tree().create_timer(0.5).timeout
+	super.heal(HYDRO_PURIFY_AMOUNT)
+	print("Cat used hydro purify.")
+	GameManager.turn_log.animate("Catster called Poseidon for Hydro Pruify.", 1.0)
+	await get_tree().create_timer(2.0).timeout
+	_end_action()
+	
+
 # Hover text for the skill buttons
 func get_skill_tooltip(skill_name: String) -> String:
 	match skill_name:
@@ -138,7 +194,11 @@ func get_skill_tooltip(skill_name: String) -> String:
 		"pounce":
 			return "Cost: %d SP\nPower: %d\nA quick strike that does damage." % [POUNCE_COST, POUNCE_POWER]
 		"ult":
-			return "Cost: %d SP\nPower: %d\nA devastating scratch with big damage" % [ULT_SCRATCH_COST, ULT_SCRATCH_POWER]
+			return "Cost: %d SP\nPower: %d\nA devastating scratch with big damage." % [ULT_SCRATCH_COST, ULT_SCRATCH_POWER]
+		"cleanse":
+			return "Cost: %d SP\nHeal %d HP over %d turns." % [HYDRO_CLEANSE_COST, HYDRO_CLEANSE_AMOUNT, HYDRO_CLEANSE_TURN]
+		"purify":
+			return "Cost: %d SP\nHeal %d HP." % [HYDRO_PURIFY_COST, HYDRO_PURIFY_AMOUNT]
 	return ""
 	
 # Starts an action. Allowed once per turn, and only with enough SP.
@@ -160,14 +220,27 @@ func _end_action():
 # Goldfish list
 func got_goldfish_bubble_attack(attacker: Character, dmg_percentage: float):
 	_receive_hit(attacker, dmg_percentage)
+	got_hit_effect()
+	
+func cat_resolve_hydro_cleanse():
+	hydro_cleanse_current_turn += 1
+	if hydro_cleanse_current_turn >= HYDRO_CLEANSE_TURN:
+		hydro_cleanse_on = false
+	print("Cat continue cleanse.")
+	super.heal(HYDRO_CLEANSE_AMOUNT)
 
 # Turtle list
 func got_turtle_bite_dust(attacker: Character, dmg_percentage: float):
 	_receive_hit(attacker, dmg_percentage)
+	got_hit_effect()
 func got_turtle_tick_damage(attacker: Character, dmg_percentage: float):
 	_receive_hit(attacker, dmg_percentage)
+	got_hit_effect()
 func got_turtle_emerald_splash(attacker: Character, dmg_percentage: float):
 	_receive_hit(attacker, dmg_percentage)
+	if !flashed_once:
+		got_hit_effect()
+		flashed_once = true
 
 # Shared damage handling for every enemy attack
 func _receive_hit(attacker: Character, dmg_percentage: float):
@@ -183,6 +256,7 @@ func _receive_hit(attacker: Character, dmg_percentage: float):
 		print("Cat takes %f damages." % damage)
 		take_damage(damage)
 
+
 # Turn Block on or off, and tint the sprite so the player can see it
 func _set_blocking(on: bool):
 	is_blocking = on
@@ -195,7 +269,14 @@ func _play_sfx(sfx):
 	if sfx != null:
 		sfx.play()
 		
-
+# Flash effect for getting hit
+func got_hit_effect():
+	for i in 2:
+		sprite.modulate = Color(3, 3, 3)
+		await get_tree().create_timer(0.1).timeout
+		sprite.modulate = original_modulate
+		await get_tree().create_timer(0.1).timeout
+		
 # Restore SP function
 func restore_sp(amount: int):
 	sp += amount;

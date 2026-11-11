@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://b7f8qlcv787cv" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/TurnNumber.gd" id="12_52703"]
 [ext_resource type="AudioStream" uid="uid://bofmufwx3d1e1" path="res://BSmallAudio/TestVictoryMusic.wav" id="15_uubjq"]
 [ext_resource type="AudioStream" uid="uid://byqwc6df2j51n" path="res://BSmallAudio/TestDefeatMusic.wav" id="16_7dxga"]
+[ext_resource type="Script" uid="uid://er3o6e5yc87x" path="res://DiwenFolder/Scripts/ObjectScripts/TurnLog.gd" id="17_3nbg1"]
 [ext_resource type="Script" uid="uid://de74y6l47bs3l" path="res://DiwenFolder/Scripts/CharacterScripts/Turtle.gd" id="18_pph7p"]
 [ext_resource type="Script" uid="uid://bvnhvb5r30n2" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/ShieldDisplay.gd" id="19_437qj"]
 [ext_resource type="Texture2D" uid="uid://cletpfokhcf6j" path="res://TempImages/pixel-art-8bit-cartoon-turtle-260nw-1819767353.webp" id="20_xqvke"]
@@ -35,6 +36,9 @@ bg_color = Color(0.8168608, 0.528142, 0.12982893, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wdwy1"]
 bg_color = Color(0.8168608, 0.528142, 0.12982893, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_twaol"]
+bg_color = Color(0.27986997, 0.6223677, 0.92484796, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ve06g"]
 bg_color = Color(0.10829217, 0.059270762, 0.08788093, 1)
@@ -88,10 +92,10 @@ script = ExtResource("3_e70ou")
 character = NodePath("..")
 
 [node name="BlockButton" type="Button" parent="Cat" unique_id=1914667546 node_paths=PackedStringArray("attacker", "target")]
-offset_left = -535.0
-offset_top = 214.0
-offset_right = -420.0
-offset_bottom = 256.0
+offset_left = -524.0
+offset_top = 129.0
+offset_right = -409.0
+offset_bottom = 171.0
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_ac6d3")
 text = "BLOCK "
@@ -101,10 +105,10 @@ attacker = NodePath("..")
 target = NodePath("..")
 
 [node name="PounceButton2" type="Button" parent="Cat" unique_id=1089814010 node_paths=PackedStringArray("attacker", "target")]
-offset_left = -392.0
-offset_top = 216.0
-offset_right = -272.0
-offset_bottom = 254.0
+offset_left = -356.0
+offset_top = 133.0
+offset_right = -236.0
+offset_bottom = 171.0
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_y1nwd")
 text = "POUNCE"
@@ -113,15 +117,41 @@ attacker = NodePath("..")
 target = NodePath("../../Turtle")
 
 [node name="UltButton" type="Button" parent="Cat" unique_id=544460930 node_paths=PackedStringArray("attacker", "target")]
-offset_left = -240.0
-offset_top = 218.0
-offset_right = -77.0
-offset_bottom = 254.0
+offset_left = -198.0
+offset_top = 135.0
+offset_right = -35.0
+offset_bottom = 171.0
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_wdwy1")
 text = "ULTIMATE SCRATCH"
 script = ExtResource("4_k1lyr")
 skill = 2
+attacker = NodePath("..")
+target = NodePath("../../Turtle")
+
+[node name="CleanseButton" type="Button" parent="Cat" unique_id=1107794141 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -548.0
+offset_top = 204.0
+offset_right = -385.0
+offset_bottom = 240.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_twaol")
+text = "HYDRO CLEANSE"
+script = ExtResource("4_k1lyr")
+skill = 3
+attacker = NodePath("..")
+target = NodePath("../../Turtle")
+
+[node name="PurifyButton" type="Button" parent="Cat" unique_id=1522261311 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -548.0
+offset_top = 268.0
+offset_right = -385.0
+offset_bottom = 304.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_twaol")
+text = "HYDRO PURIFY"
+script = ExtResource("4_k1lyr")
+skill = 4
 attacker = NodePath("..")
 target = NodePath("../../Turtle")
 
@@ -285,17 +315,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_5tq84")
 text = "Rock"
 horizontal_alignment = 1
 
-[node name="TurtleDialogueBox" type="RichTextLabel" parent="Turtle" unique_id=1420293552]
-offset_left = -1.0
-offset_top = 140.0
-offset_right = 574.0
-offset_bottom = 319.0
-theme_override_font_sizes/normal_font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_jvtii")
-text = "Baby don't hurt me!"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="TurtleHealthDisplay" type="RichTextLabel" parent="Turtle" unique_id=668246095 node_paths=PackedStringArray("target")]
 offset_left = 299.0
 offset_top = -104.0
@@ -308,6 +327,18 @@ target = NodePath("..")
 
 [node name="sfx_basicAttack2" type="AudioStreamPlayer" parent="Turtle" unique_id=612572846]
 stream = ExtResource("10_y1nwd")
+
+[node name="TurtleLevelTurnLog" type="RichTextLabel" parent="." unique_id=1420293552]
+offset_left = -1.0
+offset_top = 140.0
+offset_right = 574.0
+offset_bottom = 319.0
+theme_override_font_sizes/normal_font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_jvtii")
+text = "Baby don't hurt me!"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("17_3nbg1")
 
 [node name="Test_BattleMusic" type="AudioStreamPlayer" parent="." unique_id=1105500636]
 stream = ExtResource("22_mcm55")
