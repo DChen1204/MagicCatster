@@ -7,6 +7,8 @@ extends Node
 var game_over_music: Control
 # The turn manager 
 var turn_manager: Node
+# The turn log 
+var turn_log: Node
 
 # The characters
 # var players: Array[Node] = []
@@ -37,13 +39,16 @@ func register_turn_manager(t: Node):
 func register_game_over_screen(s: Node):
 	game_over_music = s
 	_try_start()
+func register_turn_log(l: Node):
+	turn_log = l
+	_try_start()
 	
 # Start game once every object is registered
 # Every player is registered before the tunr queue is built
 func _try_start():
 	if _start_queued:
 		return
-	if turn_manager and game_over_music and player and enemy:
+	if turn_manager and turn_log and game_over_music and player and enemy:
 		_start_queued = true
 		call_deferred("_start_game")
 		

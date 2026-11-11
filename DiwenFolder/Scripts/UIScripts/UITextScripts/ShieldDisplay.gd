@@ -15,8 +15,4 @@ func _ready() -> void:
 # Update the text when shield changes
 func _on_shield_changed() -> void:
 	text = "%s Shield: %d / %d" % [target.character_name, target.shield, target.max_shield]
-	if target.shield < 1:
-		hide()
-	else:
-		show()
 		
