@@ -7,11 +7,11 @@ extends RichTextLabel
 
 func _ready() -> void:
 	# Update the text
-	text = "%s SP: %d / %d" % [target.character_name, target.sp, target.max_sp]
+	text = "SP: %d / %d" % [target.sp, target.max_sp]
 	
 	# Update the text when sp changes
 	target.sp_changed.connect(_on_sp_changed)
 	
 # Update the text when sp changes
 func _on_sp_changed() -> void:
-	text = "%s SP: %d / %d" % [target.character_name, target.sp, target.max_sp]
+	text = "SP: %d / %d" % [target.sp, target.max_sp]

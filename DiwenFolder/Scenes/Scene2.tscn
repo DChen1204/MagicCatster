@@ -12,13 +12,17 @@
 [ext_resource type="AudioStream" uid="uid://dv2a1tefu34d6" path="res://BSmallAudio/lightAttack1.wav" id="10_urdjd"]
 [ext_resource type="Texture2D" uid="uid://spamqhfd3f5" path="res://TempImages/alchemy_lab_blue_glow.png" id="11_8lyrt"]
 [ext_resource type="AudioStream" uid="uid://dtbrxoxvox4p1" path="res://BSmallAudio/heavyAttack1.mp3" id="11_sgdef"]
+[ext_resource type="AudioStream" uid="uid://dviiit2vrnk0p" path="res://BSmallAudio/sfx_block.wav" id="12_2ushx"]
 [ext_resource type="Script" uid="uid://i8qsk8dfiahs" path="res://DiwenFolder/Scripts/ManagerScripts/TurnManager.gd" id="12_q3cm8"]
 [ext_resource type="Script" uid="uid://b7f8qlcv787cv" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/TurnNumber.gd" id="13_77foi"]
 [ext_resource type="Script" uid="uid://dsm2wif4321pt" path="res://DiwenFolder/Scripts/CharacterScripts/Goldfish.gd" id="15_go3hv"]
 [ext_resource type="Texture2D" uid="uid://c7ph3y61637vb" path="res://TempImages/GoldfishImage1.jpeg" id="16_5ijur"]
 [ext_resource type="Script" uid="uid://bb8khp5mjwqbe" path="res://DiwenFolder/Scripts/UIScripts/GameOverDefeat.gd" id="17_hojyp"]
+[ext_resource type="AudioStream" uid="uid://dna2fher5k6x" path="res://BSmallAudio/sfx_heal1.wav" id="18_e4jyd"]
 [ext_resource type="AudioStream" uid="uid://bofmufwx3d1e1" path="res://BSmallAudio/TestVictoryMusic.wav" id="18_ucooe"]
 [ext_resource type="AudioStream" uid="uid://byqwc6df2j51n" path="res://BSmallAudio/TestDefeatMusic.wav" id="19_67d8c"]
+[ext_resource type="AudioStream" uid="uid://dg7ij70o8aa4" path="res://BSmallAudio/sfx_heal2.wav" id="19_g03e7"]
+[ext_resource type="Script" uid="uid://er3o6e5yc87x" path="res://DiwenFolder/Scripts/ObjectScripts/TurnLog.gd" id="21_amivq"]
 [ext_resource type="AudioStream" uid="uid://lola6yesy8bi" path="res://BSmallAudio/TestBattleMusic.wav" id="21_vola3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrivr"]
@@ -39,6 +43,9 @@ bg_color = Color(0.23028189, 0.62517625, 0.9409401, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_twaol"]
 bg_color = Color(0.2123048, 0.21230489, 0.21230471, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ushx"]
+bg_color = Color(0.2123048, 0.21230489, 0.21230471, 1)
+
 [node name="World" type="Node2D" unique_id=42255485]
 script = ExtResource("1_amivq")
 
@@ -52,15 +59,15 @@ z_index = 2
 script = ExtResource("3_rcx44")
 
 [node name="CatSprite" type="Sprite2D" parent="Cat" unique_id=1428940964]
-position = Vector2(-385, 9)
+position = Vector2(-207, -11)
 scale = Vector2(0.58093524, 0.5911764)
 texture = ExtResource("4_e4jyd")
 
 [node name="CatHealthBar" type="ProgressBar" parent="Cat" unique_id=1218942256 node_paths=PackedStringArray("character")]
-offset_left = -502.0
-offset_top = -132.0
-offset_right = -285.0
-offset_bottom = -93.0
+offset_left = -542.0
+offset_top = -42.0
+offset_right = -308.0
+offset_bottom = -3.0
 theme_override_styles/background = SubResource("StyleBoxFlat_xrivr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_13qdw")
 value = 100.0
@@ -69,10 +76,10 @@ script = ExtResource("5_g03e7")
 character = NodePath("..")
 
 [node name="BlockButton" type="Button" parent="Cat" unique_id=2131501139 node_paths=PackedStringArray("attacker", "target")]
-offset_left = -542.0
-offset_top = 234.0
-offset_right = -420.0
-offset_bottom = 275.0
+offset_left = -529.0
+offset_top = 195.0
+offset_right = -407.0
+offset_bottom = 236.0
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_pjtp4")
 text = "BLOCK"
@@ -82,10 +89,10 @@ attacker = NodePath("..")
 target = NodePath("..")
 
 [node name="PounceButton" type="Button" parent="Cat" unique_id=1397001259 node_paths=PackedStringArray("attacker", "target")]
-offset_left = -397.0
-offset_top = 233.0
-offset_right = -268.0
-offset_bottom = 275.0
+offset_left = -364.0
+offset_top = 192.0
+offset_right = -235.0
+offset_bottom = 234.0
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_pjtp4")
 text = "POUNCE"
@@ -94,10 +101,10 @@ attacker = NodePath("..")
 target = NodePath("../../Goldfish")
 
 [node name="UltButton" type="Button" parent="Cat" unique_id=778740610 node_paths=PackedStringArray("attacker", "target")]
-offset_left = -248.0
-offset_top = 235.0
-offset_right = -85.0
-offset_bottom = 275.0
+offset_left = -205.0
+offset_top = 194.0
+offset_right = -42.0
+offset_bottom = 234.0
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_pjtp4")
 text = "ULTIMATE SCRATCH"
@@ -107,30 +114,31 @@ attacker = NodePath("..")
 target = NodePath("../../Goldfish")
 
 [node name="CatNameLabel" type="RichTextLabel" parent="Cat" unique_id=329795008]
-offset_left = -473.0
-offset_top = -180.0
-offset_right = -311.0
-offset_bottom = -133.0
+offset_left = -295.0
+offset_top = -170.0
+offset_right = -133.0
+offset_bottom = -123.0
 theme_override_font_sizes/normal_font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_mwn8k")
 text = "Catster"
 horizontal_alignment = 1
 
 [node name="CatSPDisplay" type="RichTextLabel" parent="Cat" unique_id=1323602701 node_paths=PackedStringArray("target")]
-offset_left = -278.0
-offset_top = -105.0
-offset_right = -37.0
-offset_bottom = -65.0
+offset_left = -491.0
+offset_top = 29.0
+offset_right = -250.0
+offset_bottom = 101.0
 theme_override_font_sizes/normal_font_size = 21
-text = "Character SP"
+text = "SP 100/100"
 script = ExtResource("7_kiahr")
 target = NodePath("..")
 
 [node name="CatSPBar" type="ProgressBar" parent="Cat" unique_id=1784342234 node_paths=PackedStringArray("character")]
-offset_left = -287.0
-offset_top = -75.0
-offset_right = -70.0
-offset_bottom = -36.0
+show_behind_parent = true
+offset_left = -534.0
+offset_top = 27.0
+offset_right = -306.0
+offset_bottom = 62.0
 theme_override_styles/background = SubResource("StyleBoxFlat_xrivr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_1ypm2")
 value = 100.0
@@ -139,12 +147,12 @@ script = ExtResource("8_mvohu")
 character = NodePath("..")
 
 [node name="CatHealthDisplay" type="RichTextLabel" parent="Cat" unique_id=1680723035 node_paths=PackedStringArray("target")]
-offset_left = -495.0
-offset_top = -127.0
-offset_right = -254.0
-offset_bottom = -87.0
+offset_left = -494.0
+offset_top = -35.0
+offset_right = -253.0
+offset_bottom = 1.0
 theme_override_font_sizes/normal_font_size = 21
-text = "Character SP"
+text = "HP 500/500"
 script = ExtResource("9_vewk3")
 target = NodePath("..")
 
@@ -163,6 +171,9 @@ stream = ExtResource("10_urdjd")
 
 [node name="sfx_ult_scratch" type="AudioStreamPlayer" parent="Cat" unique_id=2100172725]
 stream = ExtResource("11_sgdef")
+
+[node name="sfx_block" type="AudioStreamPlayer" parent="Cat" unique_id=1605380297]
+stream = ExtResource("12_2ushx")
 
 [node name="Background" type="Node2D" parent="." unique_id=1780150100]
 metadata/_edit_lock_ = true
@@ -190,15 +201,15 @@ turn_manager = NodePath("..")
 script = ExtResource("15_go3hv")
 
 [node name="GoldfishSprite" type="Sprite2D" parent="Goldfish" unique_id=982258047]
-position = Vector2(297.99997, 29)
-scale = Vector2(0.5859031, 0.49411765)
+position = Vector2(200, -21.499998)
+scale = Vector2(0.5859031, 0.59117645)
 texture = ExtResource("16_5ijur")
 
 [node name="GoldfishHealthBar" type="ProgressBar" parent="Goldfish" unique_id=322728773 node_paths=PackedStringArray("character")]
-offset_left = -383.0
-offset_top = -250.0
-offset_right = 474.0
-offset_bottom = -211.0
+offset_left = 333.0
+offset_top = -50.0
+offset_right = 569.0
+offset_bottom = 22.0
 theme_override_styles/background = SubResource("StyleBoxFlat_xrivr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_13qdw")
 max_value = 50.0
@@ -208,39 +219,45 @@ script = ExtResource("5_g03e7")
 character = NodePath("..")
 
 [node name="GoldfishNameLabel" type="RichTextLabel" parent="Goldfish" unique_id=1145737620]
-offset_left = -80.0
-offset_top = -307.0
-offset_right = 82.0
-offset_bottom = -260.0
+offset_left = 119.0
+offset_top = -173.0
+offset_right = 281.0
+offset_bottom = -126.0
 theme_override_font_sizes/normal_font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_mwn8k")
 text = "Poseidon"
 horizontal_alignment = 1
 
 [node name="GoldfishDialogueBox" type="RichTextLabel" parent="Goldfish" unique_id=529990718]
-offset_left = 81.0
-offset_top = -169.0
-offset_right = 522.0
-offset_bottom = -68.0
+offset_left = 3.0
+offset_top = 134.0
+offset_right = 578.0
+offset_bottom = 317.0
 theme_override_font_sizes/normal_font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_twaol")
 text = "How dare you fight me!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GoldfishHealthDisplay" type="RichTextLabel" parent="Goldfish" unique_id=1640335290 node_paths=PackedStringArray("target")]
-offset_left = -118.0
-offset_top = -247.0
-offset_right = 172.0
-offset_bottom = -207.0
-theme_override_font_sizes/normal_font_size = 21
-text = "Character SP: 100/100"
-script = ExtResource("9_vewk3")
-target = NodePath("..")
-
 [node name="sfx_basicAttack1" type="AudioStreamPlayer" parent="Goldfish" unique_id=1274723350]
 stream = ExtResource("10_urdjd")
 volume_db = -9.0
+
+[node name="GoldfishHealthDisplay" type="RichTextLabel" parent="Goldfish" unique_id=1640335290 node_paths=PackedStringArray("target")]
+offset_left = 365.0
+offset_top = -31.0
+offset_right = 547.0
+offset_bottom = 3.0
+theme_override_font_sizes/normal_font_size = 21
+text = "HP: 100/100"
+script = ExtResource("9_vewk3")
+target = NodePath("..")
+
+[node name="sfx_heal1" type="AudioStreamPlayer" parent="Goldfish" unique_id=1911570032]
+stream = ExtResource("18_e4jyd")
+
+[node name="sfx_heal2" type="AudioStreamPlayer" parent="Goldfish" unique_id=1039280624]
+stream = ExtResource("19_g03e7")
 
 [node name="GameOverDefeat" type="Control" parent="." unique_id=1124794058 node_paths=PackedStringArray("battle_music")]
 visible = false
@@ -304,3 +321,15 @@ text = "Retry Level"
 stream = ExtResource("21_vola3")
 volume_db = -6.0
 autoplay = true
+
+[node name="TurnLog" type="RichTextLabel" parent="." unique_id=317328344]
+offset_left = -1.0
+offset_top = 140.0
+offset_right = 574.0
+offset_bottom = 319.0
+theme_override_font_sizes/normal_font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_2ushx")
+text = "Baby don't hurt me!"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("21_amivq")

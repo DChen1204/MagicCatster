@@ -9,13 +9,14 @@ extends CanvasLayer
 
 func _ready() -> void:
 	hide()
-	message.text = "Victory! Choose a new attack to carry into the next fight."
-	option_a.text = "Water Cleanse"
-	option_b.text = "Water Purify"
+	message.text = "Victory! Poseidon will aid you in future fights"
+	message.text = "Choose a new skill that Poseidon will perform for you in future fights"
+	option_a.text = "Hydro Cleanse"
+	option_b.text = "Hydro Purify"
 	
 	# Hover text describing what each attack does
-	option_a.tooltip_text = "Water Cleanse: Heals the player by 10% every 4 turns"
-	option_b.tooltip_text = "Water Purify: Negates all Debuffs on the player"
+	option_a.tooltip_text = "Hydro Cleanse: Heals the player by 50 HP for 5 turns 30 SP"
+	option_b.tooltip_text = "Hydro Purify: Heals once for 175 HP Cost 30 SP"
 	
 	option_a.pressed.connect(_choose.bind("water_cleanse"))
 	option_b.pressed.connect(_choose.bind("water_purify"))

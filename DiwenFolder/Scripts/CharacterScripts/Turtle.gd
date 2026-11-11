@@ -7,7 +7,7 @@ extends Character
 Stats of the Turtle
 Base Attack = 150
 Base Defense = 25
-Base Health = 400
+Base Health = 500
 Play Character = false
 SP = 0
 Character Name = Rock
