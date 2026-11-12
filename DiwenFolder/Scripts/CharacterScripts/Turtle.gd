@@ -89,7 +89,7 @@ func play_turn():
 	await get_tree().create_timer(1.5).timeout
 	decide_action()
 	# Dim itself after its turn
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(3.2).timeout
 	sprite.modulate = Color(0.5, 0.5, 0.5)  
 	
 	

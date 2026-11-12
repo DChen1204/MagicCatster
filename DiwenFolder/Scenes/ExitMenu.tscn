@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://b0g65i3s7clm6"]
+
+[ext_resource type="Script" uid="uid://cympws6k7wo2p" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/ExitToStartButton.gd" id="1_aejuq"]
+
+[node name="ExitMenu" type="CanvasLayer" unique_id=800030418]
+
+[node name="ExitButton" type="Button" parent="." unique_id=1029737853]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -246.0
+offset_bottom = 82.0
+grow_horizontal = 0
+text = "MAIN MENU"
+script = ExtResource("1_aejuq")

@@ -104,7 +104,7 @@ func play_turn():
 	sprite.modulate = Color(1, 1, 1,) 
 	
 	# Default text while the player picks an action
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.5).timeout
 	GameManager.turn_log.animate("Catster prepares her next move", 0.5)
 
 	

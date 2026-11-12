@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://ccsalquyoq2vg"]
+
+[ext_resource type="Script" uid="uid://cgn3uu8y2fm8h" path="res://DiwenFolder/Scripts/ManagerScripts/StartScreen.gd" id="1_ql5wk"]
+[ext_resource type="PackedScene" uid="uid://nv0asuka4fli" path="res://DiwenFolder/Scenes/Scene2.tscn" id="2_oj7qt"]
+
+[node name="StartScreeen" type="Control" unique_id=1821180603]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ql5wk")
+first_scene = ExtResource("2_oj7qt")
+
+[node name="Background" type="ColorRect" parent="." unique_id=594502925]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(0.608372, 0.00029513775, 0.61504734, 1)
+
+[node name="Center" type="CenterContainer" parent="." unique_id=1103746004]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -246.0
+offset_top = -94.0
+offset_right = 246.0
+offset_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Center" unique_id=1892977673]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Title" type="Label" parent="Center/VBox" unique_id=1226163667]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "MAGIC CATSTER"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="Center/VBox" unique_id=1609467824]
+custom_minimum_size = Vector2(220, 60)
+layout_mode = 2
+text = "START"
