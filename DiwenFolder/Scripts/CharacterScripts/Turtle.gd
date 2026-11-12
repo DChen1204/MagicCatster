@@ -215,13 +215,23 @@ func got_hit_effect():
 
 # List of affected skills		
 func got_cat_pounce(attacker: Character, dmg_percentage: float):
-	var total_damage = (attacker.attack / self.defense) * dmg_percentage
+	var ability_damage = (attacker.attack / self.defense) * dmg_percentage
 	var shield_damage = (attacker.attack / self.defense) * dmg_percentage
+	var total_damage = ability_damage + shield_damage
+	var health_damage = total_damage
+	# When there is a shield
 	if shield > 0:
-		if shield >= shield_damage:
-			shield = shield - shield_damage
-			total_damage = 0
+		# When shield is greater than the total damage,
+		# Subtract the total damage from the shield 
+		# Make health_damage 0
+		if shield >= total_damage:
+			shield = shield - total_damage
+			health_damage = 0
 		else:
+			if shield >= shield_damage:
+				
+			
+			
 			shield_damage = shield_damage - shield
 			#total_damage = shield_damage / 2
 			total_damage = shield_damage
@@ -229,13 +239,11 @@ func got_cat_pounce(attacker: Character, dmg_percentage: float):
 			stunted = true
 		shield_changed.emit()
 	
-	# Restore normal damage to health
-	# total_damage /= 2.5
 
 	# Calculate health loss
-	if total_damage > 0:
-		print("Turtle takes %f damage." % total_damage)
-		super.take_damage(total_damage)
+	if health_damage > 0:
+		print("Turtle takes %f health damage." % health_damage)
+		super.take_damage(health_damage)
 		got_hit_effect()
 		
 		
