@@ -50,13 +50,12 @@ signal action_finished
 # True once the Cat has committed to an action this turn
 var has_acted: bool = false
 
-# The text for goldfish heal ability
-var water_cleanse_text: RichTextLabel
-var water_purify_text: RichTextLabel
-
+# The buttles for goldfish abilities
+var hydro_cleanse_button: Button
+var hydro_purify_button: Button
 # Whether we have the following abilities unlocked
-var water_cleanse: bool = false
-var water_purify: bool = false
+var hydro_cleanse: bool = false
+var hydro_purify: bool = false
 
 @onready var sprite: Sprite2D = $CatSprite
 var original_modulate: Color
@@ -79,23 +78,31 @@ func _ready():
 	
 	# Dim itself
 	sprite.modulate = Color(0.5, 0.5, 0.5) 
+	original_modulate = sprite.modulate
+	
+	# Get the chosen attack buttons
+	detect_attack_buttons()
 	
 	# Register with GameManager
 	GameManager.register_player(self)
 	print("Catster registered!")
-	
-	detect_attack_texts()
-	
-	original_modulate = sprite.modulate
-	
+
 	
 # Reset the character when resetting the game
 func reset():
+	# Reset basic stats
 	super.assign_stats(attack, defense, max_health, is_play_character, max_sp)
 	_set_blocking(false)
 	restore_sp(max_sp)
 	health_changed.emit()
-	detect_attack_texts()
+	
+	# Reset other stats
+	hydro_cleanse_on = false
+	hydro_cleanse_current_turn = 1
+	hydro_cleanse = false
+	hydro_purify = false
+	flashed_once = false
+	detect_attack_buttons()
 
 # Called when it's its turn
 func play_turn():
@@ -105,9 +112,8 @@ func play_turn():
 	
 	# Default text while the player picks an action
 	await get_tree().create_timer(1.0).timeout
-	GameManager.turn_log.animate("Catster prepares her next move", 0.5)
+	GameManager.turn_log.animate("Catster prepares her next move.", 0.5)
 
-	
 	has_acted = false
 	# Block from the last turn wears off
 	_set_blocking(false)
@@ -121,7 +127,6 @@ func play_turn():
 		cat_resolve_hydro_cleanse()
 			
 	# Water Purify is to negate debuff
-	# It is a temp effect, and not implemented yet.
 	
 	# The turn ends as soon as the one action finishes
 	await action_finished
@@ -293,23 +298,23 @@ func add_chosen_attack():
 	var attack_to_add = GameManager.chosen_attack
 	if !attack_to_add.is_empty():
 		print("Adding attack %s." % attack_to_add)
-		if attack_to_add == "water_cleanse":
-			water_cleanse = true
-		elif attack_to_add == "water_purify":
-			water_purify = true
+		if attack_to_add == "hydro_cleanse":
+			hydro_cleanse = true
+		elif attack_to_add == "hydro_purify":
+			hydro_purify = true
 		
 # Display ability texts
-func detect_attack_texts():
-	water_cleanse_text = get_node_or_null("WaterCleanseLabel")
-	if water_cleanse_text != null:
-		if water_cleanse:
-			water_cleanse_text.show()
+func detect_attack_buttons():
+	hydro_cleanse_button = get_node_or_null("CleanseButton")
+	if hydro_cleanse_button != null:
+		if hydro_cleanse:
+			hydro_cleanse_button.show()
 		else:
-			water_cleanse_text.hide()
+			hydro_cleanse_button.hide()
 		
-	water_purify_text = get_node_or_null("WaterPurifyLabel")
-	if water_purify_text != null:
-		if water_purify:
-			water_purify_text.show()
+	hydro_purify_button = get_node_or_null("PurifyButton")
+	if hydro_cleanse_button != null:
+		if hydro_purify:
+			hydro_cleanse_button.show()
 		else:
-			water_purify_text.hide()
+			hydro_cleanse_button.hide()

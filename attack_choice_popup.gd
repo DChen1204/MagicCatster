@@ -18,8 +18,8 @@ func _ready() -> void:
 	option_a.tooltip_text = "Hydro Cleanse: Heals the player by 50 HP for 5 turns 30 SP"
 	option_b.tooltip_text = "Hydro Purify: Heals once for 175 HP Cost 30 SP"
 	
-	option_a.pressed.connect(_choose.bind("water_cleanse"))
-	option_b.pressed.connect(_choose.bind("water_purify"))
+	option_a.pressed.connect(_choose.bind("hydro_cleanse"))
+	option_b.pressed.connect(_choose.bind("hydro_purify"))
 	GameManager.game_over.connect(_on_game_over)
 
 # Only appear when the player side wins

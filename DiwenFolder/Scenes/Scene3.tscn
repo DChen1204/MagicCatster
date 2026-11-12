@@ -196,17 +196,6 @@ text = "Character HP"
 script = ExtResource("7_wfap5")
 target = NodePath("..")
 
-[node name="GoldfishHealToggle" type="CheckButton" parent="Cat" unique_id=2099154603]
-visible = false
-offset_left = -523.0
-offset_top = 139.0
-offset_right = -274.0
-offset_bottom = 205.0
-theme_override_font_sizes/font_size = 20
-text = "Goldfish Heal
-Heal 10% Every 3 turn"
-icon_alignment = 1
-
 [node name="sfx_basicAttack1" type="AudioStreamPlayer" parent="Cat" unique_id=1557120559]
 stream = ExtResource("9_m6a0m")
 

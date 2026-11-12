@@ -66,7 +66,7 @@ func reset():
 	gift_cooldown = 0
 	tide_cooldown = 0
 	tide_turns_left = 0
-	GameManager.turn_log.text = ""
+	# GameManager.turn_log.text = ""
 
 # Play its turn
 func play_turn():
