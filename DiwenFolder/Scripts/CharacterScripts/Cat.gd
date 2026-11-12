@@ -6,6 +6,8 @@ extends Character
 @onready var sfx_ult_scratch = get_node_or_null("sfx_ult_scratch")
 @onready var sfx_pounce = get_node_or_null("sfx_pounce")
 @onready var sfx_block = get_node_or_null("sfx_block")
+@onready var sfx_heal1 = get_node_or_null("sfx_heal1")
+@onready var sfx_heal2 = get_node_or_null("sfx_heal2")
 
 """
 Initial stats of the Cat
@@ -31,13 +33,13 @@ const ULT_SCRATCH_COST: int = 90
 const ULT_SCRATCH_POWER: float = 400.0
 
 const HYDRO_CLEANSE_COST: int = 30
-const HYDRO_CLEANSE_AMOUNT: float = 50
+const HYDRO_CLEANSE_AMOUNT: float = 25
 const HYDRO_CLEANSE_TURN: int = 5
 var hydro_cleanse_on: bool = false
 var hydro_cleanse_current_turn: int = 1
 
 const HYDRO_PURIFY_COST: int = 30
-const HYDRO_PURIFY_AMOUNT: float = 175
+const HYDRO_PURIFY_AMOUNT: float = 90
 
 const SP_RECOVER_RATE: int = 30
 
@@ -50,13 +52,12 @@ signal action_finished
 # True once the Cat has committed to an action this turn
 var has_acted: bool = false
 
-# The text for goldfish heal ability
-var water_cleanse_text: RichTextLabel
-var water_purify_text: RichTextLabel
-
+# The buttles for goldfish abilities
+var hydro_cleanse_button: Button
+var hydro_purify_button: Button
 # Whether we have the following abilities unlocked
-var water_cleanse: bool = false
-var water_purify: bool = false
+var hydro_cleanse: bool = false
+var hydro_purify: bool = false
 
 @onready var sprite: Sprite2D = $CatSprite
 var original_modulate: Color
@@ -79,23 +80,31 @@ func _ready():
 	
 	# Dim itself
 	sprite.modulate = Color(0.5, 0.5, 0.5) 
+	original_modulate = sprite.modulate
+	
+	# Get the chosen attack buttons
+	detect_attack_buttons()
 	
 	# Register with GameManager
 	GameManager.register_player(self)
 	print("Catster registered!")
-	
-	detect_attack_texts()
-	
-	original_modulate = sprite.modulate
-	
+
 	
 # Reset the character when resetting the game
 func reset():
+	# Reset basic stats
 	super.assign_stats(attack, defense, max_health, is_play_character, max_sp)
 	_set_blocking(false)
 	restore_sp(max_sp)
 	health_changed.emit()
-	detect_attack_texts()
+	
+	# Reset other stats
+	hydro_cleanse_on = false
+	hydro_cleanse_current_turn = 1
+	hydro_cleanse = false
+	hydro_purify = false
+	flashed_once = false
+	detect_attack_buttons()
 
 # Called when it's its turn
 func play_turn():
@@ -105,24 +114,18 @@ func play_turn():
 	
 	# Default text while the player picks an action
 	await get_tree().create_timer(0.5).timeout
-	GameManager.turn_log.animate("Catster prepares her next move", 0.5)
+	GameManager.turn_log.animate("Catster prepares her next move.", 0.5)
 
-	
 	has_acted = false
 	# Block from the last turn wears off
 	_set_blocking(false)
 	# Refills SP every turn 
 	restore_sp(SP_RECOVER_RATE)
 	
-	# Apply Goldfish Water Cleanse
-	#if water_cleanse and hydro_cleanse_on:
-	#	cat_resolve_hydro_cleanse()
+	# Resolve Goldfish Water Cleanse
 	if hydro_cleanse_on:
 		cat_resolve_hydro_cleanse()
 			
-	# Water Purify is to negate debuff
-	# It is a temp effect, and not implemented yet.
-	
 	# The turn ends as soon as the one action finishes
 	await action_finished
 	
@@ -177,6 +180,7 @@ func cat_hydro_cleanse():
 	hydro_cleanse_current_turn = 1
 	print("Cat used hydro cleanse.")
 	GameManager.turn_log.animate("Catster called Poseidon for Hydro Cleanse.", 1.0)
+	_play_sfx(sfx_heal2)
 	await get_tree().create_timer(2.0).timeout
 	_end_action()
 	
@@ -187,6 +191,7 @@ func cat_hydro_purify():
 	super.heal(HYDRO_PURIFY_AMOUNT)
 	print("Cat used hydro purify.")
 	GameManager.turn_log.animate("Catster called Poseidon for Hydro Pruify.", 1.0)
+	_play_sfx(sfx_heal1)
 	await get_tree().create_timer(2.0).timeout
 	_end_action()
 	
@@ -197,7 +202,7 @@ func get_skill_tooltip(skill_name: String) -> String:
 		"block":
 			return "Cost: %d SP\nHalves the damage you take until your next turn." % BLOCK_COST
 		"pounce":
-			return "Cost: %d SP\nPower: %d\nA quick strike that does damage." % [POUNCE_COST, POUNCE_POWER]
+			return "Cost: %d SP\nPower: %d\nA quick strike that does damage. Do triple damage to shields."% [POUNCE_COST, POUNCE_POWER]
 		"ult":
 			return "Cost: %d SP\nPower: %d\nA devastating scratch with big damage.\nCan also cancel multi-turn healing" % [ULT_SCRATCH_COST, ULT_SCRATCH_POWER]
 		"cleanse":
@@ -293,23 +298,23 @@ func add_chosen_attack():
 	var attack_to_add = GameManager.chosen_attack
 	if !attack_to_add.is_empty():
 		print("Adding attack %s." % attack_to_add)
-		if attack_to_add == "water_cleanse":
-			water_cleanse = true
-		elif attack_to_add == "water_purify":
-			water_purify = true
+		if attack_to_add == "hydro_cleanse":
+			hydro_cleanse = true
+		elif attack_to_add == "hydro_purify":
+			hydro_purify = true
 		
 # Display ability texts
-func detect_attack_texts():
-	water_cleanse_text = get_node_or_null("WaterCleanseLabel")
-	if water_cleanse_text != null:
-		if water_cleanse:
-			water_cleanse_text.show()
+func detect_attack_buttons():
+	hydro_cleanse_button = get_node_or_null("CleanseButton")
+	if hydro_cleanse_button != null:
+		if hydro_cleanse:
+			hydro_cleanse_button.show()
 		else:
-			water_cleanse_text.hide()
+			hydro_cleanse_button.hide()
 		
-	water_purify_text = get_node_or_null("WaterPurifyLabel")
-	if water_purify_text != null:
-		if water_purify:
-			water_purify_text.show()
+	hydro_purify_button = get_node_or_null("PurifyButton")
+	if hydro_cleanse_button != null:
+		if hydro_purify:
+			hydro_purify_button.show()
 		else:
-			water_purify_text.hide()
+			hydro_purify_button.hide()

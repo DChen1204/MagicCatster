@@ -6,6 +6,9 @@ func _ready():
 	print("Turn Log registered!")
 	text = ""
 	
+func reset():
+	text = ""
+	
 # Make the sentence appear letter by letter in the turn log
 # content is the text to be animated, duration is the total time for the animation
 func animate(content: String, duration: float):

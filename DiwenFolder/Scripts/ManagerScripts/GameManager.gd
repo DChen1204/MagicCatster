@@ -71,6 +71,7 @@ func reset_game():
 	player.reset()
 	enemy.reset()
 	turn_manager.reset()
+	turn_log.reset()
 	
 	# Choices that carry over between fights
 var chosen_attack: String = ""
@@ -81,6 +82,7 @@ func clear_battle_state():
 	enemy = null
 	turn_manager = null
 	game_over_music = null
+	turn_log = null
 	_start_queued = false
 
 # Use this instead of calling change_scene_to_file directly
