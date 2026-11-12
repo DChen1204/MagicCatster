@@ -46,8 +46,6 @@ bg_color = Color(0.10829217, 0.059270762, 0.08788093, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ap38i"]
 bg_color = Color(0.23028189, 0.62517625, 0.9409401, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3nbg1"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_acss3"]
 bg_color = Color(0.86159027, 0.20457613, 0.24049276, 1)
 
@@ -212,28 +210,6 @@ icon_alignment = 1
 [node name="sfx_basicAttack1" type="AudioStreamPlayer" parent="Cat" unique_id=1557120559]
 stream = ExtResource("9_m6a0m")
 
-[node name="WaterCleanseLabel" type="RichTextLabel" parent="Cat" unique_id=933078199]
-visible = false
-offset_left = -278.0
-offset_top = -24.0
-offset_right = -126.0
-offset_bottom = 62.0
-theme_override_font_sizes/normal_font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_3nbg1")
-text = "Water Cleanse:
-Heal 10% HP every 4 turns"
-
-[node name="WaterPurifyLabel" type="RichTextLabel" parent="Cat" unique_id=2109698856]
-visible = false
-offset_left = -279.0
-offset_top = -24.0
-offset_right = -133.0
-offset_bottom = 38.0
-theme_override_font_sizes/normal_font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_3nbg1")
-text = "Water Purify:
-Negate Debuff"
-
 [node name="sfx_basicAttack2" type="AudioStreamPlayer" parent="Cat" unique_id=345203723]
 stream = ExtResource("10_y1nwd")
 
@@ -328,7 +304,7 @@ target = NodePath("..")
 [node name="sfx_basicAttack2" type="AudioStreamPlayer" parent="Turtle" unique_id=612572846]
 stream = ExtResource("10_y1nwd")
 
-[node name="TurtleLevelTurnLog" type="RichTextLabel" parent="." unique_id=1420293552]
+[node name="TurnLog" type="RichTextLabel" parent="." unique_id=1420293552]
 offset_left = -1.0
 offset_top = 140.0
 offset_right = 574.0
