@@ -114,7 +114,7 @@ func play_turn():
 	
 	# Default text while the player picks an action
 	await get_tree().create_timer(0.5).timeout
-	GameManager.turn_log.animate("Catster prepares her next move", 0.5)
+	GameManager.turn_log.animate("Catster prepares her next move.", 0.5)
 
 	has_acted = false
 	# Block from the last turn wears off
