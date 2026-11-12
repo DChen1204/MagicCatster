@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c3xcyqqr6cci6"]
 
+[ext_resource type="PackedScene" uid="uid://b0g65i3s7clm6" path="res://DiwenFolder/Scenes/ExitMenu.tscn" id="1_wdwy1"]
 [ext_resource type="Script" uid="uid://dp4dyqlg1bfek" path="res://DiwenFolder/Scripts/CharacterScripts/Cat.gd" id="1_y1nwd"]
 [ext_resource type="Texture2D" uid="uid://coo1c8owycbbm" path="res://TempImages/CatImage1.jpeg" id="2_wdwy1"]
 [ext_resource type="Script" uid="uid://cfrnv2u688ioq" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/HealthBar.gd" id="3_e70ou"]
@@ -68,6 +69,8 @@ bg_color = Color(0.10829217, 0.059270762, 0.08788093, 1)
 bg_color = Color(0.2123048, 0.21230489, 0.21230471, 1)
 
 [node name="Scene3" type="Node2D" unique_id=1341640545]
+
+[node name="ExitMenu" parent="." unique_id=800030418 instance=ExtResource("1_wdwy1")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=921198973]
 

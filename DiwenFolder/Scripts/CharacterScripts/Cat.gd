@@ -113,10 +113,8 @@ func play_turn():
 	sprite.modulate = Color(1, 1, 1,) 
 	
 	# Default text while the player picks an action
-	await get_tree().create_timer(1.0).timeout
-	# I think we should remove this.
-	# The player can not easily catch the opponent moves. 
-	# GameManager.turn_log.animate("Catster prepares her next move.", 0.5)
+	await get_tree().create_timer(0.5).timeout
+	GameManager.turn_log.animate("Catster prepares her next move", 0.5)
 
 	has_acted = false
 	# Block from the last turn wears off
