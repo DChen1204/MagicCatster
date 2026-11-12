@@ -6,6 +6,8 @@ extends Character
 @onready var sfx_ult_scratch = get_node_or_null("sfx_ult_scratch")
 @onready var sfx_pounce = get_node_or_null("sfx_pounce")
 @onready var sfx_block = get_node_or_null("sfx_block")
+@onready var sfx_heal1 = get_node_or_null("sfx_heal1")
+@onready var sfx_heal2 = get_node_or_null("sfx_heal2")
 
 """
 Initial stats of the Cat
@@ -31,13 +33,13 @@ const ULT_SCRATCH_COST: int = 90
 const ULT_SCRATCH_POWER: float = 400.0
 
 const HYDRO_CLEANSE_COST: int = 30
-const HYDRO_CLEANSE_AMOUNT: float = 50
+const HYDRO_CLEANSE_AMOUNT: float = 25
 const HYDRO_CLEANSE_TURN: int = 5
 var hydro_cleanse_on: bool = false
 var hydro_cleanse_current_turn: int = 1
 
 const HYDRO_PURIFY_COST: int = 30
-const HYDRO_PURIFY_AMOUNT: float = 175
+const HYDRO_PURIFY_AMOUNT: float = 90
 
 const SP_RECOVER_RATE: int = 30
 
@@ -112,7 +114,9 @@ func play_turn():
 	
 	# Default text while the player picks an action
 	await get_tree().create_timer(1.0).timeout
-	GameManager.turn_log.animate("Catster prepares her next move.", 0.5)
+	# I think we should remove this.
+	# The player can not easily catch the opponent moves. 
+	# GameManager.turn_log.animate("Catster prepares her next move.", 0.5)
 
 	has_acted = false
 	# Block from the last turn wears off
@@ -120,14 +124,10 @@ func play_turn():
 	# Refills SP every turn 
 	restore_sp(SP_RECOVER_RATE)
 	
-	# Apply Goldfish Water Cleanse
-	#if water_cleanse and hydro_cleanse_on:
-	#	cat_resolve_hydro_cleanse()
+	# Resolve Goldfish Water Cleanse
 	if hydro_cleanse_on:
 		cat_resolve_hydro_cleanse()
 			
-	# Water Purify is to negate debuff
-	
 	# The turn ends as soon as the one action finishes
 	await action_finished
 	
@@ -182,6 +182,7 @@ func cat_hydro_cleanse():
 	hydro_cleanse_current_turn = 1
 	print("Cat used hydro cleanse.")
 	GameManager.turn_log.animate("Catster called Poseidon for Hydro Cleanse.", 1.0)
+	_play_sfx(sfx_heal2)
 	await get_tree().create_timer(2.0).timeout
 	_end_action()
 	
@@ -192,6 +193,7 @@ func cat_hydro_purify():
 	super.heal(HYDRO_PURIFY_AMOUNT)
 	print("Cat used hydro purify.")
 	GameManager.turn_log.animate("Catster called Poseidon for Hydro Pruify.", 1.0)
+	_play_sfx(sfx_heal1)
 	await get_tree().create_timer(2.0).timeout
 	_end_action()
 	
@@ -202,7 +204,7 @@ func get_skill_tooltip(skill_name: String) -> String:
 		"block":
 			return "Cost: %d SP\nHalves the damage you take until your next turn." % BLOCK_COST
 		"pounce":
-			return "Cost: %d SP\nPower: %d\nA quick strike that does damage." % [POUNCE_COST, POUNCE_POWER]
+			return "Cost: %d SP\nPower: %d\nA quick strike that does damage. Do triple damage to shields."% [POUNCE_COST, POUNCE_POWER]
 		"ult":
 			return "Cost: %d SP\nPower: %d\nA devastating scratch with big damage.\nCan also cancel multi-turn healing" % [ULT_SCRATCH_COST, ULT_SCRATCH_POWER]
 		"cleanse":
@@ -315,6 +317,6 @@ func detect_attack_buttons():
 	hydro_purify_button = get_node_or_null("PurifyButton")
 	if hydro_cleanse_button != null:
 		if hydro_purify:
-			hydro_cleanse_button.show()
+			hydro_purify_button.show()
 		else:
-			hydro_cleanse_button.hide()
+			hydro_purify_button.hide()

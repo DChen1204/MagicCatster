@@ -215,30 +215,31 @@ func got_hit_effect():
 
 # List of affected skills		
 func got_cat_pounce(attacker: Character, dmg_percentage: float):
+	# Different damage types to resolve shields
 	var ability_damage = (attacker.attack / self.defense) * dmg_percentage
-	var shield_damage = (attacker.attack / self.defense) * dmg_percentage
-	var total_damage = ability_damage + shield_damage
-	var health_damage = total_damage
+	var shield_damage = (attacker.attack / self.defense) * dmg_percentage * 2
+	var combined_damage = ability_damage + shield_damage
+	var health_damage = ability_damage
+	
 	# When there is a shield
 	if shield > 0:
-		# When shield is greater than the total damage,
-		# Subtract the total damage from the shield 
+		# When shield is greater or equal to than the combined damage,
+		# Subtract the combined damage from the shield 
 		# Make health_damage 0
-		if shield >= total_damage:
-			shield = shield - total_damage
+		if shield >= combined_damage:
+			shield = shield - combined_damage
 			health_damage = 0
+		
+		# When the shield is smaller than the combined damage (shield break)
+		# Subtract the shield damage from the shield (clamped)
+		# Subtract the remaining shield from the ability damage to get health damage
 		else:
-			if shield >= shield_damage:
-				
-			
-			
-			shield_damage = shield_damage - shield
-			#total_damage = shield_damage / 2
-			total_damage = shield_damage
+			shield = shield - shield_damage
+			shield = clampf(shield, 0, shield)
+			health_damage = ability_damage - shield
 			shield = 0
 			stunted = true
 		shield_changed.emit()
-	
 
 	# Calculate health loss
 	if health_damage > 0:
@@ -248,24 +249,31 @@ func got_cat_pounce(attacker: Character, dmg_percentage: float):
 		
 		
 func got_cat_ult_scratch(attacker: Character, dmg_percentage: float):
-	var total_damage = (attacker.attack / self.defense) * dmg_percentage
-	var shield_damage = (attacker.attack / self.defense) * dmg_percentage
+	# Different damage types to resolve shields
+	var ability_damage = (attacker.attack / self.defense) * dmg_percentage
+	var health_damage = ability_damage
+	
+	# When there is a shield
 	if shield > 0:
-		if shield >= shield_damage:
-			shield = shield - shield_damage
-			total_damage = 0
+		# When shield is greater or equal to than the ability damage,
+		# Subtract the ability damage from the shield 
+		# Make health_damage 0
+		if shield >= ability_damage:
+			shield = shield - ability_damage
+			health_damage = 0
+		
+		# When the shield is smaller than the ability damage (shield break)
+		# Subtract the remaining shield from the ability damage to get health damage
 		else:
-			shield_damage = shield_damage - shield
-			#total_damage = shield_damage / 2
-			total_damage = shield_damage
+			health_damage = ability_damage - shield
 			shield = 0
 			stunted = true
 		shield_changed.emit()
-		
+
 	# Calculate health loss
-	if total_damage > 0:
-		print("Turtle takes %f damage." % total_damage)
-		super.take_damage(total_damage)
+	if health_damage > 0:
+		print("Turtle takes %f health damage." % health_damage)
+		super.take_damage(health_damage)
 		got_hit_effect()
 		
 
