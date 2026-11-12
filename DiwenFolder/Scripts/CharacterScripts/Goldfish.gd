@@ -14,7 +14,7 @@ Character Name = Poseidon
 """
 
 # Tuning. Heal amounts are a percentage of max health
-const BUBBLE_POWER: float = 50.0
+const BUBBLE_POWER: float = 70.0
 
 const GIFT_HEAL_PERCENT: float = 0.25	# Gift of the Seas: instant heal
 const GIFT_COOLDOWN: int = 5		# usable once every 5 turns
@@ -90,7 +90,7 @@ func play_turn():
 	# Do action
 	decide_action()
 	# Give the player time to read what happened, then dim itself
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(2.5).timeout
 	sprite.modulate = Color(0.5, 0.5, 0.5)
 	
 # Enemy AI deciding what to do in its turn

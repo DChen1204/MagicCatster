@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://tham7ji8np0c"]
 
-[ext_resource type="Script" uid="uid://ctn081ybxfdy" path="res://attack_choice_popup.gd" id="1_mtrws"]
+[ext_resource type="Script" uid="uid://ctn081ybxfdy" path="res://DiwenFolder/Scripts/UIScripts/attack_choice_popup.gd" id="1_mtrws"]
 
 [node name="AttackChoicePopup" type="CanvasLayer" unique_id=5521783]
 layer = 10

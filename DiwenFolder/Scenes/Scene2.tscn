@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://banyasb8i2768" path="res://DiwenFolder/Scripts/ManagerScripts/GameManager.gd" id="1_amivq"]
 [ext_resource type="PackedScene" uid="uid://tham7ji8np0c" path="res://attack_choice_popup.tscn" id="2_2ushx"]
+[ext_resource type="PackedScene" uid="uid://b0g65i3s7clm6" path="res://DiwenFolder/Scenes/ExitMenu.tscn" id="2_g03e7"]
 [ext_resource type="Script" uid="uid://dp4dyqlg1bfek" path="res://DiwenFolder/Scripts/CharacterScripts/Cat.gd" id="3_rcx44"]
 [ext_resource type="Texture2D" uid="uid://coo1c8owycbbm" path="res://TempImages/CatImage1.jpeg" id="4_e4jyd"]
 [ext_resource type="Script" uid="uid://cfrnv2u688ioq" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/HealthBar.gd" id="5_g03e7"]
@@ -48,6 +49,8 @@ bg_color = Color(0.2123048, 0.21230489, 0.21230471, 1)
 
 [node name="World" type="Node2D" unique_id=42255485]
 script = ExtResource("1_amivq")
+
+[node name="ExitMenu" parent="." unique_id=800030418 instance=ExtResource("2_g03e7")]
 
 [node name="AttackChoicePopup" parent="." unique_id=5521783 instance=ExtResource("2_2ushx")]
 next_scene = "uid://c3xcyqqr6cci6"
