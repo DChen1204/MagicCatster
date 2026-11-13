@@ -18,7 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://dtbrxoxvox4p1" path="res://BSmallAudio/heavyAttack1.mp3" id="13_y2hg3"]
 [ext_resource type="AudioStream" uid="uid://lola6yesy8bi" path="res://BSmallAudio/TestBattleMusic.wav" id="14_5g4ls"]
 [ext_resource type="AudioStream" uid="uid://chlr6hoe6ntno" path="res://BSmallAudio/uiButton1.wav" id="14_r5kap"]
-[ext_resource type="Script" uid="uid://c1m5h1hkrfvr4" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/end_turn_button.gd" id="16_asecs"]
+[ext_resource type="Script" uid="uid://c1m5h1hkrfvr4" path="res://DiwenFolder/OldScripts/end_turn_button.gd" id="16_asecs"]
 
 [node name="World" type="Node2D" unique_id=1568438141]
 script = ExtResource("1_u5sc1")
