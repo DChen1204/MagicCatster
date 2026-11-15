@@ -21,13 +21,13 @@ const BITE_DUST_DURATION: int = 5			# Number of turns Bite Dust ticks
 const CRAZY_DIAMOND_SHEILD_REPAIR: float = 0.10		# The percentage of every shield repair
 const CRAZY_DIAMOND_SHIELD_TURN: int = 4			# Number of turns before shield repair
 
-const EMERALD_SPLASH_EMERALD_DAMAGE_LOW: float = 10 	# Lowest damage for one emerald
-const EMERALD_SPLASH_EMERALD_DAMAGE_HIGH: float = 20	# Highest damage for one emerald
+const EMERALD_SPLASH_EMERALD_DAMAGE_LOW: float = 15 	# Lowest damage for one emerald
+const EMERALD_SPLASH_EMERALD_DAMAGE_HIGH: float = 25	# Highest damage for one emerald
 const EMERALD_SPLASH_EMERALD_COUNT: int = 4				# The number of emeralds shot in one emerald splash
 
-const STUNT_TURN: int = 3	# The number of turns the turtle is stunt after shield down
-var stunt_counter: int = 1
-var stunted: bool = false
+const STUN_TURN: int = 3	# The number of turns the turtle is stunt after shield down
+var stun_counter: int = 1
+var stunned: bool = false
 
 #SFX for attacks
 @onready var sfx_basicAttack2 = $sfx_basicAttack2
@@ -48,6 +48,13 @@ var player_dusted_duration: int = 0
 var crazy_diamond_used: bool = false
 var crazy_diamond_current_turn: int = 0
 
+# Status effect icons
+@onready var crazy_diamond_icon = get_node("TurtleCrazyDiamondIcon")
+@onready var stun_icon = get_node("TurtleStunIcon")
+@onready var dust_icon = get_node("TurtleDustIcon")
+
+@onready var shield_cover = get_node("TurtleShieldCover")
+
 # Set up
 func _ready():
 	# Assign stats and name to itself
@@ -66,6 +73,16 @@ func _ready():
 	sprite.modulate = Color(0.5, 0.5, 0.5) 
 	original_modulate = sprite.modulate
 	
+	# Hide icons
+	crazy_diamond_icon.update_tooltip()
+	crazy_diamond_icon.hide()
+	stun_icon.update_tooltip()
+	stun_icon.hide()
+	dust_icon.update_tooltip()
+	dust_icon.hide()
+	
+	shield_cover.hide()
+	
 	# Register itself with GameManager
 	GameManager.register_enemy(self)
 	print("Rock registered!")
@@ -82,8 +99,8 @@ func reset():
 	shield_changed.emit()
 	
 	# reset other stats
-	stunt_counter = 1
-	stunted = false
+	stun_counter = 1
+	stunned = false
 	player_dusted = false
 	player_dusted_duration = 0
 	crazy_diamond_used = false
@@ -97,10 +114,17 @@ func reset():
 func play_turn():
 	# Undim when it is its turn
 	sprite.modulate = Color(1, 1, 1) 
+	
 	# Pause for some time to pretend thinking
 	GameManager.turn_log.animate("Rock is preparing to attack...", 1.0)
 	await get_tree().create_timer(1.5).timeout
 	decide_action()
+	
+	# update icon tooltips
+	# crazy_diamond_icon.update_tooltip()
+	stun_icon.update_tooltip()
+	dust_icon.update_tooltip()
+	
 	# Dim itself after its turn
 	await get_tree().create_timer(3.2).timeout
 	sprite.modulate = Color(0.5, 0.5, 0.5)  
@@ -110,9 +134,9 @@ func play_turn():
 # For Turtle, 
 func decide_action():
 	
-	# Stunt after shield break
-	if stunted:
-		turtle_stunted()
+	# Stunned after shield break
+	if stunned:
+		turtle_stunned()
 		return
 	
 	# Use Crazy Diamond when half hp
@@ -144,6 +168,8 @@ func turtle_bite_dust():
 	player_dusted_duration = 0
 	sfx_basicAttack2.play()
 	GameManager.player.got_turtle_bite_dust(self, BITE_DUST_DAMAGE)
+	dust_icon.show()
+	dust_icon.update_tooltip()
 
 	
 # Skill "Crazy Diamond'
@@ -159,7 +185,10 @@ func turtle_crazy_diamond():
 	shield = max_shield
 	shield_changed.emit()
 	player_dusted = false
+	dust_icon.hide()
 	crazy_diamond_used = true
+	crazy_diamond_icon.show()
+	shield_cover.show()
 	
 	
 # Skill 'Emerald Splash'
@@ -176,10 +205,11 @@ func turtle_emerald_splash():
 	
 # Decide action when turtle has shield
 func turtle_has_shield():
-	if crazy_diamond_current_turn == CRAZY_DIAMOND_SHIELD_TURN:
+	if crazy_diamond_current_turn >= CRAZY_DIAMOND_SHIELD_TURN and shield < max_shield:
 		print("Turtled repaired shield.")
 		GameManager.turn_log.animate("Rock repaired its earth shield!", 1.0)
 		shield += max_shield * CRAZY_DIAMOND_SHEILD_REPAIR
+		shield = clampf(shield, shield, max_shield)
 		shield_changed.emit()
 		crazy_diamond_current_turn = 0
 	else:
@@ -191,27 +221,44 @@ func turtle_resolve_tick_damage():
 	player_dusted_duration += 1
 	if player_dusted_duration >= BITE_DUST_DURATION:
 		player_dusted = false
+		dust_icon.hide()
 	print("Turtle used tick.")
 	GameManager.player.got_turtle_tick_damage(self, BITE_DUST_TICK_DAMAGE)
 	
-# Stunt after shield break
-func turtle_stunted():
-	if stunt_counter < STUNT_TURN:
-		print("Turtled stunted.")
-		GameManager.turn_log.animate("Rock is still stunted from the shield break.", 1.0)
-		stunt_counter += 1
+# Stun after shield break
+func turtle_stunned():
+	if stun_counter < STUN_TURN:
+		print("Turtled stunned.")
+		GameManager.turn_log.animate("Rock is still stunned from the shield break.", 1.0)
+		stun_counter += 1
 	else:
 		print("Turtled recovered.")
-		GameManager.turn_log.animate("Rock is recovering from the stunt.", 1.0)
-		stunted = false
+		GameManager.turn_log.animate("Rock is recovering from the stun.", 1.0)
+		stunned = false
+		stun_icon.hide()
 	
 # Got hit special affect
 func got_hit_effect():
+	# Shakes
+	super.shake_sprite(sprite)
+	
+	# Flashes
 	for i in 2:
 		sprite.modulate = Color(3, 3, 3)
 		await get_tree().create_timer(0.1).timeout
 		sprite.modulate = original_modulate
 		await get_tree().create_timer(0.1).timeout
+		
+# Tooltips for icons
+func get_icon_tooltip(skill_name: String) -> String:
+	match skill_name:
+		"turtle_crazy_diamond":
+			return "Crazy Diamond: Repair %d shield every %d turns." % [max_shield * CRAZY_DIAMOND_SHEILD_REPAIR, CRAZY_DIAMOND_SHIELD_TURN]
+		"turtle_stun":
+			return "Stun: Cannot take action for another %d turn(s)." % [STUN_TURN - stun_counter + 1]
+		"turtle_dust":
+			return "Dusted: Take %d damage per turn for another %d turn(s)." % [BITE_DUST_DAMAGE, BITE_DUST_DURATION - player_dusted_duration]
+	return "TOOLTIP NOT FOUND"
 
 # List of affected skills		
 func got_cat_pounce(attacker: Character, dmg_percentage: float):
@@ -238,7 +285,10 @@ func got_cat_pounce(attacker: Character, dmg_percentage: float):
 			shield = clampf(shield, 0, shield)
 			health_damage = ability_damage - shield
 			shield = 0
-			stunted = true
+			stunned = true
+			crazy_diamond_icon.hide()
+			stun_icon.show()
+			shield_cover.hide()
 		shield_changed.emit()
 
 	# Calculate health loss
@@ -267,7 +317,10 @@ func got_cat_ult_scratch(attacker: Character, dmg_percentage: float):
 		else:
 			health_damage = ability_damage - shield
 			shield = 0
-			stunted = true
+			stunned = true
+			crazy_diamond_icon.hide()
+			stun_icon.show()
+			shield_cover.hide()
 		shield_changed.emit()
 
 	# Calculate health loss

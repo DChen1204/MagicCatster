@@ -9,6 +9,7 @@ extends Character
 @onready var sfx_heal1 = get_node_or_null("sfx_heal1")
 @onready var sfx_heal2 = get_node_or_null("sfx_heal2")
 
+
 """
 Initial stats of the Cat
 Base Attack = 200
@@ -31,14 +32,17 @@ const POUNCE_POWER: float = 100.0
 
 const ULT_SCRATCH_COST: int = 90
 const ULT_SCRATCH_POWER: float = 400.0
+# const ULT_SCRATCH_POWER: float = 2000.0
 
-const HYDRO_CLEANSE_COST: int = 30
+#const HYDRO_CLEANSE_COST: int = 30
+const HYDRO_CLEANSE_COOLDOWN: int = 5
 const HYDRO_CLEANSE_AMOUNT: float = 25
 const HYDRO_CLEANSE_TURN: int = 5
 var hydro_cleanse_on: bool = false
 var hydro_cleanse_current_turn: int = 1
 
-const HYDRO_PURIFY_COST: int = 30
+#const HYDRO_PURIFY_COST: int = 30
+const HYDRO_PURIFY_COOLDOWN: int = 3
 const HYDRO_PURIFY_AMOUNT: float = 90
 
 const SP_RECOVER_RATE: int = 30
@@ -58,10 +62,23 @@ var hydro_purify_button: Button
 # Whether we have the following abilities unlocked
 var hydro_cleanse: bool = false
 var hydro_purify: bool = false
+# Cooldown timers
+var hydro_purify_countdown: int = HYDRO_PURIFY_COOLDOWN
+var hydro_cleanse_countdown: int = HYDRO_CLEANSE_COOLDOWN
+var hydro_purify_on_cooldown: bool = false
+var hydro_cleanse_on_cooldown: bool = false
 
 @onready var sprite: Sprite2D = $CatSprite
 var original_modulate: Color
 var flashed_once: bool = false
+
+# Status effect icons
+@onready var cleanse_icon = get_node_or_null("CatCleanseIcon")
+
+# Ability buttons
+@onready var block_button = get_node("BlockButton")
+@onready var pounce_button = get_node("PounceButton")
+@onready var ult_button = get_node("UltButton")
 
 # Set up
 func _ready():
@@ -84,6 +101,11 @@ func _ready():
 	
 	# Get the chosen attack buttons
 	detect_attack_buttons()
+	
+	# Hide icons
+	if cleanse_icon != null:
+		cleanse_icon.hide()
+		cleanse_icon.update_tooltip()
 	
 	# Register with GameManager
 	GameManager.register_player(self)
@@ -122,12 +144,25 @@ func play_turn():
 	# Refills SP every turn 
 	restore_sp(SP_RECOVER_RATE)
 	
+	# Enable buttons
+	disable_buttons(false)
+	
 	# Resolve Goldfish Water Cleanse
 	if hydro_cleanse_on:
 		cat_resolve_hydro_cleanse()
+		
+	# resolve companion ability countdowns
+	cat_resolve_countdowns()
+	
+	# Update icon tooltips
+	if cleanse_icon != null:
+		cleanse_icon.update_tooltip()
 			
 	# The turn ends as soon as the one action finishes
 	await action_finished
+	
+	# disable buttons
+	disable_buttons(true)
 	
 	# Dim itself after its turn
 	await get_tree().create_timer(1.0).timeout
@@ -172,27 +207,33 @@ func cat_ult_scratch(target: Character):
 	
 # Hydro Cleanse: Heal hp over time
 func cat_hydro_cleanse():
-	if not _begin_action(HYDRO_CLEANSE_COST):
+	if hydro_cleanse_on_cooldown:
 		return
 	await get_tree().create_timer(0.5).timeout
 	hydro_cleanse_on = true
 	super.heal(HYDRO_CLEANSE_AMOUNT)
 	hydro_cleanse_current_turn = 1
+	hydro_cleanse_on_cooldown = true
 	print("Cat used hydro cleanse.")
 	GameManager.turn_log.animate("Catster called Poseidon for Hydro Cleanse.", 1.0)
 	_play_sfx(sfx_heal2)
 	await get_tree().create_timer(2.0).timeout
+	hydro_cleanse_button.disabled = true
+	cleanse_icon.show()
+	cleanse_icon.update_tooltip()
 	_end_action()
 	
 func cat_hydro_purify():
-	if not _begin_action(HYDRO_PURIFY_COST):
+	if hydro_purify_on_cooldown:
 		return
 	await get_tree().create_timer(0.5).timeout
 	super.heal(HYDRO_PURIFY_AMOUNT)
+	hydro_purify_on_cooldown = true
 	print("Cat used hydro purify.")
-	GameManager.turn_log.animate("Catster called Poseidon for Hydro Pruify.", 1.0)
+	GameManager.turn_log.animate("Catster called Poseidon for Hydro Purify.", 1.0)
 	_play_sfx(sfx_heal1)
 	await get_tree().create_timer(2.0).timeout
+	hydro_purify_button.disabled = true
 	_end_action()
 	
 
@@ -206,10 +247,17 @@ func get_skill_tooltip(skill_name: String) -> String:
 		"ult":
 			return "Cost: %d SP\nPower: %d\nA devastating scratch with big damage.\nCan also cancel multi-turn healing" % [ULT_SCRATCH_COST, ULT_SCRATCH_POWER]
 		"cleanse":
-			return "Cost: %d SP\nHeal %d HP over %d turns." % [HYDRO_CLEANSE_COST, HYDRO_CLEANSE_AMOUNT, HYDRO_CLEANSE_TURN]
+			return "Cooldown: %d turns.\nHeal %d HP over %d turns.\n Nonstacking." % [HYDRO_CLEANSE_COOLDOWN, HYDRO_CLEANSE_AMOUNT, HYDRO_CLEANSE_TURN]
 		"purify":
-			return "Cost: %d SP\nHeal %d HP." % [HYDRO_PURIFY_COST, HYDRO_PURIFY_AMOUNT]
+			return "Cooldown: %d turns.\nHeal %d HP." % [HYDRO_PURIFY_COOLDOWN, HYDRO_PURIFY_AMOUNT]
 	return ""
+	
+# Tooltips for icons
+func get_icon_tooltip(skill_name: String) -> String:
+	match skill_name:
+		"cat_cleanse":
+			return "Hydro Cleanse: Heal %d per turn for another %d turn(s)." % [HYDRO_CLEANSE_AMOUNT, hydro_cleanse_countdown]
+	return "TOOLTIP NOT FOUND"
 	
 # Starts an action. Allowed once per turn, and only with enough SP.
 # Return false (and changes nothing) if it can't be taken, so a failed
@@ -221,7 +269,8 @@ func _begin_action(cost: int) -> bool:
 	sp -= cost
 	sp_changed.emit()
 	return true
-	
+
+
 # Finish the action, which ends the Catster's turn
 func _end_action():
 	action_finished.emit()
@@ -238,6 +287,25 @@ func cat_resolve_hydro_cleanse():
 		hydro_cleanse_on = false
 	print("Cat continue cleanse.")
 	super.heal(HYDRO_CLEANSE_AMOUNT)
+	
+	
+# resolve the companion skill cooldowns 
+func cat_resolve_countdowns():
+	if hydro_cleanse and hydro_cleanse_on_cooldown:
+		hydro_cleanse_countdown -= 1
+		if hydro_cleanse_countdown < 1:
+			hydro_cleanse_on_cooldown = false
+			hydro_cleanse_countdown = HYDRO_CLEANSE_COOLDOWN
+			hydro_cleanse_button.disabled = false
+			cleanse_icon.hide()
+	
+	if hydro_purify and hydro_purify_on_cooldown:
+		hydro_purify_countdown -= 1
+		if hydro_purify_countdown < 1:
+			hydro_purify_on_cooldown = false
+			hydro_purify_countdown = HYDRO_PURIFY_COOLDOWN
+			hydro_purify_button.disabled = false
+			
 
 # Turtle list
 func got_turtle_bite_dust(attacker: Character, dmg_percentage: float):
@@ -281,6 +349,10 @@ func _play_sfx(sfx):
 		
 # Flash effect for getting hit
 func got_hit_effect():
+	# Shake
+	super.shake_sprite(sprite)
+	
+	# Flash
 	for i in 2:
 		sprite.modulate = Color(3, 3, 3)
 		await get_tree().create_timer(0.1).timeout
@@ -292,6 +364,7 @@ func restore_sp(amount: int):
 	sp += amount;
 	sp = clamp(sp, 0, max_sp)
 	sp_changed.emit()
+	disable_buttons(false)
 	
 # Read and add chosen attack
 func add_chosen_attack():
@@ -318,3 +391,26 @@ func detect_attack_buttons():
 			hydro_purify_button.show()
 		else:
 			hydro_purify_button.hide()
+			
+# Disable buttons, for turn transition and sp cost
+func disable_buttons(disable_button: bool):
+	if disable_button == false:
+		if sp >= BLOCK_COST:
+			block_button.disabled = false
+		if sp >= POUNCE_COST:
+			pounce_button.disabled = false
+		if sp >= ULT_SCRATCH_COST:
+			ult_button.disabled = false
+	else:
+		block_button.disabled = true
+		pounce_button.disabled = true
+		ult_button.disabled = true
+	
+	if hydro_cleanse_button != null:
+		if hydro_cleanse_on_cooldown == false:
+			hydro_cleanse_button.disabled = disable_button
+	
+	if hydro_purify_button != null:
+		if hydro_purify_on_cooldown == false:
+			hydro_purify_button.disabled = disable_button
+	

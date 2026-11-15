@@ -9,6 +9,9 @@ var game_over_music: Control
 var turn_manager: Node
 # The turn log 
 var turn_log: Node
+# the inventory manager
+var inventory_manager: Node
+var sp_potion_on_record: int = 10
 
 # The characters
 # var players: Array[Node] = []
@@ -42,13 +45,16 @@ func register_game_over_screen(s: Node):
 func register_turn_log(l: Node):
 	turn_log = l
 	_try_start()
+func register_inventory_manager(i: Node):
+	inventory_manager = i
+	_try_start()
 	
 # Start game once every object is registered
 # Every player is registered before the tunr queue is built
 func _try_start():
 	if _start_queued:
 		return
-	if turn_manager and turn_log and game_over_music and player and enemy:
+	if turn_manager and turn_log and game_over_music and inventory_manager and player and enemy:
 		_start_queued = true
 		call_deferred("_start_game")
 		
@@ -72,6 +78,7 @@ func reset_game():
 	enemy.reset()
 	turn_manager.reset()
 	turn_log.reset()
+	inventory_manager.reset()
 	
 	# Choices that carry over between fights
 var chosen_attack: String = ""
