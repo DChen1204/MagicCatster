@@ -30,7 +30,6 @@ var gift_cooldown: int = 0
 var tide_cooldown: int = 0
 var tide_turns_left: int = 0
 
-
 #SFX for attacks
 @onready var sfx_basicAttack1 = get_node_or_null("sfx_basicAttack1")
 @onready var sfx_heal1 = get_node_or_null("sfx_heal1")
@@ -40,6 +39,8 @@ var tide_turns_left: int = 0
 @onready var sprite: Sprite2D = $GoldfishSprite
 var original_modulate: Color
 
+# Status effect icons
+@onready var healing_tide_icon = get_node("GoldfishHealingTideIcon")
 
 # Set up
 func _ready():
@@ -53,6 +54,10 @@ func _ready():
 	# Dim itself until its turn
 	sprite.modulate = Color(0.5, 0.5, 0.5)
 	original_modulate = sprite.modulate
+	
+	# Hide icons
+	healing_tide_icon.update_tooltip()
+	healing_tide_icon.hide()
 	
 	# Register itself with GameManager
 	GameManager.register_enemy(self)
@@ -72,8 +77,8 @@ func reset():
 func play_turn():
 	# Undim when it is its turn
 	sprite.modulate = Color(1, 1, 1)
-	
-		# Cooldowns tick down at the start of every turn
+
+	# Cooldowns tick down at the start of every turn
 	gift_cooldown = maxi(0, gift_cooldown - 1)
 	tide_cooldown = maxi(0, tide_cooldown - 1)
 	
@@ -84,8 +89,11 @@ func play_turn():
 		GameManager.turn_log.animate("The Healing Tide mends Poseidon's wounds...", 1.0)
 	else:
 		GameManager.turn_log.animate("Poseidon is summoning water...", 1.0)
+		healing_tide_icon.hide()
 		await get_tree().create_timer(1.5).timeout
-		
+	
+	# update icon tooltips
+	healing_tide_icon.update_tooltip()
 	
 	# Do action
 	decide_action()
@@ -127,7 +135,18 @@ func goldfish_healing_tide():
 	tide_cooldown = TIDE_COOLDOWN
 	GameManager.turn_log.animate("Poseidon called the Healing Tide! Its wounds begin to close.", 1.5)
 	_play_sfx(sfx_heal2)
+	healing_tide_icon.show() # show icon
+	healing_tide_icon.update_tooltip()
 	await get_tree().create_timer(1.5).timeout
+	
+	
+# Tooltips for icons
+func get_icon_tooltip(skill_name: String) -> String:
+	match skill_name:
+		"goldfish_healing_tide":
+			return "Healing Tide: Heal %d HP per turn for another %d turns. 
+			May cancel by Ultimate Scratch." % [max_health * TIDE_HEAL_PERCENT, tide_turns_left]
+	return "TOOL TIP NOT FOUND"
 
 # Play a sound if that node exists
 func _play_sfx(sfx):
@@ -137,6 +156,10 @@ func _play_sfx(sfx):
 
 # Got hit "animation"
 func got_hit_effect():
+	# Shake
+	super.shake_sprite(sprite)
+	
+	# Flash
 	for i in 2:
 		sprite.modulate = Color(3, 3, 3)
 		await get_tree().create_timer(0.1).timeout
@@ -159,5 +182,6 @@ func got_cat_ult_scratch(attacker: Character, dmg_percentage: float):
 		got_hit_effect()
 	if tide_turns_left > 0:
 		tide_turns_left = 0
+		healing_tide_icon.hide()
 		print("Healing Tide cancelled.")
 		GameManager.turn_log.animate("Catster's Ultimate Scratch tore through the Healing Tide!", 1.5)

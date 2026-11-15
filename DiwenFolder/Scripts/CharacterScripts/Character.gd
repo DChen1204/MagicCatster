@@ -82,3 +82,28 @@ func heal(amount: float) -> void:
 	health += amount;
 	health = clampf(health, 0, max_health)
 	health_changed.emit()
+	
+"""
+Shakes the sprite a few times; for acting getting attacked
+- sprite: the sprite of the character to shake
+- times: the number of times to randomly jump, default is 10
+- amount: max offset from the center when jump, default is 5.0
+- step: seconds between each jump, default is 0.05
+"""
+func shake_sprite(sprite: Sprite2D, times: int = 10, amount: float = 5.0, step: float = 0.05) -> Tween:
+	# Record the sprite's original position
+	var origin := sprite.offset
+	
+	# Create the tween and set the easing curve to sine (looks less snappy)
+	var tween := sprite.create_tween()
+	tween.set_trans(Tween.TRANS_SINE)
+	
+	# Randomly jump the sprite several times
+	for i in times:
+		var jitter = Vector2(randf_range(-amount, amount), randf_range(-amount, amount))
+		tween.tween_property(sprite, "offset", origin + jitter, step)
+		
+	# Restore the sprite to original posisition and return tween
+	tween.tween_property(sprite, "offset", origin, step)
+	return tween
+	

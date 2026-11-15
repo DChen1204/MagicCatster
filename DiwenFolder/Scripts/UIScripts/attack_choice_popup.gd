@@ -31,4 +31,5 @@ func _choose(attack_id: String) -> void:
 	UiAudio.play_click()
 	GameManager.chosen_attack = attack_id
 	print("Player chose: ", attack_id)
+	GameManager.sp_potion_on_record = GameManager.inventory_manager.inventory["SP_potion"]
 	GameManager.go_to_scene(next_scene)
