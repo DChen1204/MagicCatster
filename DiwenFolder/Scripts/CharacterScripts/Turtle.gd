@@ -6,7 +6,7 @@ extends Character
 """
 Stats of the Turtle
 Base Attack = 150
-Base Defense = 25
+Base Defense = 500
 Base Health = 500
 Play Character = false
 SP = 0
@@ -107,9 +107,6 @@ func reset():
 	player_dusted_duration = 0
 	crazy_diamond_used = false
 	crazy_diamond_current_turn = 0
-	
-	# reset turn log
-	# GameManager.turn_log.text = ""
 	
 
 # Play its turn
