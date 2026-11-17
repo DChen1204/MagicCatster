@@ -5,7 +5,7 @@ extends Node
 var inventory: Dictionary[String, int]
 
 @onready var potion_button = get_node("PotionButton")
-const SP_POTION_RESTORE_AMOUNT: int = 50
+const SP_POTION_RESTORE_AMOUNT: int = 30
 
 func _ready() -> void:
 	
@@ -20,12 +20,16 @@ func _ready() -> void:
 	
 func reset():
 	inventory["SP_potion"] =  GameManager.sp_potion_on_record
+	potion_button.update_tooltip()
 
 # Handle potion consumption
 func consume_potion():
-	if inventory["SP_potion"] > 0:
+	if inventory["SP_potion"] > 0 and GameManager.player.sp < GameManager.player.max_sp:
 		remove_from_inventory("SP_potion", 1)
 		GameManager.player.restore_sp(SP_POTION_RESTORE_AMOUNT)
+		potion_button.press_flash_blue()
+	else:
+		potion_button.press_flash_red()
 		
 	
 # Add items to the inventory

@@ -32,6 +32,7 @@ const POUNCE_POWER: float = 100.0
 
 const ULT_SCRATCH_COST: int = 90
 const ULT_SCRATCH_POWER: float = 400.0
+# const ULT_SCRATCH_COST: int = 0
 # const ULT_SCRATCH_POWER: float = 2000.0
 
 #const HYDRO_CLEANSE_COST: int = 30
