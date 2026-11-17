@@ -54,6 +54,7 @@ var crazy_diamond_current_turn: int = 0
 @onready var dust_icon = get_node("TurtleDustIcon")
 
 @onready var shield_cover = get_node("TurtleShieldCover")
+var shield_modulate: Color
 
 # Set up
 func _ready():
@@ -72,6 +73,7 @@ func _ready():
 	# Dim itself
 	sprite.modulate = Color(0.5, 0.5, 0.5) 
 	original_modulate = sprite.modulate
+	shield_modulate = shield_cover.modulate
 	
 	# Hide icons
 	crazy_diamond_icon.update_tooltip()
@@ -236,6 +238,15 @@ func turtle_stunned():
 		GameManager.turn_log.animate("Rock is recovering from the stun.", 1.0)
 		stunned = false
 		stun_icon.hide()
+		
+# Shield flash effect
+func shield_flash():
+	# Flashes
+	for i in 2:
+		shield_cover.modulate = Color(3, 3, 3)
+		await get_tree().create_timer(0.1).timeout
+		shield_cover.modulate = shield_modulate
+		await get_tree().create_timer(0.1).timeout
 	
 # Got hit special affect
 func got_hit_effect():
@@ -276,6 +287,7 @@ func got_cat_pounce(attacker: Character, dmg_percentage: float):
 		if shield >= combined_damage:
 			shield = shield - combined_damage
 			health_damage = 0
+			shield_flash()
 		
 		# When the shield is smaller than the combined damage (shield break)
 		# Subtract the shield damage from the shield (clamped)
@@ -311,6 +323,7 @@ func got_cat_ult_scratch(attacker: Character, dmg_percentage: float):
 		if shield >= ability_damage:
 			shield = shield - ability_damage
 			health_damage = 0
+			shield_flash()
 		
 		# When the shield is smaller than the ability damage (shield break)
 		# Subtract the remaining shield from the ability damage to get health damage
