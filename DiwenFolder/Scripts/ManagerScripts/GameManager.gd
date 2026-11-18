@@ -82,6 +82,7 @@ func reset_game():
 	
 	# Choices that carry over between fights
 var chosen_attack: String = ""
+var chosen_attack2: String = ""
 
 # Clear everything tied to the current battle scene
 func clear_battle_state():
@@ -103,11 +104,13 @@ const START_SCREEN: String = "res://DiwenFolder/StartScreen.tscn"
 # Begin a fresh run from the start screen
 func start_new_game(first_scene: String):
 	chosen_attack = ""
+	chosen_attack2 = ""
 	go_to_scene(first_scene)
 
 # Leave the current fight and return to the start screen (restarts the game)
 func go_to_start_screen():
 	chosen_attack = ""
+	chosen_attack2 = ""
 	go_to_scene(ProjectSettings.get_setting("application/run/main_scene"))
 	
 func get_turn_number() -> int:

@@ -19,14 +19,19 @@
 [ext_resource type="Texture2D" uid="uid://c5itn0fbc7hf1" path="res://TempImages/GoldfishHealingTideIcon.jpg" id="17_aqoed"]
 [ext_resource type="Script" uid="uid://cs5h6pu4tq0ti" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/Icons.gd" id="18_cwm1s"]
 [ext_resource type="Script" uid="uid://er3o6e5yc87x" path="res://DiwenFolder/Scripts/ObjectScripts/TurnLog.gd" id="19_83km3"]
+[ext_resource type="Script" uid="uid://c42f4g7ui5vxg" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/ShieldBar.gd" id="19_dn70o"]
 [ext_resource type="AudioStream" uid="uid://lola6yesy8bi" path="res://BSmallAudio/TestBattleMusic.wav" id="20_1n0u4"]
+[ext_resource type="Script" uid="uid://bvnhvb5r30n2" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/ShieldDisplay.gd" id="20_xh5ji"]
 [ext_resource type="Script" uid="uid://bb8khp5mjwqbe" path="res://DiwenFolder/Scripts/UIScripts/GameOverDefeat.gd" id="21_36oqq"]
+[ext_resource type="Texture2D" uid="uid://dcv0slrwy6eff" path="res://TempImages/CatDustedIcon.png" id="21_xh5ji"]
 [ext_resource type="AudioStream" uid="uid://bofmufwx3d1e1" path="res://BSmallAudio/TestVictoryMusic.wav" id="22_5x862"]
 [ext_resource type="AudioStream" uid="uid://byqwc6df2j51n" path="res://BSmallAudio/TestDefeatMusic.wav" id="23_oo06p"]
 [ext_resource type="Script" uid="uid://cnee6sgsvxtd1" path="res://DiwenFolder/Scripts/ManagerScripts/InventoryManager.gd" id="24_gg04u"]
 [ext_resource type="Texture2D" uid="uid://d4p0q3r5avi3" path="res://TempImages/PotionIcon2.jpg" id="25_87r0u"]
 [ext_resource type="Script" uid="uid://ctdp18b1b50qh" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/PotionButton.gd" id="26_2sqat"]
-[ext_resource type="Texture2D" uid="uid://b6ud8xp0wqy4s" path="res://TempImages/CanarySprite1.jpg" id="27_3l880"]
+[ext_resource type="Script" uid="uid://bbcbi013es2oa" path="res://DiwenFolder/Scripts/CharacterScripts/Canary.gd" id="27_flpl1"]
+[ext_resource type="Texture2D" uid="uid://bmmsnpaiv1v22" path="res://TempImages/CanarySprite2.jpg" id="28_56yxc"]
+[ext_resource type="Texture2D" uid="uid://dcmmfoxnk0ic5" path="res://TempImages/CanaryIncreaseAttackIcon.png" id="32_duiuv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ny50f"]
 bg_color = Color(0.9647059, 0.07058824, 0.043137256, 1)
@@ -58,6 +63,15 @@ bg_color = Color(0.23028189, 0.62517625, 0.9409401, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_55low"]
 bg_color = Color(0.45106512, 0.5983496, 0.8733546, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4o0k"]
+bg_color = Color(0.3602897, 0.6972323, 0.17914945, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_duiuv"]
+bg_color = Color(0.86159027, 0.20457613, 0.24049276, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6mhmq"]
+bg_color = Color(0.97, 0.72265005, 0.097000025, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n8sq"]
 bg_color = Color(0.2123048, 0.21230489, 0.21230471, 1)
 
@@ -66,6 +80,9 @@ bg_color = Color(0.9647059, 0.07058824, 0.043137256, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56yxc"]
 bg_color = Color(0.3196685, 0.69887894, 0.29762772, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dn70o"]
+bg_color = Color(0.10829217, 0.059270762, 0.08788093, 1)
 
 [node name="Scene4" type="Node2D" unique_id=900728075]
 
@@ -100,7 +117,7 @@ z_index = 2
 script = ExtResource("5_dn70o")
 
 [node name="CatSprite" type="Sprite2D" parent="Cat" unique_id=1888992192]
-position = Vector2(-233, -12)
+position = Vector2(-220.99998, -12)
 scale = Vector2(0.58093524, 0.5911764)
 texture = ExtResource("6_xh5ji")
 
@@ -118,10 +135,10 @@ character = NodePath("..")
 metadata/_edit_use_anchors_ = true
 
 [node name="BlockButton" type="Button" parent="Cat" unique_id=1770983829 node_paths=PackedStringArray("attacker", "target")]
-offset_left = -542.0
-offset_top = 192.0
-offset_right = -427.0
-offset_bottom = 234.0
+offset_left = -547.0
+offset_top = 208.0
+offset_right = -432.0
+offset_bottom = 250.0
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_rssxo")
 text = "BLOCK "
@@ -131,61 +148,61 @@ attacker = NodePath("..")
 target = NodePath("..")
 
 [node name="PounceButton" type="Button" parent="Cat" unique_id=358339086 node_paths=PackedStringArray("attacker", "target")]
-offset_left = -387.0
-offset_top = 195.0
-offset_right = -267.0
-offset_bottom = 233.0
+offset_left = -350.0
+offset_top = 213.0
+offset_right = -230.0
+offset_bottom = 251.0
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_qi4eg")
 text = "POUNCE"
 script = ExtResource("8_6mhmq")
 attacker = NodePath("..")
-target = NodePath("")
+target = NodePath("../../Canary")
 
 [node name="UltButton" type="Button" parent="Cat" unique_id=2027527916 node_paths=PackedStringArray("attacker", "target")]
-offset_left = -216.0
-offset_top = 197.0
-offset_right = -44.0
-offset_bottom = 233.0
+offset_left = -183.0
+offset_top = 213.0
+offset_right = -11.0
+offset_bottom = 249.0
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_h64va")
 text = "ULTIMATE SCRATCH"
 script = ExtResource("8_6mhmq")
 skill = 2
 attacker = NodePath("..")
-target = NodePath("")
+target = NodePath("../../Canary")
 
 [node name="CleanseButton" type="Button" parent="Cat" unique_id=648881856 node_paths=PackedStringArray("attacker", "target")]
-offset_left = -563.0
-offset_top = 262.0
-offset_right = -400.0
-offset_bottom = 298.0
+offset_left = -565.0
+offset_top = 270.0
+offset_right = -402.0
+offset_bottom = 306.0
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_dk0en")
 text = "HYDRO CLEANSE"
 script = ExtResource("8_6mhmq")
 skill = 3
 attacker = NodePath("..")
-target = NodePath("")
+target = NodePath("../../Canary")
 
 [node name="PurifyButton" type="Button" parent="Cat" unique_id=325718490 node_paths=PackedStringArray("attacker", "target")]
-offset_left = -563.0
-offset_top = 262.0
-offset_right = -400.0
-offset_bottom = 298.0
+offset_left = -564.0
+offset_top = 270.0
+offset_right = -401.0
+offset_bottom = 306.0
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_dk0en")
 text = "HYDRO PURIFY"
 script = ExtResource("8_6mhmq")
 skill = 4
 attacker = NodePath("..")
-target = NodePath("")
+target = NodePath("../../Canary")
 
 [node name="CatNameLabel" type="RichTextLabel" parent="Cat" unique_id=1368476526]
-offset_left = -315.0
-offset_top = 116.0
-offset_right = -153.0
-offset_bottom = 163.0
+offset_left = -303.0
+offset_top = 123.0
+offset_right = -141.0
+offset_bottom = 170.0
 theme_override_font_sizes/normal_font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_vi3sq")
 text = "Catster"
@@ -270,6 +287,76 @@ theme_override_font_sizes/normal_font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_55low")
 text = "SP Recovery: 30 per turn"
 
+[node name="ShieldButton" type="Button" parent="Cat" unique_id=401797565 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -370.0
+offset_top = 268.0
+offset_right = -207.0
+offset_bottom = 304.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_h4o0k")
+text = "EARTH SHIELD"
+script = ExtResource("8_6mhmq")
+skill = 5
+attacker = NodePath("..")
+target = NodePath("../../Canary")
+
+[node name="DustButton" type="Button" parent="Cat" unique_id=106483592 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -369.0
+offset_top = 269.0
+offset_right = -206.0
+offset_bottom = 305.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_h4o0k")
+text = "EARTH DUST"
+script = ExtResource("8_6mhmq")
+skill = 6
+attacker = NodePath("..")
+target = NodePath("../../Canary")
+
+[node name="CatShieldBar" type="ProgressBar" parent="Cat" unique_id=1408624648 node_paths=PackedStringArray("character")]
+z_index = 1
+offset_left = -335.0
+offset_top = 93.0
+offset_right = -110.0
+offset_bottom = 117.0
+theme_override_styles/background = SubResource("StyleBoxFlat_duiuv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6mhmq")
+value = 100.0
+show_percentage = false
+script = ExtResource("19_dn70o")
+character = NodePath("..")
+
+[node name="CatShieldDisplay" type="RichTextLabel" parent="Cat" unique_id=405912145 node_paths=PackedStringArray("target")]
+z_index = 2
+offset_left = -334.0
+offset_top = 92.0
+offset_right = -82.0
+offset_bottom = 127.0
+theme_override_font_sizes/normal_font_size = 18
+text = "Character Shield: 100/100"
+script = ExtResource("20_xh5ji")
+target = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
+[node name="CatShieldCover" type="ColorRect" parent="Cat" unique_id=313493307]
+offset_left = -308.0
+offset_top = -120.0
+offset_right = -133.0
+offset_bottom = 92.0
+color = Color(1, 0.79607844, 0.16078432, 0.3764706)
+
+[node name="CatDustIcon" type="TextureRect" parent="Cat" unique_id=140627331 node_paths=PackedStringArray("target")]
+offset_left = 322.0
+offset_top = -92.0
+offset_right = 382.0
+offset_bottom = -40.0
+texture = ExtResource("21_xh5ji")
+expand_mode = 1
+script = ExtResource("18_cwm1s")
+icon = 1
+target = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
 [node name="TurnLog" type="RichTextLabel" parent="." unique_id=1200457630]
 offset_left = -414.0
 offset_top = -322.0
@@ -287,7 +374,7 @@ stream = ExtResource("20_1n0u4")
 volume_db = -6.0
 autoplay = true
 
-[node name="GameOverDefeat" type="Control" parent="." unique_id=462189242 node_paths=PackedStringArray("battle_music")]
+[node name="GameOverDefeat" type="Control" parent="." unique_id=462189242]
 visible = false
 z_index = 10
 layout_mode = 3
@@ -297,7 +384,6 @@ offset_top = -101.0
 offset_right = 224.0
 offset_bottom = 99.0
 script = ExtResource("21_36oqq")
-battle_music = NodePath("")
 
 [node name="VictoryMusic" type="AudioStreamPlayer" parent="GameOverDefeat" unique_id=33247298]
 stream = ExtResource("22_5x862")
@@ -359,22 +445,61 @@ stretch_mode = 0
 script = ExtResource("26_2sqat")
 
 [node name="Canary" type="Node2D" parent="." unique_id=1540011454]
+script = ExtResource("27_flpl1")
 
 [node name="CanarySprite" type="Sprite2D" parent="Canary" unique_id=1289755866]
-position = Vector2(150.70557, -6.9999995)
-scale = Vector2(0.19238812, 0.19004631)
-texture = ExtResource("27_3l880")
-flip_h = true
+position = Vector2(186, 4)
+scale = Vector2(0.16348164, 0.17971702)
+texture = ExtResource("28_56yxc")
 
 [node name="CanaryHealthBar" type="ProgressBar" parent="Canary" unique_id=618094838 node_paths=PackedStringArray("character")]
-offset_left = 286.0
-offset_top = -79.0
-offset_right = 550.0
-offset_bottom = -40.0
+offset_left = 318.0
+offset_top = -28.0
+offset_right = 562.0
+offset_bottom = 11.0
 theme_override_styles/background = SubResource("StyleBoxFlat_flpl1")
 theme_override_styles/fill = SubResource("StyleBoxFlat_56yxc")
 max_value = 50.0
 value = 50.0
 show_percentage = false
 script = ExtResource("7_duiuv")
-character = NodePath("")
+character = NodePath("..")
+
+[node name="CanaryNameLabel" type="RichTextLabel" parent="Canary" unique_id=446254625]
+offset_left = 112.0
+offset_top = 120.0
+offset_right = 274.0
+offset_bottom = 167.0
+theme_override_font_sizes/normal_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_dn70o")
+text = "Songbird"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CanaryHealthDisplay" type="RichTextLabel" parent="Canary" unique_id=1640227379 node_paths=PackedStringArray("target")]
+offset_left = 323.0
+offset_top = -24.0
+offset_right = 613.0
+offset_bottom = 16.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Character Health: 100/100"
+script = ExtResource("11_ve11w")
+target = NodePath("..")
+
+[node name="CanarySwayBeatIcon" type="TextureRect" parent="Canary" unique_id=1478300422 node_paths=PackedStringArray("target")]
+offset_left = 401.0
+offset_top = -97.0
+offset_right = 457.0
+offset_bottom = -42.0
+texture = ExtResource("32_duiuv")
+expand_mode = 1
+script = ExtResource("18_cwm1s")
+icon = 6
+target = NodePath("..")
+
+[node name="CanaryArrowCover" type="ColorRect" parent="Canary" unique_id=1193035848]
+offset_left = 63.0
+offset_top = -93.0
+offset_right = 307.0
+offset_bottom = 101.0
+color = Color(0.6212375, 0.16343307, 0.09321395, 0.3764706)

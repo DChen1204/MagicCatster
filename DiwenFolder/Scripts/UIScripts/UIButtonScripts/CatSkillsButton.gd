@@ -2,7 +2,7 @@ extends Button
 
 # This script is to control Cat Skills. Pick which skill in the Inspector.
 
-enum Skill { BLOCK, POUNCE, ULT, CLEANSE, PURIFY }
+enum Skill { BLOCK, POUNCE, ULT, CLEANSE, PURIFY, SHIELD, DUST }
 
 @export var skill: Skill = Skill.POUNCE
 @export var attacker: Character
@@ -11,6 +11,10 @@ enum Skill { BLOCK, POUNCE, ULT, CLEANSE, PURIFY }
 func _ready() -> void:
 	pressed.connect(_on_pressed)
 	# Hover text comes from Cat.gd, so costs always match its constants
+	if is_instance_valid(attacker):
+		tooltip_text = attacker.get_skill_tooltip(Skill.keys()[skill].to_lower())
+		
+func update_tooltip() -> void:
 	if is_instance_valid(attacker):
 		tooltip_text = attacker.get_skill_tooltip(Skill.keys()[skill].to_lower())
 
@@ -32,3 +36,7 @@ func _on_pressed() -> void:
 			attacker.cat_hydro_cleanse()
 		Skill.PURIFY:
 			attacker.cat_hydro_purify()
+		Skill.SHIELD:
+			attacker.cat_earth_shield()
+		Skill.DUST:
+			attacker.cat_earth_dust()

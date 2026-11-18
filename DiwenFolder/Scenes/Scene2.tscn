@@ -276,7 +276,7 @@ offset_bottom = -46.0
 texture = ExtResource("21_pxbdf")
 expand_mode = 1
 script = ExtResource("22_kiahr")
-icon = 1
+icon = 2
 target = NodePath("..")
 
 [node name="GameOverDefeat" type="Control" parent="." unique_id=1124794058 node_paths=PackedStringArray("battle_music")]
