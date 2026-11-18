@@ -107,3 +107,20 @@ func shake_sprite(sprite: Sprite2D, times: int = 10, amount: float = 5.0, step: 
 	tween.tween_property(sprite, "offset", origin, step)
 	return tween
 	
+func shake_rect(rect: Control, times: int = 10, amount: float = 5.0, step: float = 0.05) -> Tween:
+	# Record the sprite's original position
+	var origin := rect.position
+	
+	# Create the tween and set the easing curve to sine (looks less snappy)
+	var tween := rect.create_tween()
+	tween.set_trans(Tween.TRANS_SINE)
+	
+	# Randomly jump the sprite several times
+	for i in times:
+		var jitter = Vector2(randf_range(-amount, amount), randf_range(-amount, amount))
+		tween.tween_property(rect, "position", origin + jitter, step)
+		
+	# Restore the sprite to original posisition and return tween
+	tween.tween_property(rect, "position", origin, step)
+	return tween
+	

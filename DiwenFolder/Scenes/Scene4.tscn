@@ -1,0 +1,505 @@
+[gd_scene format=3 uid="uid://d21j0cfw1qel7"]
+
+[ext_resource type="PackedScene" uid="uid://b0g65i3s7clm6" path="res://DiwenFolder/Scenes/ExitMenu.tscn" id="1_47454"]
+[ext_resource type="Texture2D" uid="uid://spamqhfd3f5" path="res://TempImages/alchemy_lab_blue_glow.png" id="2_3l880"]
+[ext_resource type="Script" uid="uid://i8qsk8dfiahs" path="res://DiwenFolder/Scripts/ManagerScripts/TurnManager.gd" id="3_flpl1"]
+[ext_resource type="Script" uid="uid://b7f8qlcv787cv" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/TurnNumber.gd" id="4_56yxc"]
+[ext_resource type="Script" uid="uid://dp4dyqlg1bfek" path="res://DiwenFolder/Scripts/CharacterScripts/Cat.gd" id="5_dn70o"]
+[ext_resource type="Texture2D" uid="uid://coo1c8owycbbm" path="res://TempImages/CatImage1.jpeg" id="6_xh5ji"]
+[ext_resource type="Script" uid="uid://cfrnv2u688ioq" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/HealthBar.gd" id="7_duiuv"]
+[ext_resource type="Script" uid="uid://cqw0gi1hv8xd" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/CatSkillsButton.gd" id="8_6mhmq"]
+[ext_resource type="Script" uid="uid://rmqta1r33kom" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/SPDisplay.gd" id="9_etgmp"]
+[ext_resource type="Script" uid="uid://c5qyujajafno8" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/SPBar.gd" id="10_evu54"]
+[ext_resource type="Script" uid="uid://cedxbpqw165nr" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/HealthDisplay.gd" id="11_ve11w"]
+[ext_resource type="AudioStream" uid="uid://dv2a1tefu34d6" path="res://BSmallAudio/lightAttack1.wav" id="12_n7lin"]
+[ext_resource type="AudioStream" uid="uid://dtbrxoxvox4p1" path="res://BSmallAudio/heavyAttack1.mp3" id="13_jplfu"]
+[ext_resource type="AudioStream" uid="uid://dna2fher5k6x" path="res://BSmallAudio/sfx_heal1.wav" id="14_87ia2"]
+[ext_resource type="AudioStream" uid="uid://dg7ij70o8aa4" path="res://BSmallAudio/sfx_heal2.wav" id="15_sjs3g"]
+[ext_resource type="AudioStream" uid="uid://dviiit2vrnk0p" path="res://BSmallAudio/sfx_block.wav" id="16_y0h4b"]
+[ext_resource type="Texture2D" uid="uid://c5itn0fbc7hf1" path="res://TempImages/GoldfishHealingTideIcon.jpg" id="17_aqoed"]
+[ext_resource type="Script" uid="uid://cs5h6pu4tq0ti" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/Icons.gd" id="18_cwm1s"]
+[ext_resource type="Script" uid="uid://er3o6e5yc87x" path="res://DiwenFolder/Scripts/ObjectScripts/TurnLog.gd" id="19_83km3"]
+[ext_resource type="Script" uid="uid://c42f4g7ui5vxg" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/ShieldBar.gd" id="19_dn70o"]
+[ext_resource type="AudioStream" uid="uid://lola6yesy8bi" path="res://BSmallAudio/TestBattleMusic.wav" id="20_1n0u4"]
+[ext_resource type="Script" uid="uid://bvnhvb5r30n2" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/ShieldDisplay.gd" id="20_xh5ji"]
+[ext_resource type="Script" uid="uid://bb8khp5mjwqbe" path="res://DiwenFolder/Scripts/UIScripts/GameOverDefeat.gd" id="21_36oqq"]
+[ext_resource type="Texture2D" uid="uid://dcv0slrwy6eff" path="res://TempImages/CatDustedIcon.png" id="21_xh5ji"]
+[ext_resource type="AudioStream" uid="uid://bofmufwx3d1e1" path="res://BSmallAudio/TestVictoryMusic.wav" id="22_5x862"]
+[ext_resource type="AudioStream" uid="uid://byqwc6df2j51n" path="res://BSmallAudio/TestDefeatMusic.wav" id="23_oo06p"]
+[ext_resource type="Script" uid="uid://cnee6sgsvxtd1" path="res://DiwenFolder/Scripts/ManagerScripts/InventoryManager.gd" id="24_gg04u"]
+[ext_resource type="Texture2D" uid="uid://d4p0q3r5avi3" path="res://TempImages/PotionIcon2.jpg" id="25_87r0u"]
+[ext_resource type="Script" uid="uid://ctdp18b1b50qh" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/PotionButton.gd" id="26_2sqat"]
+[ext_resource type="Script" uid="uid://bbcbi013es2oa" path="res://DiwenFolder/Scripts/CharacterScripts/Canary.gd" id="27_flpl1"]
+[ext_resource type="Texture2D" uid="uid://bmmsnpaiv1v22" path="res://TempImages/CanarySprite2.jpg" id="28_56yxc"]
+[ext_resource type="Texture2D" uid="uid://dcmmfoxnk0ic5" path="res://TempImages/CanaryIncreaseAttackIcon.png" id="32_duiuv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ny50f"]
+bg_color = Color(0.9647059, 0.07058824, 0.043137256, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_le44y"]
+bg_color = Color(0.3196685, 0.69887894, 0.29762772, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rssxo"]
+bg_color = Color(0.8168608, 0.528142, 0.12982893, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qi4eg"]
+bg_color = Color(0.8168608, 0.528142, 0.12982893, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h64va"]
+bg_color = Color(0.8168608, 0.528142, 0.12982893, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dk0en"]
+bg_color = Color(0.27986997, 0.6223677, 0.92484796, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vi3sq"]
+bg_color = Color(0.10829217, 0.059270762, 0.08788093, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_evqqj"]
+bg_color = Color(0.4045111, 0.40451118, 0.40451103, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjdb1"]
+bg_color = Color(0.23028189, 0.62517625, 0.9409401, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_55low"]
+bg_color = Color(0.45106512, 0.5983496, 0.8733546, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4o0k"]
+bg_color = Color(0.3602897, 0.6972323, 0.17914945, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_duiuv"]
+bg_color = Color(0.86159027, 0.20457613, 0.24049276, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6mhmq"]
+bg_color = Color(0.97, 0.72265005, 0.097000025, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n8sq"]
+bg_color = Color(0.2123048, 0.21230489, 0.21230471, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flpl1"]
+bg_color = Color(0.9647059, 0.07058824, 0.043137256, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56yxc"]
+bg_color = Color(0.3196685, 0.69887894, 0.29762772, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dn70o"]
+bg_color = Color(0.10829217, 0.059270762, 0.08788093, 1)
+
+[node name="Scene4" type="Node2D" unique_id=900728075]
+
+[node name="ExitMenu" parent="." unique_id=800030418 instance=ExtResource("1_47454")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=690108775]
+
+[node name="Background" type="Node2D" parent="." unique_id=156688223]
+metadata/_edit_lock_ = true
+
+[node name="BackgroundImage" type="Sprite2D" parent="Background" unique_id=1688184242]
+position = Vector2(-2, -2)
+scale = Vector2(0.89453125, 1)
+texture = ExtResource("2_3l880")
+metadata/_edit_lock_ = true
+
+[node name="TurnManager" type="Node" parent="." unique_id=1965711469]
+script = ExtResource("3_flpl1")
+
+[node name="Turn Number" type="RichTextLabel" parent="TurnManager" unique_id=1142593287 node_paths=PackedStringArray("turn_manager")]
+offset_left = -539.0
+offset_top = -291.0
+offset_right = -416.0
+offset_bottom = -241.0
+theme_override_font_sizes/normal_font_size = 30
+text = "Turn 0"
+script = ExtResource("4_56yxc")
+turn_manager = NodePath("..")
+
+[node name="Cat" type="Node2D" parent="." unique_id=1485739970]
+z_index = 2
+script = ExtResource("5_dn70o")
+
+[node name="CatSprite" type="Sprite2D" parent="Cat" unique_id=1888992192]
+position = Vector2(-220.99998, -12)
+scale = Vector2(0.58093524, 0.5911764)
+texture = ExtResource("6_xh5ji")
+
+[node name="CatHealthBar" type="ProgressBar" parent="Cat" unique_id=623703664 node_paths=PackedStringArray("character")]
+offset_left = -566.0
+offset_top = -30.0
+offset_right = -349.0
+offset_bottom = 9.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ny50f")
+theme_override_styles/fill = SubResource("StyleBoxFlat_le44y")
+value = 100.0
+show_percentage = false
+script = ExtResource("7_duiuv")
+character = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
+[node name="BlockButton" type="Button" parent="Cat" unique_id=1770983829 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -547.0
+offset_top = 208.0
+offset_right = -432.0
+offset_bottom = 250.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_rssxo")
+text = "BLOCK "
+script = ExtResource("8_6mhmq")
+skill = 0
+attacker = NodePath("..")
+target = NodePath("..")
+
+[node name="PounceButton" type="Button" parent="Cat" unique_id=358339086 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -350.0
+offset_top = 213.0
+offset_right = -230.0
+offset_bottom = 251.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_qi4eg")
+text = "POUNCE"
+script = ExtResource("8_6mhmq")
+attacker = NodePath("..")
+target = NodePath("../../Canary")
+
+[node name="UltButton" type="Button" parent="Cat" unique_id=2027527916 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -183.0
+offset_top = 213.0
+offset_right = -11.0
+offset_bottom = 249.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_h64va")
+text = "ULTIMATE SCRATCH"
+script = ExtResource("8_6mhmq")
+skill = 2
+attacker = NodePath("..")
+target = NodePath("../../Canary")
+
+[node name="CleanseButton" type="Button" parent="Cat" unique_id=648881856 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -565.0
+offset_top = 270.0
+offset_right = -402.0
+offset_bottom = 306.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_dk0en")
+text = "HYDRO CLEANSE"
+script = ExtResource("8_6mhmq")
+skill = 3
+attacker = NodePath("..")
+target = NodePath("../../Canary")
+
+[node name="PurifyButton" type="Button" parent="Cat" unique_id=325718490 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -564.0
+offset_top = 270.0
+offset_right = -401.0
+offset_bottom = 306.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_dk0en")
+text = "HYDRO PURIFY"
+script = ExtResource("8_6mhmq")
+skill = 4
+attacker = NodePath("..")
+target = NodePath("../../Canary")
+
+[node name="CatNameLabel" type="RichTextLabel" parent="Cat" unique_id=1368476526]
+offset_left = -303.0
+offset_top = 123.0
+offset_right = -141.0
+offset_bottom = 170.0
+theme_override_font_sizes/normal_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_vi3sq")
+text = "Catster"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CatSPDisplay" type="RichTextLabel" parent="Cat" unique_id=1470639174 node_paths=PackedStringArray("target")]
+z_index = 1
+offset_left = -563.0
+offset_top = 30.0
+offset_right = -322.0
+offset_bottom = 70.0
+theme_override_font_sizes/normal_font_size = 21
+text = "Character SP"
+script = ExtResource("9_etgmp")
+target = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
+[node name="CatSPBar" type="ProgressBar" parent="Cat" unique_id=2073705779 node_paths=PackedStringArray("character")]
+offset_left = -566.0
+offset_top = 25.0
+offset_right = -349.0
+offset_bottom = 64.0
+theme_override_styles/background = SubResource("StyleBoxFlat_evqqj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gjdb1")
+value = 100.0
+show_percentage = false
+script = ExtResource("10_evu54")
+character = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
+[node name="CatHealthDisplay" type="RichTextLabel" parent="Cat" unique_id=1973585291 node_paths=PackedStringArray("target")]
+offset_left = -556.0
+offset_top = -24.0
+offset_right = -346.0
+offset_bottom = 16.0
+theme_override_font_sizes/normal_font_size = 21
+text = "Character HP"
+script = ExtResource("11_ve11w")
+target = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
+[node name="sfx_basicAttack1" type="AudioStreamPlayer" parent="Cat" unique_id=1873248392]
+stream = ExtResource("12_n7lin")
+
+[node name="sfx_basicAttack2" type="AudioStreamPlayer" parent="Cat" unique_id=560465319]
+stream = ExtResource("13_jplfu")
+
+[node name="sfx_heal1" type="AudioStreamPlayer" parent="Cat" unique_id=618981116]
+stream = ExtResource("14_87ia2")
+
+[node name="sfx_heal2" type="AudioStreamPlayer" parent="Cat" unique_id=1101814146]
+stream = ExtResource("15_sjs3g")
+
+[node name="sfx_pounce" type="AudioStreamPlayer" parent="Cat" unique_id=115275048]
+stream = ExtResource("12_n7lin")
+
+[node name="sfx_ult_scratch" type="AudioStreamPlayer" parent="Cat" unique_id=103389753]
+stream = ExtResource("13_jplfu")
+
+[node name="sfx_block" type="AudioStreamPlayer" parent="Cat" unique_id=1298324282]
+stream = ExtResource("16_y0h4b")
+
+[node name="CatCleanseIcon" type="TextureRect" parent="Cat" unique_id=263442369 node_paths=PackedStringArray("target")]
+offset_left = -558.0
+offset_top = -97.0
+offset_right = -503.0
+offset_bottom = -44.0
+texture = ExtResource("17_aqoed")
+expand_mode = 1
+script = ExtResource("18_cwm1s")
+target = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
+[node name="CatSPDisplay2" type="RichTextLabel" parent="Cat" unique_id=1970162232]
+z_index = 1
+offset_left = -564.0
+offset_top = 70.0
+offset_right = -346.0
+offset_bottom = 100.0
+theme_override_font_sizes/normal_font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_55low")
+text = "SP Recovery: 30 per turn"
+
+[node name="ShieldButton" type="Button" parent="Cat" unique_id=401797565 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -370.0
+offset_top = 268.0
+offset_right = -207.0
+offset_bottom = 304.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_h4o0k")
+text = "EARTH SHIELD"
+script = ExtResource("8_6mhmq")
+skill = 5
+attacker = NodePath("..")
+target = NodePath("../../Canary")
+
+[node name="DustButton" type="Button" parent="Cat" unique_id=106483592 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -369.0
+offset_top = 269.0
+offset_right = -206.0
+offset_bottom = 305.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_h4o0k")
+text = "EARTH DUST"
+script = ExtResource("8_6mhmq")
+skill = 6
+attacker = NodePath("..")
+target = NodePath("../../Canary")
+
+[node name="CatShieldBar" type="ProgressBar" parent="Cat" unique_id=1408624648 node_paths=PackedStringArray("character")]
+z_index = 1
+offset_left = -335.0
+offset_top = 93.0
+offset_right = -110.0
+offset_bottom = 117.0
+theme_override_styles/background = SubResource("StyleBoxFlat_duiuv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6mhmq")
+value = 100.0
+show_percentage = false
+script = ExtResource("19_dn70o")
+character = NodePath("..")
+
+[node name="CatShieldDisplay" type="RichTextLabel" parent="Cat" unique_id=405912145 node_paths=PackedStringArray("target")]
+z_index = 2
+offset_left = -334.0
+offset_top = 92.0
+offset_right = -82.0
+offset_bottom = 127.0
+theme_override_font_sizes/normal_font_size = 18
+text = "Character Shield: 100/100"
+script = ExtResource("20_xh5ji")
+target = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
+[node name="CatShieldCover" type="ColorRect" parent="Cat" unique_id=313493307]
+offset_left = -308.0
+offset_top = -120.0
+offset_right = -133.0
+offset_bottom = 92.0
+color = Color(1, 0.79607844, 0.16078432, 0.3764706)
+
+[node name="CatDustIcon" type="TextureRect" parent="Cat" unique_id=140627331 node_paths=PackedStringArray("target")]
+offset_left = 322.0
+offset_top = -92.0
+offset_right = 382.0
+offset_bottom = -40.0
+texture = ExtResource("21_xh5ji")
+expand_mode = 1
+script = ExtResource("18_cwm1s")
+icon = 1
+target = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
+[node name="TurnLog" type="RichTextLabel" parent="." unique_id=1200457630]
+offset_left = -414.0
+offset_top = -322.0
+offset_right = 312.0
+offset_bottom = -143.0
+theme_override_font_sizes/normal_font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_3n8sq")
+text = "Baby don't hurt me!"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("19_83km3")
+
+[node name="Test_BattleMusic" type="AudioStreamPlayer" parent="." unique_id=1154621256]
+stream = ExtResource("20_1n0u4")
+volume_db = -6.0
+autoplay = true
+
+[node name="GameOverDefeat" type="Control" parent="." unique_id=462189242]
+visible = false
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_left = -226.0
+offset_top = -101.0
+offset_right = 224.0
+offset_bottom = 99.0
+script = ExtResource("21_36oqq")
+
+[node name="VictoryMusic" type="AudioStreamPlayer" parent="GameOverDefeat" unique_id=33247298]
+stream = ExtResource("22_5x862")
+volume_db = -10.0
+
+[node name="DefeatMusic" type="AudioStreamPlayer" parent="GameOverDefeat" unique_id=418767849]
+stream = ExtResource("23_oo06p")
+volume_db = -18.086
+
+[node name="VictoryText" type="RichTextLabel" parent="GameOverDefeat" unique_id=31540451]
+z_index = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -193.0
+offset_top = 15.0
+offset_right = 195.0
+offset_bottom = 145.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.40977117, 0.81065845, 0.957442, 1)
+theme_override_font_sizes/normal_font_size = 40
+text = "Catster's journey has ended! "
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="GameOverDefeat" unique_id=1324306183]
+layout_mode = 0
+offset_right = 450.0
+offset_bottom = 200.0
+color = Color(0.9056048, 0.8871768, 0.9319379, 1)
+
+[node name="RestartButton" type="Button" parent="GameOverDefeat" unique_id=1015812295]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -49.0
+offset_top = -54.0
+offset_right = 56.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Retry Level"
+
+[node name="InventoryManager" type="Node" parent="." unique_id=586172689]
+script = ExtResource("24_gg04u")
+
+[node name="PotionButton" type="TextureButton" parent="InventoryManager" unique_id=1757032727]
+offset_left = -555.0
+offset_top = 108.0
+offset_right = -500.0
+offset_bottom = 164.0
+texture_normal = ExtResource("25_87r0u")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("26_2sqat")
+
+[node name="Canary" type="Node2D" parent="." unique_id=1540011454]
+script = ExtResource("27_flpl1")
+
+[node name="CanarySprite" type="Sprite2D" parent="Canary" unique_id=1289755866]
+position = Vector2(186, 4)
+scale = Vector2(0.16348164, 0.17971702)
+texture = ExtResource("28_56yxc")
+
+[node name="CanaryHealthBar" type="ProgressBar" parent="Canary" unique_id=618094838 node_paths=PackedStringArray("character")]
+offset_left = 318.0
+offset_top = -28.0
+offset_right = 562.0
+offset_bottom = 11.0
+theme_override_styles/background = SubResource("StyleBoxFlat_flpl1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_56yxc")
+max_value = 50.0
+value = 50.0
+show_percentage = false
+script = ExtResource("7_duiuv")
+character = NodePath("..")
+
+[node name="CanaryNameLabel" type="RichTextLabel" parent="Canary" unique_id=446254625]
+offset_left = 112.0
+offset_top = 120.0
+offset_right = 274.0
+offset_bottom = 167.0
+theme_override_font_sizes/normal_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_dn70o")
+text = "Songbird"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CanaryHealthDisplay" type="RichTextLabel" parent="Canary" unique_id=1640227379 node_paths=PackedStringArray("target")]
+offset_left = 323.0
+offset_top = -24.0
+offset_right = 613.0
+offset_bottom = 16.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Character Health: 100/100"
+script = ExtResource("11_ve11w")
+target = NodePath("..")
+
+[node name="CanarySwayBeatIcon" type="TextureRect" parent="Canary" unique_id=1478300422 node_paths=PackedStringArray("target")]
+offset_left = 401.0
+offset_top = -97.0
+offset_right = 457.0
+offset_bottom = -42.0
+texture = ExtResource("32_duiuv")
+expand_mode = 1
+script = ExtResource("18_cwm1s")
+icon = 6
+target = NodePath("..")
+
+[node name="CanaryArrowCover" type="ColorRect" parent="Canary" unique_id=1193035848]
+offset_left = 63.0
+offset_top = -93.0
+offset_right = 307.0
+offset_bottom = 101.0
+color = Color(0.6212375, 0.16343307, 0.09321395, 0.3764706)

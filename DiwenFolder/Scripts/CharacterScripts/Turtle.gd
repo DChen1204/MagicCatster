@@ -6,7 +6,7 @@ extends Character
 """
 Stats of the Turtle
 Base Attack = 150
-Base Defense = 25
+Base Defense = 500
 Base Health = 500
 Play Character = false
 SP = 0
@@ -36,6 +36,15 @@ var stunned: bool = false
 @onready var sprite: Sprite2D = $TurtleSprite
 var original_modulate: Color
 
+# UI elements
+@onready var crazy_diamond_icon = get_node("TurtleCrazyDiamondIcon")
+@onready var stun_icon = get_node("TurtleStunIcon")
+@onready var dust_icon = get_node("TurtleDustIcon")
+@onready var shield_cover = get_node("TurtleShieldCover")
+var shield_modulate: Color
+@onready var shield_bar = get_node("TurtleShieldBar")
+@onready var shield_display = get_node("TurtleShieldDisplay")
+
 # Shield stats 
 var shield: float
 var max_shield: float
@@ -47,14 +56,6 @@ var player_dusted_duration: int = 0
 # Crazy Diamond Variables
 var crazy_diamond_used: bool = false
 var crazy_diamond_current_turn: int = 0
-
-# Status effect icons
-@onready var crazy_diamond_icon = get_node("TurtleCrazyDiamondIcon")
-@onready var stun_icon = get_node("TurtleStunIcon")
-@onready var dust_icon = get_node("TurtleDustIcon")
-
-@onready var shield_cover = get_node("TurtleShieldCover")
-var shield_modulate: Color
 
 # Set up
 func _ready():
@@ -75,15 +76,16 @@ func _ready():
 	original_modulate = sprite.modulate
 	shield_modulate = shield_cover.modulate
 	
-	# Hide icons
+	# Hide icons and UI
 	crazy_diamond_icon.update_tooltip()
 	crazy_diamond_icon.hide()
 	stun_icon.update_tooltip()
 	stun_icon.hide()
 	dust_icon.update_tooltip()
 	dust_icon.hide()
-	
 	shield_cover.hide()
+	shield_bar.hide()
+	shield_display.hide()
 	
 	# Register itself with GameManager
 	GameManager.register_enemy(self)
@@ -108,9 +110,6 @@ func reset():
 	crazy_diamond_used = false
 	crazy_diamond_current_turn = 0
 	
-	# reset turn log
-	# GameManager.turn_log.text = ""
-	
 
 # Play its turn
 func play_turn():
@@ -133,7 +132,6 @@ func play_turn():
 	
 	
 # Enemy AI deciding what to do in its turn
-# For Turtle, 
 func decide_action():
 	
 	# Stunned after shield break
@@ -183,7 +181,7 @@ func turtle_bite_dust():
 # And the turtle is stunt (can not take action) for the next z turns.
 func turtle_crazy_diamond():
 	print("Turtle used Crazy Diamond.")
-	GameManager.turn_log.animate("Rock used Crazy Diamond! Now it has an earth shield.", 1.5)
+	GameManager.turn_log.animate("Rock used Crazy Diamond! It has retreated to its shell.", 1.5)
 	shield = max_shield
 	shield_changed.emit()
 	player_dusted = false
@@ -191,6 +189,8 @@ func turtle_crazy_diamond():
 	crazy_diamond_used = true
 	crazy_diamond_icon.show()
 	shield_cover.show()
+	shield_bar.show()
+	shield_display.show()
 	
 	
 # Skill 'Emerald Splash'
@@ -268,7 +268,7 @@ func get_icon_tooltip(skill_name: String) -> String:
 		"turtle_stun":
 			return "Stun: Cannot take action for another %d turn(s)." % [STUN_TURN - stun_counter + 1]
 		"turtle_dust":
-			return "Dusted: Take %d damage per turn for another %d turn(s)." % [BITE_DUST_DAMAGE, BITE_DUST_DURATION - player_dusted_duration]
+			return "Dusted: Take %d power damage per turn for another %d turn(s)." % [BITE_DUST_DAMAGE, BITE_DUST_DURATION - player_dusted_duration]
 	return "TOOLTIP NOT FOUND"
 
 # List of affected skills		

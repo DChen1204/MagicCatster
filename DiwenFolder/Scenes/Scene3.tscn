@@ -33,6 +33,7 @@
 [ext_resource type="Script" uid="uid://cnee6sgsvxtd1" path="res://DiwenFolder/Scripts/ManagerScripts/InventoryManager.gd" id="31_52703"]
 [ext_resource type="Texture2D" uid="uid://d4p0q3r5avi3" path="res://TempImages/PotionIcon2.jpg" id="32_h4o0k"]
 [ext_resource type="Script" uid="uid://ctdp18b1b50qh" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/PotionButton.gd" id="33_mj11a"]
+[ext_resource type="PackedScene" uid="uid://tham7ji8np0c" path="res://attack_choice_popup.tscn" id="34_h4o0k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q2kye"]
 bg_color = Color(0.9647059, 0.07058824, 0.043137256, 1)
@@ -363,7 +364,7 @@ offset_bottom = 118.0
 texture = ExtResource("21_2tyy8")
 expand_mode = 1
 script = ExtResource("22_fcldl")
-icon = 2
+icon = 3
 target = NodePath("..")
 metadata/_edit_use_anchors_ = true
 
@@ -375,7 +376,7 @@ offset_bottom = -44.0
 texture = ExtResource("23_wfap5")
 expand_mode = 1
 script = ExtResource("22_fcldl")
-icon = 3
+icon = 4
 target = NodePath("..")
 metadata/_edit_use_anchors_ = true
 
@@ -387,7 +388,7 @@ offset_bottom = -44.0
 texture = ExtResource("16_m6a0m")
 expand_mode = 1
 script = ExtResource("22_fcldl")
-icon = 4
+icon = 5
 target = NodePath("..")
 metadata/_edit_use_anchors_ = true
 
@@ -485,3 +486,6 @@ texture_normal = ExtResource("32_h4o0k")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("33_mj11a")
+
+[node name="AttackChoicePopup" parent="." unique_id=5521783 instance=ExtResource("34_h4o0k")]
+next_scene = "uid://d21j0cfw1qel7"

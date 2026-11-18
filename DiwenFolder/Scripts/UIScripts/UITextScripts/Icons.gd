@@ -3,9 +3,10 @@ extends TextureRect
 # This script to organize the tool tip of the status effect icons
 
 enum Icon {
-	CAT_CLEANSE,
+	CAT_CLEANSE, CAT_DUST,
 	GOLDFISH_HEALING_TIDE, 
-	TURTLE_CRAZY_DIAMOND, TURTLE_STUN, TURTLE_DUST
+	TURTLE_CRAZY_DIAMOND, TURTLE_STUN, TURTLE_DUST,
+	CANARY_SWAY_BEAT,
 }
 
 @export var icon: Icon
