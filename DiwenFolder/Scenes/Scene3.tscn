@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b0g65i3s7clm6" path="res://DiwenFolder/Scenes/ExitMenu.tscn" id="1_wdwy1"]
 [ext_resource type="Script" uid="uid://dp4dyqlg1bfek" path="res://DiwenFolder/Scripts/CharacterScripts/Cat.gd" id="1_y1nwd"]
-[ext_resource type="Texture2D" uid="uid://coo1c8owycbbm" path="res://TempImages/CatImage1.jpeg" id="2_wdwy1"]
+[ext_resource type="Texture2D" uid="uid://bwwsnugw7sv2h" path="res://BrookynArt/Magic_Catster_Sprite.png" id="3_52703"]
 [ext_resource type="Script" uid="uid://cfrnv2u688ioq" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/HealthBar.gd" id="3_e70ou"]
 [ext_resource type="Script" uid="uid://cqw0gi1hv8xd" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/CatSkillsButton.gd" id="4_k1lyr"]
 [ext_resource type="Script" uid="uid://rmqta1r33kom" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/SPDisplay.gd" id="5_2tyy8"]
@@ -93,10 +93,10 @@ bg_color = Color(0.2123048, 0.21230489, 0.21230471, 1)
 z_index = 2
 script = ExtResource("1_y1nwd")
 
-[node name="CatSprite" type="Sprite2D" parent="Cat" unique_id=2134995916]
-position = Vector2(-233, -12)
-scale = Vector2(0.58093524, 0.5911764)
-texture = ExtResource("2_wdwy1")
+[node name="CatSprite" type="Sprite2D" parent="Cat" unique_id=1528609748]
+position = Vector2(-221, 18.000002)
+scale = Vector2(0.17448555, 0.18338948)
+texture = ExtResource("3_52703")
 
 [node name="CatHealthBar" type="ProgressBar" parent="Cat" unique_id=296650448 node_paths=PackedStringArray("character")]
 offset_left = -566.0
