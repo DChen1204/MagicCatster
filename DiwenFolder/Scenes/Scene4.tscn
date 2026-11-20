@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://i8qsk8dfiahs" path="res://DiwenFolder/Scripts/ManagerScripts/TurnManager.gd" id="3_flpl1"]
 [ext_resource type="Script" uid="uid://b7f8qlcv787cv" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/TurnNumber.gd" id="4_56yxc"]
 [ext_resource type="Script" uid="uid://dp4dyqlg1bfek" path="res://DiwenFolder/Scripts/CharacterScripts/Cat.gd" id="5_dn70o"]
-[ext_resource type="Texture2D" uid="uid://coo1c8owycbbm" path="res://TempImages/CatImage1.jpeg" id="6_xh5ji"]
+[ext_resource type="Texture2D" uid="uid://bwwsnugw7sv2h" path="res://BrookynArt/Magic_Catster_Sprite.png" id="6_duiuv"]
 [ext_resource type="Script" uid="uid://cfrnv2u688ioq" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/HealthBar.gd" id="7_duiuv"]
 [ext_resource type="Script" uid="uid://cqw0gi1hv8xd" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/CatSkillsButton.gd" id="8_6mhmq"]
 [ext_resource type="Script" uid="uid://rmqta1r33kom" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/SPDisplay.gd" id="9_etgmp"]
@@ -116,10 +116,10 @@ turn_manager = NodePath("..")
 z_index = 2
 script = ExtResource("5_dn70o")
 
-[node name="CatSprite" type="Sprite2D" parent="Cat" unique_id=1888992192]
-position = Vector2(-220.99998, -12)
-scale = Vector2(0.58093524, 0.5911764)
-texture = ExtResource("6_xh5ji")
+[node name="CatSprite" type="Sprite2D" parent="Cat" unique_id=1771500039]
+position = Vector2(-206.00002, 18.000002)
+scale = Vector2(0.17448555, 0.18338948)
+texture = ExtResource("6_duiuv")
 
 [node name="CatHealthBar" type="ProgressBar" parent="Cat" unique_id=623703664 node_paths=PackedStringArray("character")]
 offset_left = -566.0
@@ -199,9 +199,9 @@ attacker = NodePath("..")
 target = NodePath("../../Canary")
 
 [node name="CatNameLabel" type="RichTextLabel" parent="Cat" unique_id=1368476526]
-offset_left = -303.0
+offset_left = -296.0
 offset_top = 123.0
-offset_right = -141.0
+offset_right = -134.0
 offset_bottom = 170.0
 theme_override_font_sizes/normal_font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_vi3sq")
@@ -339,10 +339,10 @@ target = NodePath("..")
 metadata/_edit_use_anchors_ = true
 
 [node name="CatShieldCover" type="ColorRect" parent="Cat" unique_id=313493307]
-offset_left = -308.0
-offset_top = -120.0
-offset_right = -133.0
-offset_bottom = 92.0
+offset_left = -310.0
+offset_top = -93.0
+offset_right = -104.0
+offset_bottom = 119.0
 color = Color(1, 0.79607844, 0.16078432, 0.3764706)
 
 [node name="CatDustIcon" type="TextureRect" parent="Cat" unique_id=140627331 node_paths=PackedStringArray("target")]

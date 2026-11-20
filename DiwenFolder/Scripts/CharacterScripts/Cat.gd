@@ -67,7 +67,7 @@ var has_acted: bool = false
 var hydro_cleanse_button: Button
 var hydro_purify_button: Button
 # Whether we have the following abilities unlocked
-var hydro_cleanse: bool = true
+var hydro_cleanse: bool = false
 var hydro_purify: bool = false
 # Cooldown timers
 var hydro_cleanse_on: bool = false
@@ -79,7 +79,7 @@ var hydro_cleanse_on_cooldown: bool = false
 
 # Turtle abilities
 var earth_shield_button: Button
-var earth_shield_unlocked: bool = true
+var earth_shield_unlocked: bool = false
 var earth_shield_countdown: int = EARTH_SHIELD_COOLDOWN
 var earth_shield_on_cooldown: bool = false
 
