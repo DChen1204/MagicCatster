@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b0g65i3s7clm6" path="res://DiwenFolder/Scenes/ExitMenu.tscn" id="2_g03e7"]
 [ext_resource type="Script" uid="uid://dp4dyqlg1bfek" path="res://DiwenFolder/Scripts/CharacterScripts/Cat.gd" id="3_rcx44"]
 [ext_resource type="Script" uid="uid://cfrnv2u688ioq" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/HealthBar.gd" id="5_g03e7"]
+[ext_resource type="Texture2D" uid="uid://bwwsnugw7sv2h" path="res://BrookynArt/Magic_Catster_Sprite.png" id="5_urdjd"]
 [ext_resource type="Script" uid="uid://cqw0gi1hv8xd" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/CatSkillsButton.gd" id="6_pxbdf"]
 [ext_resource type="Script" uid="uid://rmqta1r33kom" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/SPDisplay.gd" id="7_kiahr"]
 [ext_resource type="Script" uid="uid://c5qyujajafno8" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/SPBar.gd" id="8_mvohu"]
@@ -19,9 +20,9 @@
 [ext_resource type="Script" uid="uid://dsm2wif4321pt" path="res://DiwenFolder/Scripts/CharacterScripts/Goldfish.gd" id="15_go3hv"]
 [ext_resource type="Script" uid="uid://ctdp18b1b50qh" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/PotionButton.gd" id="15_vewk3"]
 [ext_resource type="Script" uid="uid://bb8khp5mjwqbe" path="res://DiwenFolder/Scripts/UIScripts/GameOverDefeat.gd" id="17_hojyp"]
-[ext_resource type="Texture2D" uid="uid://unkmuu4otprv" path="res://BrookynArt/Goldfish_Sprite.jpg" id="18_8lyrt"]
 [ext_resource type="AudioStream" uid="uid://dna2fher5k6x" path="res://BSmallAudio/sfx_heal1.wav" id="18_e4jyd"]
 [ext_resource type="AudioStream" uid="uid://bofmufwx3d1e1" path="res://BSmallAudio/TestVictoryMusic.wav" id="18_ucooe"]
+[ext_resource type="Texture2D" uid="uid://bk8blwefqr11i" path="res://BrookynArt/Posideon_Sprite.png" id="18_urdjd"]
 [ext_resource type="AudioStream" uid="uid://byqwc6df2j51n" path="res://BSmallAudio/TestDefeatMusic.wav" id="19_67d8c"]
 [ext_resource type="AudioStream" uid="uid://dg7ij70o8aa4" path="res://BSmallAudio/sfx_heal2.wav" id="19_g03e7"]
 [ext_resource type="Script" uid="uid://er3o6e5yc87x" path="res://DiwenFolder/Scripts/ObjectScripts/TurnLog.gd" id="21_amivq"]
@@ -29,9 +30,6 @@
 [ext_resource type="AudioStream" uid="uid://lola6yesy8bi" path="res://BSmallAudio/TestBattleMusic.wav" id="21_vola3"]
 [ext_resource type="Script" uid="uid://cs5h6pu4tq0ti" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/Icons.gd" id="22_kiahr"]
 [ext_resource type="Script" uid="uid://cnee6sgsvxtd1" path="res://DiwenFolder/Scripts/ManagerScripts/InventoryManager.gd" id="28_urdjd"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vewk3"]
-load_path = "res://.godot/imported/Cat_Sprite.jpg-adab48ac37cfe2bd51b4afd8828b9576.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrivr"]
 bg_color = Color(0.9647059, 0.07058824, 0.043137256, 1)
@@ -71,9 +69,9 @@ z_index = 2
 script = ExtResource("3_rcx44")
 
 [node name="CatSprite" type="Sprite2D" parent="Cat" unique_id=1428940964]
-position = Vector2(-206, 24)
-scale = Vector2(0.6342176, 0.7087827)
-texture = SubResource("CompressedTexture2D_vewk3")
+position = Vector2(-206.00002, 18.000002)
+scale = Vector2(0.17448555, 0.18338948)
+texture = ExtResource("5_urdjd")
 
 [node name="CatHealthBar" type="ProgressBar" parent="Cat" unique_id=1218942256 node_paths=PackedStringArray("character")]
 offset_left = -558.0
@@ -223,9 +221,9 @@ turn_manager = NodePath("..")
 script = ExtResource("15_go3hv")
 
 [node name="GoldfishSprite" type="Sprite2D" parent="Goldfish" unique_id=982258047]
-position = Vector2(187, 22)
-scale = Vector2(0.68005085, 0.9290441)
-texture = ExtResource("18_8lyrt")
+position = Vector2(193.00002, -27)
+scale = Vector2(0.26416665, 0.34)
+texture = ExtResource("18_urdjd")
 
 [node name="GoldfishHealthBar" type="ProgressBar" parent="Goldfish" unique_id=322728773 node_paths=PackedStringArray("character")]
 offset_left = 340.0

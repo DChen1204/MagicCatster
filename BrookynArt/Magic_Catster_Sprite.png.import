@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqw3gkb75a631"
-path="res://.godot/imported/Cat_Sprite.jpg-adab48ac37cfe2bd51b4afd8828b9576.ctex"
+uid="uid://bwwsnugw7sv2h"
+path="res://.godot/imported/Magic_Catster_Sprite.png-629c1603e621b5b4f247f68c08d608b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BrookynArt/Cat_Sprite.jpg"
-dest_files=["res://.godot/imported/Cat_Sprite.jpg-adab48ac37cfe2bd51b4afd8828b9576.ctex"]
+source_file="res://BrookynArt/Magic_Catster_Sprite.png"
+dest_files=["res://.godot/imported/Magic_Catster_Sprite.png-629c1603e621b5b4f247f68c08d608b4.ctex"]
 
 [params]
 
