@@ -20,6 +20,10 @@ Max SP = 100
 Character Name = Catster
 """
 
+# Playtesting only: abilities to unlock when a scene is run directly (F6).
+# Example: hydro_cleanse, hydro_purify. Ignored in exported builds and in a normal playthrough.
+@export var debug_attacks: Array[String] = []
+
 # Skill tuning. Base Power is multiplied by POWER_SCALE to get
 # the damage multiplier (50 -> 5.0)
 # const POWER_SCALE: float = 0.1
@@ -46,7 +50,7 @@ var hydro_cleanse_current_turn: int = 1
 const HYDRO_PURIFY_COOLDOWN: int = 3
 const HYDRO_PURIFY_AMOUNT: float = 90
 
-const SP_RECOVER_RATE: int = 30
+const SP_RECOVER_RATE: int = 20
 
 # True while Block is active (until the start of the Cat's next turn)
 var is_blocking: bool = false
@@ -85,6 +89,7 @@ var flashed_once: bool = false
 func _ready():
 	# Assign stats and name to itself
 	super.assign_stats(200, 200, 500, true, 100)
+	base_attack = attack
 	super.set_character_name("Catster") 
 	
 	# Notify SP change
@@ -127,7 +132,11 @@ func reset():
 	hydro_cleanse = false
 	hydro_purify = false
 	flashed_once = false
+	add_chosen_attack()
 	detect_attack_buttons()
+	burn_turns_left = 0
+	is_burned = false
+	super.assign_stats(base_attack, defense, max_health, is_play_character, max_sp)
 
 # Called when it's its turn
 func play_turn():
@@ -137,7 +146,13 @@ func play_turn():
 	
 	# Default text while the player picks an action
 	await get_tree().create_timer(0.5).timeout
-	GameManager.turn_log.animate("Catster prepares her next move.", 0.5)
+	# Burn hurts at the start of the turn
+	if _resolve_burn():
+		GameManager.turn_log.animate("The burn scorches Catster! (-%d HP)" % BURN_TICK_DAMAGE, 1.0)
+		if is_dead:
+			return  # the burn finished her off, the turn manager stops on its own
+	else:
+		GameManager.turn_log.animate("Catster prepares her next move", 1.0)
 
 	has_acted = false
 	# Block from the last turn wears off
@@ -161,6 +176,11 @@ func play_turn():
 			
 	# The turn ends as soon as the one action finishes
 	await action_finished
+	
+	# The burn's attack penalty ends after its last turn
+	if is_burned and burn_turns_left == 0:
+		is_burned = false
+		attack = base_attack
 	
 	# disable buttons
 	disable_buttons(true)
@@ -277,6 +297,7 @@ func _end_action():
 	action_finished.emit()
 
 # Got affected by skills list
+
 # Goldfish list
 func got_goldfish_bubble_attack(attacker: Character, dmg_percentage: float):
 	_receive_hit(attacker, dmg_percentage)
@@ -334,6 +355,44 @@ func _receive_hit(attacker: Character, dmg_percentage: float):
 	if damage:
 		print("Cat takes %f damages." % damage)
 		take_damage(damage)
+		
+
+# Dragon List
+# Burn (from the Baby Dragon's Fire Breath)
+const BURN_DURATION: int = 3			# Number of the Cat's turns it lasts
+const BURN_TICK_DAMAGE: float = 20.0	# Chip damage at the start of each turn
+const BURN_ATTACK_MULT: float = 0.75	# Attack multiplier while burned (Pokemon uses 0.5)
+var burn_turns_left: int = 0
+var is_burned: bool = false
+var base_attack: float
+
+# Dragon list
+func got_dragon_fire_breath(attacker: Character, dmg_percentage: float):
+	_receive_hit(attacker, dmg_percentage)
+	got_hit_effect()
+	if not is_dead:
+		_apply_burn()
+
+func got_dragon_aerial_strike(attacker: Character, dmg_percentage: float):
+	_receive_hit(attacker, dmg_percentage)
+	if !flashed_once:
+		got_hit_effect()
+		flashed_once = true
+
+# Burn: chip damage each turn, and weaker attacks while it lasts
+func _apply_burn():
+	burn_turns_left = BURN_DURATION
+	is_burned = true
+	attack = base_attack * BURN_ATTACK_MULT
+
+# Returns true if the burn hurt her this turn
+func _resolve_burn() -> bool:
+	if burn_turns_left <= 0:
+		return false
+	burn_turns_left -= 1
+	print("Cat takes %f burn damage." % BURN_TICK_DAMAGE)
+	take_damage(BURN_TICK_DAMAGE)
+	return true
 
 
 # Turn Block on or off, and tint the sprite so the player can see it
@@ -367,15 +426,23 @@ func restore_sp(amount: int):
 	sp_changed.emit()
 	disable_buttons(false)
 	
-# Read and add chosen attack
+	
+# Read and add chosen attack(s)
 func add_chosen_attack():
-	var attack_to_add = GameManager.chosen_attack
-	if !attack_to_add.is_empty():
-		print("Adding attack %s." % attack_to_add)
-		if attack_to_add == "hydro_cleanse":
-			hydro_cleanse = true
-		elif attack_to_add == "hydro_purify":
-			hydro_purify = true
+	var unlocked: Array = []
+	if !GameManager.chosen_attack.is_empty():
+		unlocked.append(GameManager.chosen_attack)
+	elif OS.is_debug_build():
+		unlocked.append_array(debug_attacks)   # nothing was picked, so we're playtesting
+	
+	for attack_name in unlocked:
+		print("Adding attack %s." % attack_name)
+		match attack_name:
+			"hydro_cleanse":
+				hydro_cleanse = true
+			"hydro_purify":
+				hydro_purify = true
+		
 		
 # Display ability texts
 func detect_attack_buttons():

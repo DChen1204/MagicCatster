@@ -36,5 +36,5 @@ func consumeItem():
 	GameManager.inventory_manager.consume_potion()
 	
 func update_tooltip():
-	tooltip_text = "SP Potion: Recovers 50 SP.
+	tooltip_text = "SP Potion: Recovers 30 SP.
 	Remaining Amount: %d" % [GameManager.inventory_manager.inventory[item]]

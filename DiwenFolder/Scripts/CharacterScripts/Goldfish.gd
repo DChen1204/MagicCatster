@@ -6,7 +6,7 @@ extends Character
 """
 Stats of the Goldfish
 Base Attack = 200
-Base Defense = 200
+Base Defense = 300
 Base Health = 800
 Play Character = false
 SP = 0
@@ -45,7 +45,7 @@ var original_modulate: Color
 # Set up
 func _ready():
 	# Assign stats and name to itself
-	super.assign_stats(200, 200, 800, false)
+	super.assign_stats(200, 300, 800, false)
 	super.set_character_name("Poseidon")
 	# used_heal = false
 	

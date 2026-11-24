@@ -1,0 +1,494 @@
+[gd_scene format=3 uid="uid://c3om3rm0lajfm"]
+
+[ext_resource type="Script" uid="uid://buksoph12sy8f" path="res://DiwenFolder/Scenes/BabyDragon.gd" id="1_lclkl"]
+[ext_resource type="Texture2D" uid="uid://bwwsnugw7sv2h" path="res://BrookynArt/Magic_Catster_Sprite.png" id="2_c43kr"]
+[ext_resource type="Script" uid="uid://bvnhvb5r30n2" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/ShieldDisplay.gd" id="2_w1sdk"]
+[ext_resource type="Script" uid="uid://c42f4g7ui5vxg" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/ShieldBar.gd" id="3_f0rjr"]
+[ext_resource type="Script" uid="uid://cfrnv2u688ioq" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/HealthBar.gd" id="4_fnxmr"]
+[ext_resource type="Script" uid="uid://cedxbpqw165nr" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/HealthDisplay.gd" id="5_bl1cp"]
+[ext_resource type="AudioStream" uid="uid://dtbrxoxvox4p1" path="res://BSmallAudio/heavyAttack1.mp3" id="6_ufcws"]
+[ext_resource type="Texture2D" uid="uid://casnyt50lgl1t" path="res://TempImages/TurtleCrazyDiamondIcon.png" id="7_bxdub"]
+[ext_resource type="Script" uid="uid://cs5h6pu4tq0ti" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/Icons.gd" id="8_y77v2"]
+[ext_resource type="Script" uid="uid://dp4dyqlg1bfek" path="res://DiwenFolder/Scripts/CharacterScripts/Cat.gd" id="11_fli6e"]
+[ext_resource type="Script" uid="uid://cqw0gi1hv8xd" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/CatSkillsButton.gd" id="13_ychh6"]
+[ext_resource type="Script" uid="uid://rmqta1r33kom" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/SPDisplay.gd" id="14_bkw6w"]
+[ext_resource type="Script" uid="uid://c5qyujajafno8" path="res://DiwenFolder/Scripts/UIScripts/UIBarScripts/SPBar.gd" id="15_pmdw7"]
+[ext_resource type="AudioStream" uid="uid://dv2a1tefu34d6" path="res://BSmallAudio/lightAttack1.wav" id="16_ster1"]
+[ext_resource type="AudioStream" uid="uid://dna2fher5k6x" path="res://BSmallAudio/sfx_heal1.wav" id="17_rd205"]
+[ext_resource type="AudioStream" uid="uid://dg7ij70o8aa4" path="res://BSmallAudio/sfx_heal2.wav" id="18_en4e6"]
+[ext_resource type="AudioStream" uid="uid://dviiit2vrnk0p" path="res://BSmallAudio/sfx_block.wav" id="19_obk7t"]
+[ext_resource type="Texture2D" uid="uid://c5itn0fbc7hf1" path="res://TempImages/GoldfishHealingTideIcon.jpg" id="20_646s2"]
+[ext_resource type="PackedScene" uid="uid://b0g65i3s7clm6" path="res://DiwenFolder/Scenes/ExitMenu.tscn" id="21_r8wxx"]
+[ext_resource type="Texture2D" uid="uid://spamqhfd3f5" path="res://TempImages/alchemy_lab_blue_glow.png" id="22_7lu87"]
+[ext_resource type="Script" uid="uid://i8qsk8dfiahs" path="res://DiwenFolder/Scripts/ManagerScripts/TurnManager.gd" id="23_gt6wq"]
+[ext_resource type="Script" uid="uid://b7f8qlcv787cv" path="res://DiwenFolder/Scripts/UIScripts/UITextScripts/TurnNumber.gd" id="24_pdp0f"]
+[ext_resource type="Script" uid="uid://er3o6e5yc87x" path="res://DiwenFolder/Scripts/ObjectScripts/TurnLog.gd" id="25_8ad8k"]
+[ext_resource type="AudioStream" uid="uid://lola6yesy8bi" path="res://BSmallAudio/TestBattleMusic.wav" id="26_bq5xf"]
+[ext_resource type="Script" uid="uid://bb8khp5mjwqbe" path="res://DiwenFolder/Scripts/UIScripts/GameOverDefeat.gd" id="27_jndh3"]
+[ext_resource type="AudioStream" uid="uid://bofmufwx3d1e1" path="res://BSmallAudio/TestVictoryMusic.wav" id="28_8q0h8"]
+[ext_resource type="AudioStream" uid="uid://byqwc6df2j51n" path="res://BSmallAudio/TestDefeatMusic.wav" id="29_drtol"]
+[ext_resource type="Script" uid="uid://cnee6sgsvxtd1" path="res://DiwenFolder/Scripts/ManagerScripts/InventoryManager.gd" id="30_sckf5"]
+[ext_resource type="Texture2D" uid="uid://d4p0q3r5avi3" path="res://TempImages/PotionIcon2.jpg" id="31_rav2m"]
+[ext_resource type="Script" uid="uid://ctdp18b1b50qh" path="res://DiwenFolder/Scripts/UIScripts/UIButtonScripts/PotionButton.gd" id="32_ovhl8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjirr"]
+bg_color = Color(0.9647059, 0.07058824, 0.043137256, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rifod"]
+bg_color = Color(0.3196685, 0.69887894, 0.29762772, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njfqp"]
+bg_color = Color(0.8168608, 0.528142, 0.12982893, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5iflk"]
+bg_color = Color(0.8168608, 0.528142, 0.12982893, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buhw0"]
+bg_color = Color(0.8168608, 0.528142, 0.12982893, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ngtsu"]
+bg_color = Color(0.27986997, 0.6223677, 0.92484796, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3klid"]
+bg_color = Color(0.10829217, 0.059270762, 0.08788093, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12p04"]
+bg_color = Color(0.4045111, 0.40451118, 0.40451103, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jtow5"]
+bg_color = Color(0.23028189, 0.62517625, 0.9409401, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_24hyh"]
+bg_color = Color(0.45106512, 0.5983496, 0.8733546, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tj44o"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s252l"]
+bg_color = Color(0.86159027, 0.20457613, 0.24049276, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mteoh"]
+bg_color = Color(0.97, 0.72265005, 0.097000025, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rj2fo"]
+bg_color = Color(0.9647059, 0.07058824, 0.043137256, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tv826"]
+bg_color = Color(0.3196685, 0.69887894, 0.29762772, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhsjm"]
+bg_color = Color(0.10829217, 0.059270762, 0.08788093, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c43kr"]
+load_path = "res://.godot/imported/TurtleStunIcon.png-e6b93c131d619c7fd6f919100726dc6c.ctex"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a6w55"]
+bg_color = Color(0.2123048, 0.21230489, 0.21230471, 1)
+
+[node name="World" type="Node2D" unique_id=1320953261]
+
+[node name="Cat" type="Node2D" parent="." unique_id=1154421596]
+z_index = 2
+script = ExtResource("11_fli6e")
+debug_attacks = Array[String](["hydro_cleanse", "hydro_purify"])
+
+[node name="CatSprite" type="Sprite2D" parent="Cat" unique_id=1074048238]
+position = Vector2(-223, 17)
+scale = Vector2(0.17448555, 0.18338948)
+texture = ExtResource("2_c43kr")
+
+[node name="CatHealthBar" type="ProgressBar" parent="Cat" unique_id=417177107 node_paths=PackedStringArray("character")]
+offset_left = -566.0
+offset_top = -30.0
+offset_right = -349.0
+offset_bottom = 9.0
+theme_override_styles/background = SubResource("StyleBoxFlat_qjirr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rifod")
+value = 100.0
+show_percentage = false
+script = ExtResource("4_fnxmr")
+character = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
+[node name="BlockButton" type="Button" parent="Cat" unique_id=2105937267 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -542.0
+offset_top = 192.0
+offset_right = -427.0
+offset_bottom = 234.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_njfqp")
+text = "BLOCK "
+script = ExtResource("13_ychh6")
+skill = 0
+attacker = NodePath("..")
+target = NodePath("..")
+
+[node name="PounceButton" type="Button" parent="Cat" unique_id=71261408 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -387.0
+offset_top = 195.0
+offset_right = -267.0
+offset_bottom = 233.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_5iflk")
+text = "POUNCE"
+script = ExtResource("13_ychh6")
+attacker = NodePath("..")
+target = NodePath("../../Dragon")
+
+[node name="UltButton" type="Button" parent="Cat" unique_id=1261521388 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -216.0
+offset_top = 197.0
+offset_right = -44.0
+offset_bottom = 233.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_buhw0")
+text = "ULTIMATE SCRATCH"
+script = ExtResource("13_ychh6")
+skill = 2
+attacker = NodePath("..")
+target = NodePath("../../Dragon")
+
+[node name="CleanseButton" type="Button" parent="Cat" unique_id=1135360458 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -563.0
+offset_top = 262.0
+offset_right = -400.0
+offset_bottom = 298.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_ngtsu")
+text = "HYDRO CLEANSE"
+script = ExtResource("13_ychh6")
+skill = 3
+attacker = NodePath("..")
+target = NodePath("..")
+
+[node name="PurifyButton" type="Button" parent="Cat" unique_id=2087100941 node_paths=PackedStringArray("attacker", "target")]
+offset_left = -563.0
+offset_top = 262.0
+offset_right = -400.0
+offset_bottom = 298.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_ngtsu")
+text = "HYDRO PURIFY"
+script = ExtResource("13_ychh6")
+skill = 4
+attacker = NodePath("..")
+target = NodePath("..")
+
+[node name="CatNameLabel" type="RichTextLabel" parent="Cat" unique_id=1577300523]
+offset_left = -315.0
+offset_top = 116.0
+offset_right = -153.0
+offset_bottom = 163.0
+theme_override_font_sizes/normal_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_3klid")
+text = "Catster"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CatSPDisplay" type="RichTextLabel" parent="Cat" unique_id=1844899165 node_paths=PackedStringArray("target")]
+z_index = 1
+offset_left = -563.0
+offset_top = 30.0
+offset_right = -322.0
+offset_bottom = 70.0
+theme_override_font_sizes/normal_font_size = 21
+text = "Character SP"
+script = ExtResource("14_bkw6w")
+target = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
+[node name="CatSPBar" type="ProgressBar" parent="Cat" unique_id=742552313 node_paths=PackedStringArray("character")]
+offset_left = -566.0
+offset_top = 25.0
+offset_right = -349.0
+offset_bottom = 64.0
+theme_override_styles/background = SubResource("StyleBoxFlat_12p04")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jtow5")
+value = 100.0
+show_percentage = false
+script = ExtResource("15_pmdw7")
+character = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
+[node name="CatHealthDisplay" type="RichTextLabel" parent="Cat" unique_id=763118556 node_paths=PackedStringArray("target")]
+offset_left = -556.0
+offset_top = -24.0
+offset_right = -346.0
+offset_bottom = 16.0
+theme_override_font_sizes/normal_font_size = 21
+text = "Character HP"
+script = ExtResource("5_bl1cp")
+target = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
+[node name="sfx_basicAttack1" type="AudioStreamPlayer" parent="Cat" unique_id=1608806385]
+stream = ExtResource("16_ster1")
+
+[node name="sfx_basicAttack2" type="AudioStreamPlayer" parent="Cat" unique_id=624892898]
+stream = ExtResource("6_ufcws")
+
+[node name="sfx_heal1" type="AudioStreamPlayer" parent="Cat" unique_id=699942243]
+stream = ExtResource("17_rd205")
+
+[node name="sfx_heal2" type="AudioStreamPlayer" parent="Cat" unique_id=1411752691]
+stream = ExtResource("18_en4e6")
+
+[node name="sfx_pounce" type="AudioStreamPlayer" parent="Cat" unique_id=1584160759]
+stream = ExtResource("16_ster1")
+
+[node name="sfx_ult_scratch" type="AudioStreamPlayer" parent="Cat" unique_id=800673348]
+stream = ExtResource("6_ufcws")
+
+[node name="sfx_block" type="AudioStreamPlayer" parent="Cat" unique_id=344632996]
+stream = ExtResource("19_obk7t")
+
+[node name="CatCleanseIcon" type="TextureRect" parent="Cat" unique_id=296574127 node_paths=PackedStringArray("target")]
+offset_left = -558.0
+offset_top = -97.0
+offset_right = -503.0
+offset_bottom = -44.0
+texture = ExtResource("20_646s2")
+expand_mode = 1
+script = ExtResource("8_y77v2")
+target = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
+[node name="CatSPDisplay2" type="RichTextLabel" parent="Cat" unique_id=182289964]
+z_index = 1
+offset_left = -564.0
+offset_top = 70.0
+offset_right = -346.0
+offset_bottom = 100.0
+theme_override_font_sizes/normal_font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_24hyh")
+text = "SP Recovery: 20 per turn"
+
+[node name="Dragon" type="Node2D" parent="." unique_id=138299319]
+script = ExtResource("1_lclkl")
+
+[node name="DragonShieldDisplay" type="RichTextLabel" parent="Dragon" unique_id=1134562490 node_paths=PackedStringArray("target")]
+z_index = 2
+offset_left = 297.0
+offset_top = 32.0
+offset_right = 549.0
+offset_bottom = 67.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Character Shield: 100/100"
+script = ExtResource("2_w1sdk")
+target = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
+[node name="DragonSprite" type="Sprite2D" parent="Dragon" unique_id=1219204587]
+top_level = true
+position = Vector2(169, -13)
+scale = Vector2(0.7692308, 0.7714286)
+texture = SubResource("CompressedTexture2D_tj44o")
+
+[node name="DragonShieldBar" type="ProgressBar" parent="Dragon" unique_id=1714542815 node_paths=PackedStringArray("character")]
+z_index = 1
+offset_left = 292.0
+offset_top = 25.0
+offset_right = 558.0
+offset_bottom = 67.0
+theme_override_styles/background = SubResource("StyleBoxFlat_s252l")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mteoh")
+value = 100.0
+show_percentage = false
+script = ExtResource("3_f0rjr")
+character = NodePath("..")
+
+[node name="DragonHealthBar" type="ProgressBar" parent="Dragon" unique_id=934600339 node_paths=PackedStringArray("character")]
+top_level = true
+offset_left = 293.0
+offset_top = -36.0
+offset_right = 557.0
+offset_bottom = 3.0
+theme_override_styles/background = SubResource("StyleBoxFlat_rj2fo")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tv826")
+max_value = 50.0
+value = 50.0
+show_percentage = false
+script = ExtResource("4_fnxmr")
+character = NodePath("..")
+
+[node name="DragonNameLable" type="RichTextLabel" parent="Dragon" unique_id=1613100090]
+offset_left = 85.0
+offset_top = 116.0
+offset_right = 247.0
+offset_bottom = 163.0
+theme_override_font_sizes/normal_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_hhsjm")
+text = "???"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="DragonHealthDisplay" type="RichTextLabel" parent="Dragon" unique_id=167151586 node_paths=PackedStringArray("target")]
+top_level = true
+offset_left = 292.0
+offset_top = -31.0
+offset_right = 582.0
+offset_bottom = 9.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Character Health: 100/100"
+script = ExtResource("5_bl1cp")
+target = NodePath("..")
+
+[node name="sfx_basicAttack2" type="AudioStreamPlayer" parent="Dragon" unique_id=552224211]
+stream = ExtResource("6_ufcws")
+
+[node name="DragonScaleArmor" type="TextureRect" parent="Dragon" unique_id=1590753847 node_paths=PackedStringArray("target")]
+offset_left = 503.0
+offset_top = 74.0
+offset_right = 546.0
+offset_bottom = 118.0
+texture = ExtResource("7_bxdub")
+expand_mode = 1
+script = ExtResource("8_y77v2")
+icon = 5
+target = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
+[node name="DragonCharging" type="TextureRect" parent="Dragon" unique_id=1582524650 node_paths=PackedStringArray("target")]
+offset_left = 494.0
+offset_top = -96.0
+offset_right = 548.0
+offset_bottom = -44.0
+texture = SubResource("CompressedTexture2D_c43kr")
+expand_mode = 1
+script = ExtResource("8_y77v2")
+icon = 6
+target = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
+[node name="DragonHeal" type="TextureRect" parent="Dragon" unique_id=826470009 node_paths=PackedStringArray("target")]
+offset_left = -481.0
+offset_top = -96.0
+offset_right = -421.0
+offset_bottom = -44.0
+texture = ExtResource("20_646s2")
+expand_mode = 1
+script = ExtResource("8_y77v2")
+icon = 7
+target = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
+[node name="DragonShieldCover" type="ColorRect" parent="Dragon" unique_id=1067559967]
+offset_left = 62.0
+offset_top = -129.0
+offset_right = 275.0
+offset_bottom = 104.0
+color = Color(1, 0.79607844, 0.16078432, 0.3764706)
+
+[node name="ExitMenu" parent="." unique_id=800030418 instance=ExtResource("21_r8wxx")]
+
+[node name="Background" type="Node2D" parent="." unique_id=1607882503]
+metadata/_edit_lock_ = true
+
+[node name="BackgroundImage" type="Sprite2D" parent="Background" unique_id=964021149]
+position = Vector2(-2, -2)
+scale = Vector2(0.89453125, 1)
+texture = ExtResource("22_7lu87")
+metadata/_edit_lock_ = true
+
+[node name="TurnManager" type="Node" parent="." unique_id=839747884]
+script = ExtResource("23_gt6wq")
+
+[node name="Turn Number" type="RichTextLabel" parent="TurnManager" unique_id=1105413806 node_paths=PackedStringArray("turn_manager")]
+offset_left = -539.0
+offset_top = -291.0
+offset_right = -416.0
+offset_bottom = -241.0
+theme_override_font_sizes/normal_font_size = 30
+text = "Turn 0"
+script = ExtResource("24_pdp0f")
+turn_manager = NodePath("..")
+
+[node name="TurnLog" type="RichTextLabel" parent="." unique_id=1531256195]
+offset_left = -414.0
+offset_top = -322.0
+offset_right = 312.0
+offset_bottom = -143.0
+theme_override_font_sizes/normal_font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_a6w55")
+text = "Baby don't hurt me!"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("25_8ad8k")
+
+[node name="Test_BattleMusic" type="AudioStreamPlayer" parent="." unique_id=1589139871]
+stream = ExtResource("26_bq5xf")
+volume_db = -6.0
+autoplay = true
+
+[node name="GameOverDefeat" type="Control" parent="." unique_id=30421967 node_paths=PackedStringArray("battle_music")]
+visible = false
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_left = -226.0
+offset_top = -101.0
+offset_right = 224.0
+offset_bottom = 99.0
+script = ExtResource("27_jndh3")
+battle_music = NodePath("../Test_BattleMusic")
+
+[node name="VictoryMusic" type="AudioStreamPlayer" parent="GameOverDefeat" unique_id=976767302]
+stream = ExtResource("28_8q0h8")
+volume_db = -10.0
+
+[node name="DefeatMusic" type="AudioStreamPlayer" parent="GameOverDefeat" unique_id=1244923320]
+stream = ExtResource("29_drtol")
+volume_db = -18.086
+
+[node name="VictoryText" type="RichTextLabel" parent="GameOverDefeat" unique_id=210411799]
+z_index = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -193.0
+offset_top = 15.0
+offset_right = 195.0
+offset_bottom = 145.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.40977117, 0.81065845, 0.957442, 1)
+theme_override_font_sizes/normal_font_size = 40
+text = "Catster's journey has ended! "
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="GameOverDefeat" unique_id=169878458]
+layout_mode = 0
+offset_right = 450.0
+offset_bottom = 200.0
+color = Color(0.9056048, 0.8871768, 0.9319379, 1)
+
+[node name="RestartButton" type="Button" parent="GameOverDefeat" unique_id=933964437]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -49.0
+offset_top = -54.0
+offset_right = 56.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Retry Level"
+
+[node name="InventoryManager" type="Node" parent="." unique_id=673665101]
+script = ExtResource("30_sckf5")
+
+[node name="PotionButton" type="TextureButton" parent="InventoryManager" unique_id=450811940]
+offset_left = -555.0
+offset_top = 108.0
+offset_right = -500.0
+offset_bottom = 164.0
+texture_normal = ExtResource("31_rav2m")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("32_ovhl8")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=199219648]

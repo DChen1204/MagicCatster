@@ -76,6 +76,10 @@ func take_damage(amount: float) -> void:
 		on_dead()
 	# Tell the healthbar the new health
 	health_changed.emit()
+	
+# Damage this character takes from an attack of the given power
+#func calc_damage(attacker: Character, power: float) -> float:
+	#return (attacker.attack / defense) * power
 		
 # Called when a character is healed
 func heal(amount: float) -> void:
